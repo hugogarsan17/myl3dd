@@ -51,7 +51,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context":"https://schema.org", "@type":"Organization", name:"Nombre de la marca", url:"https://www.tu-dominio.com/", logo:"https://www.tu-dominio.com/logo.png", sameAs:["https://www.instagram.com/tumarca/"] }) }}
       />
 
-      <SiteHeader logoSrc="/logo fondo blanco.png" logoAlt="Nombre de la marca" />
+      <SiteHeader logoSrc="/logo.png" logoAlt="Nombre de la marca" />
 
       {/* HERO */}
       <main id="home" className="hero">

@@ -4,7 +4,7 @@ import SiteHeader from "../Components/site-header/Siteheader";
 export default function ContactPage() {
   return (
     <>
-      <SiteHeader logoSrc="/logo fondo blanco.png" logoAlt="Nombre de la marca" />
+      <SiteHeader logoSrc="/logo.png" logoAlt="Nombre de la marca" />
       <Contact />
     </>
   );

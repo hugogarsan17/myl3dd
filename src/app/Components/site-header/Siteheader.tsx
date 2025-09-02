@@ -16,10 +16,10 @@ interface SiteHeaderProps {
 }
 
 export default function SiteHeader({
-  logoSrc = "/logo.svg",
+  logoSrc = "/logo.png",
   logoAlt = "MyL3d",
-  logoWidth = 120,
-  logoHeight = 50,
+  logoWidth = 100,
+  logoHeight = 100,
   links = [
     {
       label: "Servicios",
