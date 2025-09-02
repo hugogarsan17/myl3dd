@@ -72,64 +72,70 @@ export default function Home() {
         <ScrollDown />  
       </main>
 
-      {/* SECCIÓN: Quiénes somos */}
-      <section id="about" className="section section--alt">
-        <div className="container about-grid">
-          <div className="about-text">
-            <motion.h2
-              variants={item}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              className="section__title"
-              style={{ color: "#000" }}
-            >
-              Quiénes somos
-            </motion.h2>
-          <motion.div
-  variants={item}
-  initial="hidden"
-  whileInView="show"
-  viewport={{ once: true, amount: 0.2 }}
-  className="section__copy"
->
-  <p>
-    En <strong>MyL3d</strong> somos especialistas en 
-    <strong> soluciones audiovisuales llave en mano</strong> para empresas, marcas e instituciones 
-    que buscan generar impacto en sus <strong>eventos corporativos, conferencias, ferias y presentaciones</strong>. 
-    Nuestro objetivo es ofrecer <strong>tecnología audiovisual de vanguardia</strong>, 
-    fácil de usar, confiable y con un acabado 100% profesional, 
-    para que puedas centrarte en tu mensaje mientras nosotros nos ocupamos de la parte técnica.
-  </p>
+{/* SECCIÓN: Quiénes somos */}
+<section id="about" className="section section--alt">
+  <div className="container about-grid">
+    {/* Columna texto */}
+    <div className="about-text">
+      <motion.h2
+        variants={item}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        className="section__title"
+        style={{ color: "#000" }}
+      >
+        Quiénes somos
+      </motion.h2>
 
-  <p>Ponemos a tu disposición un amplio catálogo de servicios audiovisuales que incluye:</p>
+      <motion.div
+        variants={item}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        className="section__copy"
+      >
+        <p>
+          En <strong>MyL3d</strong> somos especialistas en
+          <strong> soluciones audiovisuales llave en mano</strong> para empresas, marcas e instituciones
+          que buscan generar impacto en sus <strong>eventos corporativos, conferencias, ferias y presentaciones</strong>.
+          Nuestro objetivo es ofrecer <strong>tecnología audiovisual de vanguardia</strong>,
+          fácil de usar, confiable y con un acabado 100% profesional,
+          para que puedas centrarte en tu mensaje mientras nosotros nos ocupamos de la parte técnica.
+        </p>
 
-  <ul>
-    <li><strong>Pantallas LED de gran formato</strong> para interiores y exteriores.</li>
-    <li><strong>Monitores profesionales</strong> de alta definición ideales para stands, salas de juntas y presentaciones.</li>
-    <li><strong>Realización multicámara y streaming en directo</strong>, con transmisión en alta calidad a cualquier plataforma.</li>
-    <li><strong>Sistemas de control y gestión audiovisual</strong> que garantizan estabilidad y máxima eficiencia.</li>
-  </ul>
+        <p>Ponemos a tu disposición un amplio catálogo de servicios audiovisuales que incluye:</p>
 
-  <p>
-    Gracias a nuestra experiencia en el sector audiovisual, acompañamos a cada cliente en todo el proceso: 
-    desde el <strong>asesoramiento inicial</strong> y el <strong>diseño de la propuesta técnica</strong>, 
-    hasta la instalación, operación en el evento y soporte postventa. 
-    Nos adaptamos a tus necesidades para crear <strong>experiencias visuales memorables</strong> 
-    que refuercen la identidad de tu marca y capten la atención de tu público.
-  </p>
+        <ul>
+          <li><strong>Pantallas LED de gran formato</strong> para interiores y exteriores.</li>
+          <li><strong>Monitores profesionales</strong> de alta definición ideales para stands, salas de juntas y presentaciones.</li>
+          <li><strong>Realización multicámara y streaming en directo</strong>, con transmisión en alta calidad a cualquier plataforma.</li>
+          <li><strong>Sistemas de control y gestión audiovisual</strong> que garantizan estabilidad y máxima eficiencia.</li>
+        </ul>
 
-  <p>
-    Si buscas una empresa de confianza para la 
-    <strong>producción audiovisual de tu evento</strong>, en <strong>MyL3d</strong> encontrarás un equipo comprometido con 
-    la innovación, la puntualidad y la excelencia.
-  </p>
-</motion.div>
-          <div className="about-image">
-<img src="/about.png" alt="Equipo trabajando en soluciones audiovisuales" />
-          </div>
-        </div>
-      </section>
+        <p>
+          Gracias a nuestra experiencia en el sector audiovisual, acompañamos a cada cliente en todo el proceso:
+          desde el <strong>asesoramiento inicial</strong> y el <strong>diseño de la propuesta técnica</strong>,
+          hasta la instalación, operación en el evento y soporte postventa.
+          Nos adaptamos a tus necesidades para crear <strong>experiencias visuales memorables</strong>
+          que refuercen la identidad de tu marca y capten la atención de tu público.
+        </p>
+
+        <p>
+          Si buscas una empresa de confianza para la
+          <strong>producción audiovisual de tu evento</strong>, en <strong>MyL3d</strong> encontrarás un equipo comprometido con
+          la innovación, la puntualidad y la excelencia.
+        </p>
+      </motion.div>
+    </div>{/* <-- cierre about-text */}
+
+    {/* Columna imagen (hermana de about-text) */}
+    <div className="about-image">
+      <img src="/about.png" alt="Equipo trabajando en soluciones audiovisuales" />
+    </div>
+  </div>{/* <-- cierre container */}
+</section>
+
 
 <style jsx global>{`
   .about-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; }
