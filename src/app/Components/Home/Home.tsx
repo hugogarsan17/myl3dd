@@ -93,9 +93,19 @@ export default function Home() {
               viewport={{ once: true, amount: 0.2 }}
               className="section__copy"
             >
-    Soluciones audiovisuales <strong>llave en mano</strong> para empresas y eventos: pantallas LED,
-    monitores profesionales, realización/streaming y control. Tecnología simple de usar, fiable y con
-    acabado profesional.            </motion.p>
+    En MyL3d somos especialistas en soluciones audiovisuales llave en mano para empresas, marcas e instituciones que buscan generar impacto en sus eventos corporativos, conferencias, ferias y presentaciones. Nuestro objetivo es ofrecer tecnología de vanguardia que sea fácil de usar, confiable y con un acabado 100% profesional, para que puedas centrarte en tu mensaje mientras nosotros nos ocupamos de la parte técnica. Ponemos a tu disposición un amplio catálogo de servicios audiovisuales que incluye:
+
+Pantallas LED de gran formato para interiores y exteriores.
+
+Monitores profesionales de alta definición ideales para stands, salas de juntas y presentaciones.
+
+Realización multicámara y streaming en directo, con transmisión en alta calidad a cualquier plataforma.
+
+Sistemas de control y gestión audiovisual que garantizan estabilidad y máxima eficiencia.
+
+Gracias a nuestra experiencia en el sector audiovisual, acompañamos a cada cliente en todo el proceso: desde el asesoramiento inicial y el diseño de la propuesta técnica, hasta la instalación, operación en el evento y soporte postventa. Nos adaptamos a tus necesidades para crear experiencias visuales memorables, que refuercen la identidad de tu marca y capten la atención de tu público.
+
+Si buscas una empresa de confianza para la producción audiovisual de tu evento, en [Nombre de tu empresa] encontrarás un equipo comprometido con la innovación, la puntualidad y la excelencia.           </motion.p>
           </div>
           <div className="about-image">
 <img src="/about.png" alt="Equipo trabajando en soluciones audiovisuales" />
