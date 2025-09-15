@@ -33,7 +33,7 @@ export default function Educacion() {
       <main id="service-hero" className="service-hero">
         <div className="service-hero__bg" aria-hidden>
           <Image
-            src="/img/educacion-hero.jpg"         /* pon tu imagen */
+            src="/hero.jpg"         /* pon tu imagen */
             alt=""
             fill
             priority

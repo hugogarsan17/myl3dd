@@ -33,7 +33,7 @@ export default function SalasDeControl() {
       <main id="service-hero" className="service-hero">
         <div className="service-hero__bg" aria-hidden>
           <Image
-            src="/img/sala-control-hero.jpg"    /* tu imagen de hero */
+            src="hero.jpg"    /* tu imagen de hero */
             alt=""
             fill
             priority

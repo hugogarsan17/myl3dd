@@ -18,7 +18,7 @@ interface SiteHeaderProps {
 export default function SiteHeader({
   logoSrc = "/logo.png",
   logoAlt = "MyL3d",
-  logoWidth = 100,
+  logoWidth = 200,
   logoHeight = 100,
   links = [
     {

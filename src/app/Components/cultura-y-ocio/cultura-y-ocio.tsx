@@ -33,7 +33,7 @@ export default function CulturaYOcio() {
       <main id="service-hero" className="service-hero">
         <div className="service-hero__bg" aria-hidden>
           <Image
-            src="/img/cultura-ocio-hero.jpg"   /* coloca aquí tu imagen */
+            src="/hero.jpg"   /* coloca aquí tu imagen */
             alt=""
             fill
             priority

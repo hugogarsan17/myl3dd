@@ -33,7 +33,7 @@ export default function Corporativos() {
       <main id="service-hero" className="service-hero" /* sin style inline */>
         <div className="service-hero__bg">
           <Image
-            src="/img/corporativos-hero.jpg"
+            src="/hero.jpg"
             alt=""
             fill
             priority              // sube el LCP
