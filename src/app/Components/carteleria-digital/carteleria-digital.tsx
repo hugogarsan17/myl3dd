@@ -38,7 +38,7 @@ export default function CarteleriaDigital() {
           <strong>Señalización dinámica</strong> y kioscos táctiles que potencian la interacción del cliente y aumentan la conversión.
         </>
       ),
-      bg: "/res/portada.png",
+      bg: "/res/Portada.png",
       alt: "Digital signage retail",
     },
   ];
