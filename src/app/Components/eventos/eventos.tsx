@@ -9,6 +9,43 @@ import "./eventos.css";
 export default function Eventos() {
   const reduce = useReducedMotion();
 
+  // Helper por si hay espacios en el nombre del archivo
+  const src = (p: string) => encodeURI(p);
+
+  const items = [
+    {
+      t: "Conciertos",
+      img: "/res/Stand ISE.png", // ideal renombrar a /res/stand-ise.jpg
+      d: (
+        <>
+          Cobertura <strong>multicámara</strong> con cámaras PTZ y operadores, mezcla en
+          <strong> HD/4K</strong>, pantallas LED de escenario y side screens, e <strong>intercom</strong> para equipo técnico.
+        </>
+      ),
+    },
+    {
+      t: "Festivales",
+      img: "/res/stand.png",
+      d: (
+        <>
+          <strong>Realización en directo</strong> y <strong>streaming</strong> simultáneo, ruteo de señales
+          a pantallas de recinto, <strong>grabación</strong> y <strong>replays</strong> para redes/social wall.
+        </>
+      ),
+    },
+    {
+      t: "Ferias y Expos",
+      img: "/res/ocio.png",
+      d: (
+        <>
+          Stands con <strong>LED/monitores</strong>, <strong>players</strong> y control de contenidos,
+          además de <strong>captación y edición</strong> para highlights del evento.
+        </>
+      ),
+    },
+    // Si luego añades un cuarto item, la grid ya está lista para 4 columnas en desktop
+  ];
+
   return (
     <>
       <Script
@@ -33,14 +70,13 @@ export default function Eventos() {
       <main id="service-hero" className="service-hero">
         <div className="service-hero__bg" aria-hidden>
           <Image
-            src="/img/eventos-hero.jpg"           
+            src="/hero.jpg"
             alt=""
             fill
             priority
             sizes="100vw"
             quality={72}
             placeholder="empty"
-
             style={{ objectFit: "cover", objectPosition: "center" }}
           />
         </div>
@@ -59,60 +95,39 @@ export default function Eventos() {
             <strong> sistemas de control</strong> para garantizar una ejecución fluida y un resultado impecable.
           </p>
 
-          {/* Bloques por vertical */}
-          <div className="summary-grid">
-            {[
-              {
-                t: "Conciertos",
-                d: (
-                  <>
-                    Cobertura <strong>multicámara</strong> con cámaras PTZ y operadores, mezcla en
-                    <strong> HD/4K</strong>, pantallas LED de escenario y side screens, e <strong>intercom</strong> para equipo técnico.
-                  </>
-                ),
-              },
-              {
-                t: "Festivales",
-                d: (
-                  <>
-                    <strong>Realización en directo</strong> y <strong>streaming</strong> simultáneo, ruteo de señales
-                    a pantallas de recinto, <strong>grabación</strong> y <strong>replays</strong> para redes/social wall.
-                  </>
-                ),
-              },
-              {
-                t: "Ferias y Expos",
-                d: (
-                  <>
-                    Stands con <strong>LED/monitores</strong>, <strong>players</strong> y control de contenidos,
-                    además de <strong>captación y edición</strong> para highlights del evento.
-                  </>
-                ),
-              },
-              {
-                t: "Eventos corporativos",
-                d: (
-                  <>
-                    Keynotes, presentaciones y <strong>híbridos</strong> con videoconferencia, <strong>micros y PA</strong>,
-                    <strong> mezcla de medios</strong> y <strong>control</strong> para ponentes y realización.
-                  </>
-                ),
-              },
-            ].map((c, i) => (
-              <motion.article
-                key={c.t}
-                className="summary-card"
-                initial={reduce ? {} : { opacity: 0, y: 10 }}
-                whileInView={reduce ? {} : { opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.35 }}
-                transition={{ duration: 0.35, delay: i * 0.05 }}
-              >
-                <div className="summary-thumb" />
-                <h3>{c.t}</h3>
-                <p>{c.d}</p>
-              </motion.article>
-            ))}
-          </div>
+        {/* Bloques por vertical */}
+        <div className="summary-grid">
+          {items.map((c, i) => (
+            <motion.article
+              key={c.t}
+              className="summary-card"
+              initial={reduce ? {} : { opacity: 0, y: 10 }}
+              whileInView={reduce ? {} : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.35, delay: i * 0.05 }}
+            >
+              <div className="summary-thumb">
+                {c.img ? (
+                  <Image
+                    src={src(c.img)}
+                    alt={c.t}
+                    fill
+                    // 4 columnas >= 900px, si no 100vw (la card ocupa ancho completo)
+                    sizes="(min-width: 900px) 25vw, 100vw"
+                    priority={i === 0}
+                    placeholder="empty"
+                    style={{ objectFit: "cover" }}
+                  />
+                ) : (
+                  <div className="summary-thumb__fallback" aria-hidden />
+                )}
+              </div>
+
+              <h3>{c.t}</h3>
+              <p>{c.d}</p>
+            </motion.article>
+          ))}
+        </div>
 
           {/* Bloque de capacidades (chips) */}
           <ul className="evt-chips">

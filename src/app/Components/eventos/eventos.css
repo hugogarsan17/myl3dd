@@ -14,14 +14,25 @@
 /* Sección y CTA */
 .section { padding: clamp(2.5rem, 5vw, 4rem) 0; }
 .section--alt { background:#fff; }
-.section__copy { color:#000; max-width:70ch; }
+.section__copy { color:#000;  }
 .btn-cta { padding:.65rem .95rem; border-radius:10px; font-weight:600; border:1px solid #e5e7eb; background:#111827; color:#fff; }
 
 /* Grid de tarjetas (4 columnas en desktop) */
 .summary-grid{ display:grid; grid-template-columns:1fr; gap:1.25rem; margin-top:1rem; }
-@media (min-width: 900px){ .summary-grid{ grid-template-columns:repeat(4,1fr); } }
+@media (min-width: 900px){ .summary-grid{ grid-template-columns:repeat(3,1fr); } }
 .summary-card{ border:1px solid #e5e7eb; border-radius:14px; padding:1rem; background:#fff; }
-.summary-thumb{ background:#e5e7eb; border-radius:10px; width:100%; aspect-ratio:4/3; margin-bottom:.75rem; }
+.summary-thumb{
+  background:#e5e7eb; border-radius:10px; width:100%;
+  aspect-ratio:4/3; margin-bottom:.75rem;
+  position: relative;           /* <-- necesario para next/image fill */
+  overflow: hidden;             /* <-- recorte limpio del cover */
+}
+/* Si quieres asegurar el cover en navegadores antiguos, puedes forzar el <img> */
+.summary-thumb img{
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
 .summary-card h3{ margin:.25rem 0; font-size:1.1rem; }
 .summary-card p{ color:#4b5563; }
 

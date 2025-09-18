@@ -100,8 +100,8 @@
     grid-template-columns: 1fr;
     grid-template-areas:
       "form"
-      "photo"
-      "info";
+      "info"
+      "photo" ;
   }
   .row{ grid-template-columns: 1fr; }
   .contact__photo{ min-height: 240px; }
@@ -168,4 +168,59 @@
 
 @media (max-width: 900px){
   .infoActions{ grid-template-columns: 1fr 1fr 1fr; }
+}
+
+/* +++ NUEVO: Tabs + separación + grupos + accesibilidad +++ */
+
+.tabs {
+  display: inline-flex;
+  gap: .5rem;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: .35rem;
+  margin-bottom: 1rem;
+}
+.tab {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: .55rem .9rem;
+  border-radius: 8px;
+  font-weight: 700;
+  color: #374151;
+  cursor: pointer;
+}
+.tab__active {
+  background: #fff;
+  color: #111827;
+  box-shadow: 0 1px 0 rgba(0,0,0,.03), 0 0 0 1px #e5e7eb inset;
+}
+
+/* Más espacio entre bloques del formulario */
+.group { margin-top: 1rem; }
+.group + .group { margin-top: 1rem; }
+
+.field select {
+  width: 100%;
+  background: #fff;
+  color: #111;
+  border: 1px solid #cfcfcf;
+  border-radius: 10px;
+  padding: .8rem .9rem;
+  outline: none;
+}
+.field select:focus {
+  border-color: #3001CA; box-shadow: 0 0 0 3px rgba(48,1,202,.15);
+}
+
+/* Honeypot */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+/* Error */
+.error { color: #b00020; font-weight: 700; margin: .25rem 0; }
+
+/* Mantén tu grid/responsive original — recuerda que en móvil el orden sea form, info, photo */
+@media (max-width: 900px){
+  .group { margin-top: .85rem; }
 }
