@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next"; // 👈 Importa aquí
 import "./globals.css";
 import "./Components/Home/Home.css";
 
@@ -20,7 +21,9 @@ export const metadata: Metadata = {
     title: "Innovación visual para cada espacio",
     description:
       "Pantallas LED, rótulos y señalización digital para comercios y eventos.",
-    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Proyecto en vía pública" }],
+    images: [
+      { url: "/og.jpg", width: 1200, height: 630, alt: "Proyecto en vía pública" },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -36,7 +39,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <SpeedInsights /> {/* 👈 Ya está disponible en toda la app */}
+      </body>
     </html>
   );
 }
