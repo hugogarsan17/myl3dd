@@ -5,14 +5,61 @@ import Image from "next/image";
 import styles from "./Contact.module.css";
 
 type UTM = {
-  source?: string; medium?: string; campaign?: string; term?: string; content?: string;
+  source?: string;
+  medium?: string;
+  campaign?: string;
+  term?: string;
+  content?: string;
+};
+
+type ContactTab = "empresa" | "persona";
+
+type Attachment =
+  | {
+      name: string;
+      type: string;
+      size: number;
+      dataUrl: string;
+    }
+  | undefined;
+
+type Payload = {
+  tab: ContactTab;
+
+  // Básicos
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+
+  // Empresa / Persona
+  company?: string;
+  role?: string;
+  cif?: string;
+  dni?: string;
+
+  // Proyecto / servicio
+  eventType: string;
+  city: string;
+
+  // Comercial
+  decisionTime: string;
+  hearAbout: string;
+
+  // Meta
+  utm: UTM;
+  referrer: string;
+  page: string;
+
+  attachment: Attachment;
 };
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [tab, setTab] = useState<"empresa" | "persona">("empresa");
+  const [tab, setTab] = useState<ContactTab>("empresa");
 
   // UTM + referrer
   const [utm, setUtm] = useState<UTM>({});
@@ -31,7 +78,15 @@ export default function Contact() {
   }, []);
 
   const eventTypes = useMemo(
-    () => ["Carteleria digital", "Cultura y ocio", "Eventos", "Corporativo", "Educación", "Sala de control"],
+    () =>
+      [
+        "Carteleria digital",
+        "Cultura y ocio",
+        "Eventos",
+        "Corporativo",
+        "Educación",
+        "Sala de control",
+      ] as const,
     []
   );
 
@@ -56,13 +111,19 @@ export default function Contact() {
     const file = fd.get("attachment") as File | null;
     if (file && file.name) {
       const ok = ["application/pdf", "image/jpeg", "image/png"];
-      if (!ok.includes(file.type)) { setErrorMsg("Adjunto: PDF, JPG o PNG."); return; }
-      if (file.size > 8 * 1024 * 1024) { setErrorMsg("Adjunto máximo 8MB."); return; }
+      if (!ok.includes(file.type)) {
+        setErrorMsg("Adjunto: PDF, JPG o PNG.");
+        return;
+      }
+      if (file.size > 8 * 1024 * 1024) {
+        setErrorMsg("Adjunto máximo 8MB.");
+        return;
+      }
     }
 
     setLoading(true);
 
-    const attachment =
+    const attachment: Attachment =
       file && file.name
         ? {
             name: file.name,
@@ -72,11 +133,11 @@ export default function Contact() {
           }
         : undefined;
 
-    const data = {
+    const data: Payload = {
       tab, // "empresa" | "persona"
 
       // Básicos
-      name:  ((fd.get("name")  as string) || "").trim(),
+      name: ((fd.get("name") as string) || "").trim(),
       email: ((fd.get("email") as string) || "").trim(),
       phone: ((fd.get("phone") as string) || "").trim(),
       subject: ((fd.get("subject") as string) || "").trim(),
@@ -84,9 +145,9 @@ export default function Contact() {
 
       // Empresa / Persona
       company: tab === "empresa" ? ((fd.get("company") as string) || "").trim() : undefined,
-      role:    tab === "empresa" ? ((fd.get("role")    as string) || "").trim() : undefined,
-      cif:     tab === "empresa" ? ((fd.get("cif")     as string) || "").trim() : undefined,
-      dni:     tab === "persona" ? ((fd.get("dni")     as string) || "").trim() : undefined,
+      role: tab === "empresa" ? ((fd.get("role") as string) || "").trim() : undefined,
+      cif: tab === "empresa" ? ((fd.get("cif") as string) || "").trim() : undefined,
+      dni: tab === "persona" ? ((fd.get("dni") as string) || "").trim() : undefined,
 
       // Proyecto / servicio
       eventType: (fd.get("eventType") as string) || "",
@@ -97,7 +158,8 @@ export default function Contact() {
       hearAbout: (fd.get("hearAbout") as string) || "",
 
       // Meta
-      utm, referrer,
+      utm,
+      referrer,
       page: typeof window !== "undefined" ? window.location.href : "",
 
       attachment,
@@ -116,9 +178,15 @@ export default function Contact() {
       setSent(true);
       form.reset();
       setTimeout(() => setSent(false), 4500);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
-      setErrorMsg(err?.message || "Error al enviar el formulario. Intenta más tarde.");
+      const message =
+        err instanceof Error
+          ? err.message
+          : typeof err === "string"
+          ? err
+          : "Error al enviar el formulario. Intenta más tarde.";
+      setErrorMsg(message);
     } finally {
       setLoading(false);
     }
@@ -126,7 +194,9 @@ export default function Contact() {
 
   return (
     <main id="contact" className={`container ${styles.contact}`} aria-labelledby="contact-title" role="main">
-      <h1 id="contact-title" className={styles.contact__heading}>CONTACTO</h1>
+      <h1 id="contact-title" className={styles.contact__heading}>
+        CONTACTO
+      </h1>
 
       <div className={styles.contact__grid}>
         {/* FORM */}
@@ -184,17 +254,18 @@ export default function Contact() {
             </div>
 
             {/* Campos específicos por pestaña */}
-            <div
-              id="panel-empresa"
-              role="tabpanel"
-              aria-labelledby="tab-empresa"
-              hidden={tab !== "empresa"}
-              className={styles.group}
-            >
+            <div id="panel-empresa" role="tabpanel" aria-labelledby="tab-empresa" hidden={tab !== "empresa"} className={styles.group}>
               <div className={styles.row}>
                 <div className={styles.field}>
                   <label htmlFor="company">Empresa*</label>
-                  <input id="company" name="company" type="text" placeholder="Nombre de empresa" autoComplete="organization" required={tab === "empresa"} />
+                  <input
+                    id="company"
+                    name="company"
+                    type="text"
+                    placeholder="Nombre de empresa"
+                    autoComplete="organization"
+                    required={tab === "empresa"}
+                  />
                 </div>
                 <div className={styles.field}>
                   <label htmlFor="role">Cargo*</label>
@@ -209,13 +280,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div
-              id="panel-persona"
-              role="tabpanel"
-              aria-labelledby="tab-persona"
-              hidden={tab !== "persona"}
-              className={styles.group}
-            >
+            <div id="panel-persona" role="tabpanel" aria-labelledby="tab-persona" hidden={tab !== "persona"} className={styles.group}>
               <div className={styles.row}>
                 <div className={styles.field}>
                   <label htmlFor="dni">DNI</label>
@@ -229,9 +294,13 @@ export default function Contact() {
               <div className={styles.field}>
                 <label htmlFor="eventType">Tipo de servicio</label>
                 <select id="eventType" name="eventType" required defaultValue="">
-                  <option value="" disabled>Selecciona una opción</option>
+                  <option value="" disabled>
+                    Selecciona una opción
+                  </option>
                   {eventTypes.map((et) => (
-                    <option key={et} value={et}>{et}</option>
+                    <option key={et} value={et}>
+                      {et}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -255,17 +324,29 @@ export default function Contact() {
             <div className={styles.group}>
               <label className={styles.checkbox}>
                 <input id="consent" name="consent" type="checkbox" required />
-                He leído y acepto la <a href="/privacidad" target="_blank" rel="noopener noreferrer">política de privacidad</a>.
+                He leído y acepto la{" "}
+                <a href="/privacidad" target="_blank" rel="noopener noreferrer">
+                  política de privacidad
+                </a>
+                .
               </label>
             </div>
 
-            {errorMsg && <p className={styles.error} role="alert">{errorMsg}</p>}
+            {errorMsg && (
+              <p className={styles.error} role="alert">
+                {errorMsg}
+              </p>
+            )}
 
             <div className={styles.actions}>
               <button type="submit" className={styles.btnCta} disabled={loading}>
                 {loading ? "Enviando..." : "Enviar"}
               </button>
-              {sent && <span className={styles.sentHint} role="status">¡Enviado! Te responderemos pronto.</span>}
+              {sent && (
+                <span className={styles.sentHint} role="status">
+                  ¡Enviado! Te responderemos pronto.
+                </span>
+              )}
             </div>
 
             {/* Honeypot + Meta ocultos */}
@@ -294,24 +375,38 @@ export default function Contact() {
 
         {/* INFO */}
         <div className={`${styles.contact__panel} ${styles.contact__infoCard}`} aria-labelledby="contact-info-title">
-          <h3 id="contact-info-title" className={styles.infoTitle}>¿Hablamos?</h3>
+          <h3 id="contact-info-title" className={styles.infoTitle}>
+            ¿Hablamos?
+          </h3>
           <address className={styles.infoList} itemScope itemType="https://schema.org/Organization">
             <meta itemProp="name" content="Nombre de la marca" />
             <div className={styles.infoRow}>
-              <svg className={styles.infoIcon} viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.2 2.3 3.1 4.2 5.4 5.4l1.8-1.8c.3-.3.7-.4 1.1-.3 1.2.4 2.4.7 3.7.7.6 0 1 .4 1 .9V19c0 .6-.4 1-1 1C10.3 20 4 13.7 4 6c0-.6.4-1 1-1h3.3c.5 0 .9.4.9 1 0 1.3.3 2.5.7 3.7.1.4 0 .8-.3 1.1l-2 2z"/></svg>
-              <a href="tel:+34123456789" itemProp="telephone">+34 123 456 789</a>
+              <svg className={styles.infoIcon} viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.6 10.8c1.2 2.3 3.1 4.2 5.4 5.4l1.8-1.8c.3-.3.7-.4 1.1-.3 1.2.4 2.4.7 3.7.7.6 0 1 .4 1 .9V19c0 .6-.4 1-1 1C10.3 20 4 13.7 4 6c0-.6.4-1 1-1h3.3c.5 0 .9.4.9 1 0 1.3.3 2.5.7 3.7.1.4 0 .8-.3 1.1l-2 2z" />
+              </svg>
+              <a href="tel:+34123456789" itemProp="telephone">
+                +34 123 456 789
+              </a>
             </div>
             <div className={styles.infoRow}>
-              <svg className={styles.infoIcon} viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
-              <a href="mailto:info@tudominio.com" itemProp="email">info@tudominio.com</a>
+              <svg className={styles.infoIcon} viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
+              </svg>
+              <a href="mailto:info@tudominio.com" itemProp="email">
+                info@tudominio.com
+              </a>
             </div>
             <div className={styles.infoRow}>
-              <svg className={styles.infoIcon} viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 4v2h10V6H7zm0 4v2h10v-2H7zm0 4v2h7v-2H7z"/></svg>
-              <time itemProp="openingHours" dateTime="Mo-Fr 09:00-18:00">Lun–Dom 9:00–18:00</time>
+              <svg className={styles.infoIcon} viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 4v2h10V6H7zm0 4v2h10v-2H7zm0 4v2h7v-2H7z" />
+              </svg>
+              <time itemProp="openingHours" dateTime="Mo-Fr 09:00-18:00">
+                Lun–Dom 9:00–18:00
+              </time>
             </div>
             <div className={`${styles.infoRow} ${styles.infoRowWhatsapp}`}>
               <svg className={styles.infoIcon} viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12.04 2C6.99 2 2.9 6.08 2.9 11.12c0 1.79.47 3.52 1.36 5.05L3 22l6-1.23a9.06 9.06 0 0 0 3.04.5c5.05 0 9.14-4.08 9.14-9.13C21.18 6.08 17.09 2 12.04 2zm0 16.54c-1.5 0-2.98-.4-4.27-1.15l-.31-.18-3.56.73.73-3.47-.2-.33A7.6 7.6 0 0 1 4.43 11.1c0-4.2 3.41-7.61 7.61-7.61s7.61 3.41 7.61 7.61-3.41 7.61-7.61 7.61zm4.29-5.05c-.23-.12-1.36-.67-1.57-.75-.21-.08-.36-.12-.52.12-.15.23-.6.75-.73.9-.13.15-.27.17-.5.06-.23-.12-.96-.35-1.83-1.1-.68-.61-1.14-1.36-1.28-1.59-.13-.23-.01-.36.1-.48.1-.1.23-.27.35-.4.12-.13.15-.23.23-.38.08-.15.04-.29-.02-.4-.06-.12-.52-1.26-.72-1.72-.19-.46-.38-.4-.52-.4h-.45c-.15 0-.4.06-.6.29-.21.23-.79.77-.79 1.88 0 1.11.81 2.19.93 2.34.12.15 1.59 2.43 3.84 3.41.54.23.95.37 1.28.47.54.17 1.03.15 1.42.09.43-.06 1.36-.56 1.55-1.11.19-.56.19-1.04.13-1.14-.06-.1-.21-.16-.44-.28z" />
+                <path d="M12.04 2C6.99 2 2.9 6.08 2.9 11.12c0 1.79.47 3.52 1.36 5.05L3 22l6-1.23a9.06 9.06 0 0 0 3.04.5c5.05 0 9.14-4.08 9.14-9.13C21.18 6.08 17.09 2 12.04 2zm0 16.54c-1.5 0-2.98-.4-4.27-1.15l-.31-.18-3.56.73.73-3.47-.2-.33A7.6 7.6 0 0 1 4.43 11.1c0-4.2 3.41-7.61 7.61-7.61s7.61 3.41 7.61 7.61-3.41 7.61-7.61 7.61zm4.29-5.05c-.23-.12-1.36-.67-1.57-.75-.21-.08-.36-.12-.52.12-.15.23-.6.75-.73.9-.13.15-.27.17-.5..06-.23-.12-.96-.35-1.83-1.1-.68-.61-1.14-1.36-1.28-1.59-.13-.23-.01-.36.1-.48.1-.1.23-.27.35-.4.12-.13.15-.23.23-.38.08-.15.04-.29-.02-.4-.06-.12-.52-1.26-.72-1.72-.19-.46-.38-.4-.52-.4h-.45c-.15 0-.4.06-.6.29-.21.23-.79.77-.79 1.88 0 1.11.81 2.19.93 2.34.12.15 1.59 2.43 3.84 3.41.54.23.95.37 1.28.47.54.17 1.03.15 1.42.09.43-.06 1.36-.56 1.55-1.11.19-.56.19-1.04.13-1.14-.06-.1-.21-.16-.44-.28z" />
               </svg>
               <a
                 href="https://wa.me/34123456789?text=Hola%20me%20gustaría%20recibir%20información"
