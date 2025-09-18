@@ -71,7 +71,7 @@ export default function CarteleriaDigital() {
               {
                 "@type": "Service",
                 name: "Cartelería digital",
-                serviceType: "Digital Signage",
+                serviceType: "MyL3d",
                 provider: { "@type": "Organization", name: "Nombre de la marca" },
                 areaServed: { "@type": "Country", name: "España" },
                 description:
