@@ -21,6 +21,7 @@ export default function SiteHeader({
   logoWidth = 200,
   logoHeight = 200,
   links = [
+    { href: "/", label: "Inicio", ariaCurrent: "page" },
     {
       label: "Servicios",
       children: [
@@ -34,7 +35,7 @@ export default function SiteHeader({
     },
 
     { href: "/contacto", label: "Contacto" }, // ✅ ruta real
-        { href: "/", label: "Inicio", ariaCurrent: "page" },
+        
   ],
   className = "",
 }: SiteHeaderProps) {
