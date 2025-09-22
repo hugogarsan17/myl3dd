@@ -75,7 +75,7 @@ export default function CarteleriaDigital() {
                 provider: { "@type": "Organization", name: "Nombre de la marca" },
                 areaServed: { "@type": "Country", name: "España" },
                 description:
-                  "Diseñamos e integramos cartelería digital para exteriores, interiores y retail: pantallas LED y monitores profesionales 24/7, con gestión de contenidos remota y centralizada.",
+                  "Diseñamos, instalamos e integramos cartelería digital para exteriores, interiores y retail: pantallas LED y monitores profesionales 24/7, con gestión de contenidos remota y centralizada.",
                 offers: {
                   "@type": "Offer",
                   availability: "https://schema.org/InStock",
@@ -86,7 +86,7 @@ export default function CarteleriaDigital() {
         }}
       />
 
-      <SiteHeader logoSrc="/logo.png" logoAlt="Nombre de la marca" />
+      <SiteHeader logoAlt="Nombre de la marca" />
 
       <main id="service-hero" className="service-hero">
         <div className="service-hero__bg" aria-hidden>
@@ -103,22 +103,19 @@ export default function CarteleriaDigital() {
           />
         </div>
         <div className="container">
+          
           <h1 className="service-hero__title">Cartelería digital</h1>
-          <p className="service-hero__subtitle">
+          <h2 className="service-hero__subtitle">
             Pantallas LED y monitores profesionales 24/7 con gestión remota.
-          </p>
+          </h2>
         </div>
       </main>
 
       <section id="about" className="section section--alt">
         <div className="container">
           <div className="about-text">
-            <h2 className="section__title" style={{ color: "#000" }}>
-              Soluciones de digital signage a medida
-            </h2>
-
             <p className="section__copy">
-              Diseñamos e integramos <strong>cartelería digital</strong> para exteriores, interiores y retail:
+              Diseñamos, instalamos e integramos cartelería digital para exteriores, interiores y retail:
               pantallas LED y <strong>monitores profesionales 24/7</strong>, con <strong>gestión de contenidos
               remota y centralizada</strong> para publicar información relevante en el momento adecuado.
             </p>
@@ -155,14 +152,14 @@ export default function CarteleriaDigital() {
             </div>
 
             <ul className="cd-bullets">
-              <li>Operación <strong>24/7</strong> y alta fiabilidad</li>
+              <li>Trabajo <strong>24/7</strong> y alta fiabilidad</li>
               <li><strong>Alto brillo</strong> y formatos a medida (indoor/outdoor)</li>
               <li><strong>Gestión remota</strong> y multi-sede</li>
               <li><strong>Interactividad</strong> con kioscos táctiles (opcional)</li>
             </ul>
 
             <Link href="/contacto" className="btn-cta sheen" style={{ marginTop: "1rem" }}>
-              Más información
+            Solicitar información
             </Link>
           </div>
         </div>

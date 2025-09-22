@@ -3,6 +3,8 @@
 import Script from "next/script";
 import { motion, type Variants } from "framer-motion";
 import SiteHeader from "@/app/Components/site-header/Siteheader";
+import Link from "next/link";
+
 
 const container: Variants = {
   hidden: { opacity: 0 },
@@ -51,7 +53,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context":"https://schema.org", "@type":"Organization", name:"Nombre de la marca", url:"https://www.tu-dominio.com/", logo:"https://www.tu-dominio.com/logo.png", sameAs:["https://www.instagram.com/tumarca/"] }) }}
       />
 
-      <SiteHeader logoSrc="/logo.png" logoAlt="Nombre de la marca" />
+      <SiteHeader logoSrc="/MYL3D.png" logoAlt="Nombre de la marca" />
 
       {/* HERO */}
       <main id="home" className="hero">
@@ -99,33 +101,26 @@ export default function Home() {
           En <strong>MyL3d</strong> somos especialistas en
           <strong> soluciones audiovisuales llave en mano</strong> para empresas, marcas e instituciones
           que buscan generar impacto en sus <strong>eventos corporativos, conferencias, ferias y presentaciones</strong>.
-          Nuestro objetivo es ofrecer <strong>tecnología audiovisual de vanguardia</strong>,
-          fácil de usar, confiable y con un acabado 100% profesional,
-          para que puedas centrarte en tu mensaje mientras nosotros nos ocupamos de la parte técnica.
-        </p>
+          </p>
 
-        <p>Ponemos a tu disposición un amplio catálogo de servicios audiovisuales que incluye:</p>
 
-        <ul>
-          <li><strong>Pantallas LED de gran formato</strong> para interiores y exteriores.</li>
-          <li><strong>Monitores profesionales</strong> de alta definición ideales para stands, salas de juntas y presentaciones.</li>
-          <li><strong>Realización multicámara y streaming en directo</strong>, con transmisión en alta calidad a cualquier plataforma.</li>
-          <li><strong>Sistemas de control y gestión audiovisual</strong> que garantizan estabilidad y máxima eficiencia.</li>
-        </ul>
-
-        <p>
+                <p>
           Gracias a nuestra experiencia en el sector audiovisual, acompañamos a cada cliente en todo el proceso:
           desde el <strong>asesoramiento inicial</strong> y el <strong>diseño de la propuesta técnica</strong>,
-          hasta la instalación, operación en el evento y soporte postventa.
+          hasta la instalación, operación en el evento y soporte postventa.</p>
+          <p>
           Nos adaptamos a tus necesidades para crear <strong>experiencias visuales memorables</strong>
           que refuercen la identidad de tu marca y capten la atención de tu público.
         </p>
 
-        <p>
+                <p>
           Si buscas una empresa de confianza para la
           <strong>producción audiovisual de tu evento</strong>, en <strong>MyL3d</strong> encontrarás un equipo comprometido con
           la innovación, la puntualidad y la excelencia.
         </p>
+
+
+
       </motion.div>
     </div>{/* <-- cierre about-text */}
 
@@ -155,23 +150,37 @@ export default function Home() {
           <motion.h2 variants={item} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="section__title">
             Servicios
           </motion.h2>
+          <p>
+          Nuestro objetivo es ofrecer <strong>tecnología audiovisual de vanguardia</strong>,
+          fácil de usar, confiable y con un acabado 100% profesional,
+          para que puedas centrarte en tu mensaje mientras nosotros nos ocupamos de la parte técnica.
+        </p>
 
-
-          <div className="cards">
-            {[
-              { t: "Cartelería digital", d: "LED/monitores para outdoor, indoor y retail, con gestión remota de contenidos.", img: "carteleria-digital" },
-              { t: "Eventos", d: "Realización y streaming con cámaras PTZ, procesadores y mezcladores HD/4K.", img: "carteleria-digital" },
-              { t: "Corporativo", d: "Salas de reunión y coworking con videoconferencia, audio pro y reserva de salas.", img: "carteleria-digital" },
-              { t: "Cultura y ocio", d: "Experiencias inmersivas en teatros, museos, discotecas y centros religiosos.", img: "carteleria-digital" },
-              { t: "Educación", d: "Aulas interactivas: monitores táctiles, cámaras 4K y audio de alta cobertura.", img: "carteleria-digital" },
-              { t: "Salas de control", d: "Videowalls para visualización en tiempo real y toma de decisiones ágil.", img: "carteleria-digital" },
-            ].map((c, i) => (
-              <motion.article key={c.t} className="card" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.08 * i }}>
-                <h3>{c.t}</h3>
-                <p>{c.d}</p>
-              </motion.article>
-            ))}
-          </div>
+        <p>Ponemos a tu disposición un amplio catálogo de servicios audiovisuales que incluye:</p>
+<div className="cards">
+  {[
+    { t: "Cartelería digital", d: "LED/monitores para outdoor, indoor y retail, con gestión remota de contenidos.", img: "carteleria-digital", href: "/servicios/Carteleria-digital" },
+    { t: "Eventos", d: "Realización y streaming con cámaras PTZ, procesadores y mezcladores HD/4K.", img: "eventos", href: "/servicios/eventos" },
+    { t: "Corporativo", d: "Salas de reunión y coworking con videoconferencia, audio pro y reserva de salas.", img: "corporativo", href: "/servicios/corporativo" },
+    { t: "Cultura y ocio", d: "Experiencias inmersivas en teatros, museos, discotecas y centros religiosos.", img: "cultura-ocio", href: "/servicios/cultura-y-ocio" },
+    { t: "Educación", d: "Aulas interactivas: monitores táctiles, cámaras 4K y audio de alta cobertura.", img: "educacion", href: "/servicios/educacion" },
+    { t: "Salas de control", d: "Videowalls para visualización en tiempo real y toma de decisiones ágil.", img: "salas-control", href: "/servicios/salas-de-control" },
+  ].map((c, i) => (
+    <motion.article
+      key={c.t}
+      className="card"
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.08 * i }}
+    >
+      <Link href={c.href} className="card-link">
+        <h3>{c.t}</h3>
+        <p>{c.d}</p>
+      </Link>
+    </motion.article>
+  ))}
+</div>
         </div>
       </section>
 

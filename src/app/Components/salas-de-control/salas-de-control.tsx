@@ -27,13 +27,13 @@ export default function SalasDeControl() {
         }}
       />
 
-      <SiteHeader logoSrc="/logo.png" logoAlt="Nombre de la marca" />
+      <SiteHeader  logoAlt="logo MyL3d" />
 
       {/* HERO optimizado con next/image */}
       <main id="service-hero" className="service-hero">
         <div className="service-hero__bg" aria-hidden>
           <Image
-            src="hero.jpg"    /* tu imagen de hero */
+            src="/hero.jpg"    /* tu imagen de hero */
             alt=""
             fill
             priority
@@ -127,7 +127,7 @@ export default function SalasDeControl() {
           </ul>
 
           <div style={{ marginTop: "1rem" }}>
-            <a href="/contacto" className="btn-cta sheen">Pide tu propuesta</a>
+            <a href="/contacto" className="btn-cta sheen">Solicitar información</a>
           </div>
         </div>
       </section>

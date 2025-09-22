@@ -3,7 +3,7 @@ import Educacion from "@/app/Components/educacion/educacion";
 export default function EducacionPage() {
   return (
     <>
-      <SiteHeader logoSrc="/logo.png" logoAlt="Nombre de la marca" />
+      <SiteHeader  logoAlt="logo MyL3d" />
       <Educacion />
     </>
   );

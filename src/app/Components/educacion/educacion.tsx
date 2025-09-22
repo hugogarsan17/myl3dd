@@ -27,7 +27,7 @@ export default function Educacion() {
         }}
       />
 
-      <SiteHeader logoSrc="/logo.png" logoAlt="Nombre de la marca" />
+      <SiteHeader  logoAlt="logo MyL3d" />
 
       {/* HERO optimizado con next/image */}
       <main id="service-hero" className="service-hero">
@@ -121,7 +121,7 @@ export default function Educacion() {
           </ul>
 
           <div style={{ marginTop: "1rem" }}>
-            <a href="/contacto" className="btn-cta sheen">Pide tu propuesta</a>
+            <a href="/contacto" className="btn-cta sheen">Solicitar información</a>
           </div>
         </div>
       </section>

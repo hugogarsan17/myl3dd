@@ -6,7 +6,7 @@
 .section { padding: clamp(2.5rem, 5vw, 4rem) 0; }
 .section--alt { background: #fff; }
 .section__title { font-size: clamp(1.6rem, 2vw + 1rem, 2.25rem); margin-bottom: .75rem; }
-.section__copy { color: #000; max-width: 70ch; }
+.section__copy { color: #000; }
 .section, .about-grid, .summary-grid, .cards { content-visibility: auto; contain-intrinsic-size: 1px 800px; }
 
 /* Botón */

@@ -4,7 +4,7 @@ import SiteHeader from "../../Components/site-header/Siteheader";
 export default function CarteleriaDigitalPage() {
   return (
     <>
-      <SiteHeader logoSrc="/logo.png" logoAlt="Nombre de la marca" />
+      <SiteHeader  logoAlt="logo MyL3d" />
       <CarteleriaDigital />
     </>
   );

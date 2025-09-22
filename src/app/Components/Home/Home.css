@@ -360,3 +360,14 @@
     transition: none !important;
   }
 }
+
+.card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  height: 100%;
+}
+
+.card-link:hover {
+  filter: brightness(1.1);
+}
