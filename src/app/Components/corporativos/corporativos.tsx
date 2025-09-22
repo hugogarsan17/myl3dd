@@ -104,7 +104,7 @@ export default function Corporativos() {
         }}
       />
 
-      <SiteHeader logoSrc="/logo.png" logoAlt={brand.name} />
+      <SiteHeader logoAlt={brand.name} />
 
       {/* HERO */}
       <main id="service-hero" className="service-hero">
