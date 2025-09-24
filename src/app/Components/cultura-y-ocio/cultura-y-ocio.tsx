@@ -87,15 +87,7 @@ export default function CulturaYOcio() {
                   </>
                 ),
               },
-              {
-                t: "Centros religiosos",
-                d: (
-                  <>
-                    Visualización discreta y clara de <strong>contenido informativo y litúrgico</strong>, con
-                    integración respetuosa en el entorno arquitectónico.
-                  </>
-                ),
-              },
+
             ].map((c, i) => (
               <motion.article
                 key={c.t}
