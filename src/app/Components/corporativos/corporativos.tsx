@@ -19,7 +19,7 @@ export default function Corporativos() {
 
   const breadcrumbs = [
     { name: "Inicio", url: "/" },
-    { name: "Soluciones corporativas", url: "/corporativo" },
+    { name: "Soluciones corporativas", url: "/servicios/corporativos" },
   ];
 
   const summary = [
@@ -86,7 +86,7 @@ export default function Corporativos() {
                 logo: brand.logo,
               },
               areaServed: "ES",
-              url: `${brand.url}corporativo`,
+              url: `${brand.url}servicios/corporativos`,
               description:
                 "Integración llave en mano de videoconferencia, audio profesional y visualización para empresas.",
             },
