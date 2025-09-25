@@ -346,13 +346,16 @@ export default function Contact() {
             <div className={styles.group}>
               <div className={styles.field}>
                 <label>Verificación anti-bot</label>
-                <Turnstile
-                  sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY as string}
-                  onSuccess={(token) => setCaptchaToken(token)}
-                  onExpire={() => setCaptchaToken("")}
-                  onError={() => setCaptchaToken("")}
-                  options={{ action: "contact", theme: "auto" }} // size "managed" por defecto
-                />
+<Turnstile
+  sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY as string}
+  onVerify={(token) => setCaptchaToken(token)}  // <-- antes onSuccess
+  onExpire={() => setCaptchaToken("")}
+  onError={() => setCaptchaToken("")}
+  action="contact"   // <-- antes options={{ action: "contact", theme: "auto" }}
+  theme="auto"       // <-- pásalo como props sueltas
+  // size="invisible" // (opcional) si luego quieres invisible
+  // execution="render" // según el modo que uses
+/>
               </div>
             </div>
 
