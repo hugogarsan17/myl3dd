@@ -1,22 +1,60 @@
 // src/app/api/contact/route.ts
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import type { SentMessageInfo } from "nodemailer";
 
 export const runtime = "nodejs"; // Nodemailer requiere Node, no Edge.
 
 const isDev = process.env.NODE_ENV !== "production";
 
-export async function POST(req: Request) {
-  try {
-    const { name, email, phone, subject, message } = await req.json();
+type ContactPayload = {
+  name: string;
+  email: string;
+  phone?: string;
+  subject?: string;
+  message: string;
+};
 
-    // Validaciones mínimas
-    if (!name || !email || !message) {
+function isRecord(v: unknown): v is Record<string, unknown> {
+  return v !== null && typeof v === "object";
+}
+
+function isContactPayload(v: unknown): v is ContactPayload {
+  if (!isRecord(v)) return false;
+  const { name, email, message } = v;
+  return (
+    typeof name === "string" &&
+    typeof email === "string" &&
+    typeof message === "string"
+  );
+}
+
+// Escapa HTML básico para evitar inyección en el correo
+function escapeHtml(s: string): string {
+  return s.replace(/[&<>"']/g, (ch) => {
+    switch (ch) {
+      case "&": return "&amp;";
+      case "<": return "&lt;";
+      case ">": return "&gt;";
+      case '"': return "&quot;";
+      case "'": return "&#39;";
+      default: return ch;
+    }
+  });
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const raw: unknown = await req.json();
+
+    if (!isContactPayload(raw)) {
       return NextResponse.json(
-        { success: false, error: "Faltan campos obligatorios: name, email, message." },
+        { success: false, error: "Cuerpo inválido. Se requieren name, email y message (string)." },
         { status: 400 }
       );
     }
+
+    const { name, email, phone, subject, message } = raw;
 
     // Carga de ENV con defaults sensatos
     const host = process.env.MAIL_HOST;
@@ -41,7 +79,7 @@ export async function POST(req: Request) {
       auth: { user, pass },
     });
 
-    // Verifica la conexión SMTP (muy útil al depurar)
+    // Verifica la conexión SMTP (útil en desarrollo)
     await transporter.verify();
 
     const plainText = [
@@ -54,9 +92,9 @@ export async function POST(req: Request) {
       message,
     ].join("\n");
 
-    const safeHtmlMsg = String(message).replace(/\n/g, "<br/>"); // formatea saltos de línea
+    const safeHtmlMsg = escapeHtml(String(message)).replace(/\n/g, "<br/>");
 
-    const info = await transporter.sendMail({
+    const info: SentMessageInfo = await transporter.sendMail({
       from: `"Web Contacto" <${from}>`, // desde TU buzón autenticado (evita problemas SPF/DMARC)
       to,                               // receptor en Gmail
       replyTo: email,                   // al responder, va al remitente real
@@ -64,10 +102,10 @@ export async function POST(req: Request) {
       text: plainText,
       html: `
         <h2>Nuevo mensaje desde la web</h2>
-        <p><strong>Nombre:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Teléfono:</strong> ${phone || "No indicado"}</p>
-        <p><strong>Asunto:</strong> ${subject || "Sin asunto"}</p>
+        <p><strong>Nombre:</strong> ${escapeHtml(name)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+        <p><strong>Teléfono:</strong> ${escapeHtml(phone ?? "No indicado")}</p>
+        <p><strong>Asunto:</strong> ${escapeHtml(subject ?? "Sin asunto")}</p>
         <p><strong>Mensaje:</strong><br/>${safeHtmlMsg}</p>
       `,
     });
@@ -77,9 +115,9 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ success: true });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("Error enviando correo:", err);
-    const msg = typeof err?.message === "string" ? err.message : "No se pudo enviar el correo.";
+    const msg = err instanceof Error ? err.message : "No se pudo enviar el correo.";
     return NextResponse.json(
       { success: false, error: isDev ? msg : "No se pudo enviar el correo." },
       { status: 500 }
