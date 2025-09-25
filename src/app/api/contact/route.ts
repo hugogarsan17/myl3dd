@@ -13,7 +13,6 @@ type ContactPayload = {
   phone?: string;
   subject?: string;
   message: string;
-  captchaToken: string; // Turnstile
 };
 
 function isRecord(v: unknown): v is Record<string, unknown> {
@@ -22,13 +21,11 @@ function isRecord(v: unknown): v is Record<string, unknown> {
 
 function isContactPayload(v: unknown): v is ContactPayload {
   if (!isRecord(v)) return false;
-  const { name, email, message, captchaToken } = v;
+  const { name, email, message } = v;
   return (
     typeof name === "string" &&
     typeof email === "string" &&
-    typeof message === "string" &&
-    typeof captchaToken === "string" &&
-    captchaToken.length > 0
+    typeof message === "string"
   );
 }
 
@@ -46,58 +43,21 @@ function escapeHtml(s: string): string {
   });
 }
 
-// Verifica token de Cloudflare Turnstile
-async function verifyTurnstile(token: string, ip: string) {
-  const secret = process.env.TURNSTILE_SECRET_KEY || "";
-  if (!secret) throw new Error("Falta TURNSTILE_SECRET_KEY en el entorno.");
-
-  const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-    method: "POST",
-    headers: { "content-type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({
-      secret,
-      response: token,
-      remoteip: ip,
-    }),
-  });
-
-  if (!res.ok) throw new Error(`Fallo verificando Turnstile: ${res.status}`);
-  const data = (await res.json()) as { success: boolean; "error-codes"?: string[] };
-
-  if (!data.success) {
-    const codes = data["error-codes"]?.join(", ") || "desconocido";
-    throw new Error(`Verificación CAPTCHA fallida (${codes})`);
-  }
-}
-
 export async function POST(req: NextRequest) {
   try {
-    // (Opcional) CSRF/same-origin mínimo
-    const origin = req.headers.get("origin") || "";
-    const host = req.headers.get("host") || "";
-    if (!origin || !origin.includes(host)) {
-      return NextResponse.json({ success: false, error: "Origen no permitido" }, { status: 403 });
-    }
-
     const raw: unknown = await req.json();
+
     if (!isContactPayload(raw)) {
       return NextResponse.json(
-        { success: false, error: "Cuerpo inválido. Se requieren name, email, message y captchaToken (string)." },
+        { success: false, error: "Cuerpo inválido. Se requieren name, email y message (string)." },
         { status: 400 }
       );
     }
 
-    const { name, email, phone, subject, message, captchaToken } = raw;
+    const { name, email, phone, subject, message } = raw;
 
-    // IP desde cabecera estándar (sin any, sin ts-ignore)
-    const xff = req.headers.get("x-forwarded-for") || "";
-    const ip = xff.split(",")[0]?.trim() || "";
-
-    // 1) Verificar CAPTCHA
-    await verifyTurnstile(captchaToken, ip);
-
-    // 2) Config SMTP
-    const hostSmtp = process.env.MAIL_HOST;
+    // Carga de ENV con defaults sensatos
+    const host = process.env.MAIL_HOST;
     const port = Number(process.env.MAIL_PORT ?? "465");
     const secure = (process.env.MAIL_SECURE ?? "true") === "true"; // 465->true, 587->false
     const user = process.env.MAIL_USER;
@@ -105,7 +65,7 @@ export async function POST(req: NextRequest) {
     const from = process.env.MAIL_FROM || user;
     const to = process.env.MAIL_TO || "info.myl3d@gmail.com";
 
-    if (!hostSmtp || !user || !pass) {
+    if (!host || !user || !pass) {
       return NextResponse.json(
         { success: false, error: "Falta configuración SMTP (MAIL_HOST/MAIL_USER/MAIL_PASS)." },
         { status: 500 }
@@ -113,13 +73,14 @@ export async function POST(req: NextRequest) {
     }
 
     const transporter = nodemailer.createTransport({
-      host: hostSmtp,
+      host,
       port,
       secure,
       auth: { user, pass },
     });
 
-    if (isDev) await transporter.verify();
+    // Verifica la conexión SMTP (útil en desarrollo)
+    await transporter.verify();
 
     const plainText = [
       `Nombre: ${name}`,
@@ -134,9 +95,9 @@ export async function POST(req: NextRequest) {
     const safeHtmlMsg = escapeHtml(String(message)).replace(/\n/g, "<br/>");
 
     const info: SentMessageInfo = await transporter.sendMail({
-      from: `"Web Contacto" <${from}>`,
-      to,
-      replyTo: email,
+      from: `"Web Contacto" <${from}>`, // desde TU buzón autenticado (evita problemas SPF/DMARC)
+      to,                               // receptor en Gmail
+      replyTo: email,                   // al responder, va al remitente real
       subject: subject || "Nuevo mensaje de contacto",
       text: plainText,
       html: `
@@ -146,8 +107,6 @@ export async function POST(req: NextRequest) {
         <p><strong>Teléfono:</strong> ${escapeHtml(phone ?? "No indicado")}</p>
         <p><strong>Asunto:</strong> ${escapeHtml(subject ?? "Sin asunto")}</p>
         <p><strong>Mensaje:</strong><br/>${safeHtmlMsg}</p>
-        <hr/>
-        <small>IP: ${escapeHtml(ip || "desconocida")}</small>
       `,
     });
 
@@ -157,11 +116,12 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (err: unknown) {
-    console.error("Error en /api/contact:", err);
-    const msg = err instanceof Error ? err.message : "No se pudo procesar la solicitud.";
+    console.error("Error enviando correo:", err);
+    const msg = err instanceof Error ? err.message : "No se pudo enviar el correo.";
     return NextResponse.json(
       { success: false, error: isDev ? msg : "No se pudo enviar el correo." },
       { status: 500 }
     );
   }
 }
+
