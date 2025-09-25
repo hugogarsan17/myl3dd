@@ -43,6 +43,12 @@ export default function CarteleriaDigital() {
     },
   ];
 
+  const breadcrumbs = [
+    { name: "Inicio", url: "/" },
+    { name: "Servicios", url: "/servicios" },
+    { name: "Cartelería digital", url: "/servicios/Carteleria-digital" },
+  ];
+
   return (
     <>
       <Script
@@ -103,7 +109,20 @@ export default function CarteleriaDigital() {
           />
         </div>
         <div className="container">
-          
+          <nav className="breadcrumbs" aria-label="breadcrumbs">
+            <ol>
+              {breadcrumbs.map((b, i) => (
+                <li key={b.url}>
+                  {i < breadcrumbs.length - 1 ? (
+                    <Link href={b.url}>{b.name}</Link>
+                  ) : (
+                    <span aria-current="page">{b.name}</span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </nav>
+
           <h1 className="service-hero__title">Cartelería digital</h1>
           <h2 className="service-hero__subtitle">
             Pantallas LED y monitores profesionales 24/7 con gestión remota.

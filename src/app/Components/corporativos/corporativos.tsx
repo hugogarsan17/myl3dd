@@ -140,6 +140,9 @@ export default function Corporativos() {
           </nav>
 
           <h1 className="service-hero__title">Soluciones corporativas</h1>
+          <h2 className="service-hero__subtitle">
+            Integración audiovisual llave en mano para salas, coworkings y auditorios.
+          </h2>
         </div>
       </main>
 

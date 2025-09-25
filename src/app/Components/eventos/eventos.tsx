@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Script from "next/script";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
@@ -8,6 +9,12 @@ import "./eventos.css";
 
 export default function Eventos() {
   const reduce = useReducedMotion();
+
+  const breadcrumbs = [
+    { name: "Inicio", url: "/" },
+    { name: "Servicios", url: "/servicios" },
+    { name: "Eventos", url: "/servicios/eventos" },
+  ];
 
   // Helper por si hay espacios en el nombre del archivo
   const src = (p: string) => encodeURI(p);
@@ -64,7 +71,7 @@ export default function Eventos() {
         }}
       />
 
-      <SiteHeader  logoAlt="logo MyL3d" />
+      <SiteHeader logoAlt="logo MyL3d" />
 
       {/* HERO optimizado con next/image */}
       <main id="service-hero" className="service-hero">
@@ -81,7 +88,23 @@ export default function Eventos() {
           />
         </div>
         <div className="container">
+          <nav className="breadcrumbs" aria-label="breadcrumbs">
+            <ol>
+              {breadcrumbs.map((b, i) => (
+                <li key={b.url}>
+                  {i < breadcrumbs.length - 1 ? (
+                    <Link href={b.url}>{b.name}</Link>
+                  ) : (
+                    <span aria-current="page">{b.name}</span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </nav>
           <h1 className="service-hero__title">Eventos</h1>
+          <h2 className="service-hero__subtitle">
+            Producción audiovisual integral para conciertos, festivales y ferias.
+          </h2>
         </div>
       </main>
 
