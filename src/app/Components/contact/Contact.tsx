@@ -345,7 +345,6 @@ export default function Contact() {
             {/* TURNSTILE: widget visible para depurar */}
             <div className={styles.group}>
               <div className={styles.field}>
-                <label>Verificación anti-bot</label>
 <Turnstile
   sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY as string}
   onVerify={(token) => setCaptchaToken(token)}  // <-- antes onSuccess
