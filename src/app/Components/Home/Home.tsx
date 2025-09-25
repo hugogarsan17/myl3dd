@@ -54,7 +54,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context":"https://schema.org", "@type":"Organization", name:"Nombre de la marca", url:"https://www.tu-dominio.com/", logo:"https://www.tu-dominio.com/logo.png", sameAs:["https://www.instagram.com/tumarca/"] }) }}
       />
 
-      <SiteHeader logoSrc="/MYL3D.png" logoAlt="Nombre de la marca" />
+      <SiteHeader logoSrc="/logo.png" logoAlt="Nombre de la marca" />
 
       {/* HERO */}
       <main id="home" className="hero">
@@ -162,7 +162,7 @@ export default function Home() {
   {[
     { t: "Cartelería digital", d: "LED/monitores para outdoor, indoor y retail, con gestión remota de contenidos.", img: "carteleria-digital", href: "/servicios/Carteleria-digital" },
     { t: "Eventos", d: "Realización y streaming con cámaras PTZ, procesadores y mezcladores HD/4K.", img: "eventos", href: "/servicios/eventos" },
-    { t: "Corporativo", d: "Salas de reunión y coworking con videoconferencia, audio pro y reserva de salas.", img: "corporativo", href: "/servicios/corporativo" },
+    { t: "Corporativo", d: "Salas de reunión y coworking con videoconferencia, audio pro y reserva de salas.", img: "corporativo", href: "/servicios/corporativos" },
     { t: "Cultura y ocio", d: "Experiencias inmersivas en teatros, museos, discotecas y centros religiosos.", img: "cultura-ocio", href: "/servicios/cultura-y-ocio" },
     { t: "Educación", d: "Aulas interactivas: monitores táctiles, cámaras 4K y audio de alta cobertura.", img: "educacion", href: "/servicios/educacion" },
     { t: "Salas de control", d: "Videowalls para visualización en tiempo real y toma de decisiones ágil.", img: "salas-control", href: "/servicios/salas-de-control" },

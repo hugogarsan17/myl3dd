@@ -55,10 +55,10 @@ export default function CarteleriaDigital() {
             "@graph": [
               {
                 "@type": "Organization",
-                name: "Nombre de la marca",
-                url: "https://www.tu-dominio.com/",
-                logo: "https://www.tu-dominio.com/logo.png",
-                sameAs: ["https://www.instagram.com/tumarca/"],
+                name: "MyL3D",
+                url: "https://www.myl3d.es/",
+                logo: "https://www.myl3d.es/logo.png",
+                sameAs: ["https://www.instagram.com/myl3d/"],
               },
               {
                 "@type": "BreadcrumbList",

@@ -45,7 +45,7 @@
 .section { padding: 3.5rem 0; }
 @media (min-width: 1024px){ .section { padding: 4rem 0; } }
 .section--alt { background:#fff; }
-.section__copy { color:#000; max-width:70ch; }
+.section__copy { color:#000;}
 
 /* ===== Botón CTA ===== */
 .btn-cta {

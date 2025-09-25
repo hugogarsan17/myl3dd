@@ -19,10 +19,10 @@ export default function CulturaYOcio() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            name: "Nombre de la marca",
-            url: "https://www.tu-dominio.com/",
-            logo: "https://www.tu-dominio.com/logo.png",
-            sameAs: ["https://www.instagram.com/tumarca/"],
+            name: "MyL3D",
+            url: "https://www.myl3d.es.com/",
+            logo: "https://www.myl3d.es/logo.png",
+            sameAs: ["https://www.instagram.com/myl3d/"],
           }),
         }}
       />
@@ -87,15 +87,7 @@ export default function CulturaYOcio() {
                   </>
                 ),
               },
-              {
-                t: "Centros religiosos",
-                d: (
-                  <>
-                    Visualización discreta y clara de <strong>contenido informativo y litúrgico</strong>, con
-                    integración respetuosa en el entorno arquitectónico.
-                  </>
-                ),
-              },
+
             ].map((c, i) => (
               <motion.article
                 key={c.t}

@@ -18,7 +18,7 @@
 /* Sección y CTA */
 .section { padding: clamp(2.5rem, 5vw, 4rem) 0; }
 .section--alt { background:#fff; }
-.section__copy { color:#000; max-width:70ch; }
+.section__copy { color:#000;}
 .btn-cta { padding:.65rem .95rem; border-radius:10px; font-weight:600; border:1px solid #e5e7eb; background:#111827; color:#fff; }
 
 /* Grid de tarjetas (4 columnas en desktop) */
