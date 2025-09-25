@@ -12,7 +12,7 @@ export default function Educacion() {
 
   const breadcrumbs = [
     { name: "Inicio", url: "/" },
-    { name: "Servicios", url: "/servicios" },
+    { name: "Servicios", url: "/#services" },
     { name: "Educación", url: "/servicios/educacion" },
   ];
 

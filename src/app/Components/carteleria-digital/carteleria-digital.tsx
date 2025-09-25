@@ -45,7 +45,7 @@ export default function CarteleriaDigital() {
 
   const breadcrumbs = [
     { name: "Inicio", url: "/" },
-    { name: "Servicios", url: "/servicios" },
+    { name: "Servicios", url: "/#services" },
     { name: "Cartelería digital", url: "/servicios/Carteleria-digital" },
   ];
 

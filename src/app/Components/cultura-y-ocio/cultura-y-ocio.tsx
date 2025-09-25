@@ -12,7 +12,7 @@ export default function CulturaYOcio() {
 
   const breadcrumbs = [
     { name: "Inicio", url: "/" },
-    { name: "Servicios", url: "/servicios" },
+    { name: "Servicios", url: "/#services" },
     { name: "Cultura y ocio", url: "/servicios/cultura-y-ocio" },
   ];
 

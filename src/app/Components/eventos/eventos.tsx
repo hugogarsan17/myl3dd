@@ -12,7 +12,7 @@ export default function Eventos() {
 
   const breadcrumbs = [
     { name: "Inicio", url: "/" },
-    { name: "Servicios", url: "/servicios" },
+    { name: "Servicios", url: "/#services" },
     { name: "Eventos", url: "/servicios/eventos" },
   ];
 

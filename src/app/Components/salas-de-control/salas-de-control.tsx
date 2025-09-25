@@ -12,7 +12,7 @@ export default function SalasDeControl() {
 
   const breadcrumbs = [
     { name: "Inicio", url: "/" },
-    { name: "Servicios", url: "/servicios" },
+    { name: "Servicios", url: "/#services" },
     { name: "Salas de control", url: "/servicios/salas-de-control" },
   ];
 
