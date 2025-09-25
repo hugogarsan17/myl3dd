@@ -334,14 +334,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Adjunto (opcional) */}
-            <div className={styles.group}>
-              <div className={styles.field}>
-                <label htmlFor="attachment">Adjunto (PDF/JPG/PNG, máx 8MB)</label>
-                <input id="attachment" name="attachment" type="file" accept=".pdf,image/jpeg,image/png" />
-              </div>
-            </div>
-
             {/* TURNSTILE: widget visible para depurar */}
             <div className={styles.group}>
               <div className={styles.field}>
