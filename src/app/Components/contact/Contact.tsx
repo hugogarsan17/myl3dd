@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState, FormEvent } from "react";
-import Script from "next/script";
 import Image from "next/image";
+import Turnstile from "react-turnstile"; 
 import styles from "./Contact.module.css";
 
 type UTM = {
@@ -56,12 +56,6 @@ type Payload = {
   attachment: Attachment;
 };
 
-declare global {
-  interface Window {
-    onTurnstileSuccess?: (token: string) => void;
-  }
-}
-
 export default function Contact() {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -72,7 +66,7 @@ export default function Contact() {
   const [utm, setUtm] = useState<UTM>({});
   const [referrer, setReferrer] = useState<string>("");
 
-  // Turnstile
+  // CAPTCHA
   const [captchaToken, setCaptchaToken] = useState("");
 
   useEffect(() => {
@@ -85,10 +79,6 @@ export default function Contact() {
       content: sp.get("utm_content") || undefined,
     });
     setReferrer(document.referrer || "");
-  }, []);
-
-  useEffect(() => {
-    window.onTurnstileSuccess = (token: string) => setCaptchaToken(token);
   }, []);
 
   const eventTypes = useMemo(
@@ -200,7 +190,7 @@ export default function Contact() {
       }
       setSent(true);
       form.reset();
-      setCaptchaToken(""); // opcional: fuerza nuevo challenge
+      setCaptchaToken(""); // fuerza nuevo challenge
       setTimeout(() => setSent(false), 4500);
     } catch (err: unknown) {
       console.error(err);
@@ -218,9 +208,6 @@ export default function Contact() {
 
   return (
     <main id="contact" className={`container ${styles.contact}`} aria-labelledby="contact-title" role="main">
-      {/* Script Turnstile */}
-      <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" />
-
       <h1 id="contact-title" className={styles.contact__heading}>
         CONTACTO
       </h1>
@@ -355,14 +342,19 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Turnstile (widget visible “managed”) */}
-            <div
-              className="cf-turnstile"
-              data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-              data-callback="onTurnstileSuccess"
-              data-action="contact"
-              data-theme="auto"
-            />
+            {/* TURNSTILE: widget visible para depurar */}
+            <div className={styles.group}>
+              <div className={styles.field}>
+                <label>Verificación anti-bot</label>
+                <Turnstile
+                  sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY as string}
+                  onSuccess={(token) => setCaptchaToken(token)}
+                  onExpire={() => setCaptchaToken("")}
+                  onError={() => setCaptchaToken("")}
+                  options={{ action: "contact", theme: "auto" }} // size "managed" por defecto
+                />
+              </div>
+            </div>
 
             {/* Consentimiento + estado */}
             <div className={styles.group}>
