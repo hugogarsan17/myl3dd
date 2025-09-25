@@ -49,6 +49,7 @@ function ScrollDown() {
 export default function Home() {
   return (
     <>
+    <meta name="google-site-verification" content="F2KbcllmUmkhOsHGLBPPZZtBUPRVPvrA8_cJe1pNySo" />
       <Script id="ld-org" type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context":"https://schema.org", "@type":"Organization", name:"Nombre de la marca", url:"https://www.tu-dominio.com/", logo:"https://www.tu-dominio.com/logo.png", sameAs:["https://www.instagram.com/tumarca/"] }) }}
       />

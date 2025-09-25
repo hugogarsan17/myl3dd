@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     images: ["/og.jpg"],
   },
   robots: { index: true, follow: true },
-  icons: { icon: "/favicon.ico" },
+  icons: { icon: "/MYL3D.png" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
