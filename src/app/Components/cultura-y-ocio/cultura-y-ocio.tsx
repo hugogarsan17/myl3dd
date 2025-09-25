@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Script from "next/script";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
@@ -8,6 +9,12 @@ import "./cultura-y-ocio.css";
 
 export default function CulturaYOcio() {
   const reduce = useReducedMotion();
+
+  const breadcrumbs = [
+    { name: "Inicio", url: "/" },
+    { name: "Servicios", url: "/servicios" },
+    { name: "Cultura y ocio", url: "/servicios/cultura-y-ocio" },
+  ];
 
   return (
     <>
@@ -27,7 +34,7 @@ export default function CulturaYOcio() {
         }}
       />
 
-      <SiteHeader  logoAlt="logo MyL3d" />
+      <SiteHeader logoAlt="logo MyL3d" />
 
       {/* HERO optimizado con next/image */}
       <main id="service-hero" className="service-hero">
@@ -44,7 +51,24 @@ export default function CulturaYOcio() {
           />
         </div>
         <div className="container">
+          <nav className="breadcrumbs" aria-label="breadcrumbs">
+            <ol>
+              {breadcrumbs.map((b, i) => (
+                <li key={b.url}>
+                  {i < breadcrumbs.length - 1 ? (
+                    <Link href={b.url}>{b.name}</Link>
+                  ) : (
+                    <span aria-current="page">{b.name}</span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </nav>
+
           <h1 className="service-hero__title">Cultura y ocio</h1>
+          <h2 className="service-hero__subtitle">
+            Experiencias inmersivas para museos, teatros y ocio nocturno.
+          </h2>
         </div>
       </main>
 

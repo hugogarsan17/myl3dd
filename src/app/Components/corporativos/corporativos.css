@@ -32,6 +32,14 @@
   font-weight: 800; letter-spacing:-.02em; margin:0;
   text-shadow: 0 6px 26px rgba(0,0,0,.35);
 }
+.service-hero__subtitle {
+  margin:.35rem 0 0;
+  font-size:clamp(1.1rem, 1.4vw + .7rem, 1.6rem);
+  font-weight:500;
+  color:#f3f4f6;
+  max-width:44rem;
+  text-shadow:0 4px 18px rgba(0,0,0,.35);
+}
 
 /* ===== Breadcrumbs ===== */
 .breadcrumbs { margin-bottom: .5rem; font-size: .875rem; color: #e5e7eb; }
