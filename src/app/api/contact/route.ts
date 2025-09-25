@@ -13,7 +13,7 @@ type ContactPayload = {
   phone?: string;
   subject?: string;
   message: string;
-  captchaToken: string; // 👈 Turnstile
+  captchaToken: string; // Turnstile
 };
 
 function isRecord(v: unknown): v is Record<string, unknown> {
@@ -57,12 +57,12 @@ async function verifyTurnstile(token: string, ip: string) {
     body: new URLSearchParams({
       secret,
       response: token,
-      remoteip: ip || "",
+      remoteip: ip,
     }),
   });
 
   if (!res.ok) throw new Error(`Fallo verificando Turnstile: ${res.status}`);
-  const data = await res.json() as { success: boolean; "error-codes"?: string[] };
+  const data = (await res.json()) as { success: boolean; "error-codes"?: string[] };
 
   if (!data.success) {
     const codes = data["error-codes"]?.join(", ") || "desconocido";
@@ -89,12 +89,9 @@ export async function POST(req: NextRequest) {
 
     const { name, email, phone, subject, message, captchaToken } = raw;
 
-    // IP para Turnstile (y logs)
-    const ip =
-      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-      // @ts-ignore NextRequest puede traer ip en algunos despliegues
-      (req as any).ip ||
-      "";
+    // IP desde cabecera estándar (sin any, sin ts-ignore)
+    const xff = req.headers.get("x-forwarded-for") || "";
+    const ip = xff.split(",")[0]?.trim() || "";
 
     // 1) Verificar CAPTCHA
     await verifyTurnstile(captchaToken, ip);
@@ -122,7 +119,6 @@ export async function POST(req: NextRequest) {
       auth: { user, pass },
     });
 
-    // Verifica la conexión SMTP (útil en desarrollo)
     if (isDev) await transporter.verify();
 
     const plainText = [
@@ -138,7 +134,7 @@ export async function POST(req: NextRequest) {
     const safeHtmlMsg = escapeHtml(String(message)).replace(/\n/g, "<br/>");
 
     const info: SentMessageInfo = await transporter.sendMail({
-      from: `"Web Contacto" <${from}>`, // debe ser tu buzón autenticado (SPF/DMARC)
+      from: `"Web Contacto" <${from}>`,
       to,
       replyTo: email,
       subject: subject || "Nuevo mensaje de contacto",
