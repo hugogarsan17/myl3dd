@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, FormEvent } from "react";
+import Script from "next/script";
 import Image from "next/image";
 import styles from "./Contact.module.css";
 
@@ -55,6 +56,12 @@ type Payload = {
   attachment: Attachment;
 };
 
+declare global {
+  interface Window {
+    onTurnstileSuccess?: (token: string) => void;
+  }
+}
+
 export default function Contact() {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -64,6 +71,9 @@ export default function Contact() {
   // UTM + referrer
   const [utm, setUtm] = useState<UTM>({});
   const [referrer, setReferrer] = useState<string>("");
+
+  // Turnstile
+  const [captchaToken, setCaptchaToken] = useState("");
 
   useEffect(() => {
     const sp = new URLSearchParams(window.location.search);
@@ -75,6 +85,10 @@ export default function Contact() {
       content: sp.get("utm_content") || undefined,
     });
     setReferrer(document.referrer || "");
+  }, []);
+
+  useEffect(() => {
+    window.onTurnstileSuccess = (token: string) => setCaptchaToken(token);
   }, []);
 
   const eventTypes = useMemo(
@@ -107,6 +121,12 @@ export default function Contact() {
       return;
     }
 
+    // CAPTCHA
+    if (!captchaToken) {
+      setErrorMsg("Por favor completa la verificación anti-bot.");
+      return;
+    }
+
     // File (opcional)
     const file = fd.get("attachment") as File | null;
     if (file && file.name) {
@@ -133,7 +153,7 @@ export default function Contact() {
           }
         : undefined;
 
-    const data: Payload = {
+    const data: Payload & { captchaToken: string } = {
       tab, // "empresa" | "persona"
 
       // Básicos
@@ -163,6 +183,9 @@ export default function Contact() {
       page: typeof window !== "undefined" ? window.location.href : "",
 
       attachment,
+
+      // CAPTCHA
+      captchaToken,
     };
 
     try {
@@ -177,6 +200,7 @@ export default function Contact() {
       }
       setSent(true);
       form.reset();
+      setCaptchaToken(""); // opcional: fuerza nuevo challenge
       setTimeout(() => setSent(false), 4500);
     } catch (err: unknown) {
       console.error(err);
@@ -194,6 +218,9 @@ export default function Contact() {
 
   return (
     <main id="contact" className={`container ${styles.contact}`} aria-labelledby="contact-title" role="main">
+      {/* Script Turnstile */}
+      <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" />
+
       <h1 id="contact-title" className={styles.contact__heading}>
         CONTACTO
       </h1>
@@ -320,6 +347,23 @@ export default function Contact() {
               </div>
             </div>
 
+            {/* Adjunto (opcional) */}
+            <div className={styles.group}>
+              <div className={styles.field}>
+                <label htmlFor="attachment">Adjunto (PDF/JPG/PNG, máx 8MB)</label>
+                <input id="attachment" name="attachment" type="file" accept=".pdf,image/jpeg,image/png" />
+              </div>
+            </div>
+
+            {/* Turnstile (widget visible “managed”) */}
+            <div
+              className="cf-turnstile"
+              data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+              data-callback="onTurnstileSuccess"
+              data-action="contact"
+              data-theme="auto"
+            />
+
             {/* Consentimiento + estado */}
             <div className={styles.group}>
               <label className={styles.checkbox}>
@@ -399,7 +443,7 @@ export default function Contact() {
             </div>
             <div className={`${styles.infoRow} ${styles.infoRowWhatsapp}`}>
               <svg className={styles.infoIcon} viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12.04 2C6.99 2 2.9 6.08 2.9 11.12c0 1.79.47 3.52 1.36 5.05L3 22l6-1.23a9.06 9.06 0 0 0 3.04.5c5.05 0 9.14-4.08 9.14-9.13C21.18 6.08 17.09 2 12.04 2zm0 16.54c-1.5 0-2.98-.4-4.27-1.15l-.31-.18-3.56.73.73-3.47-.2-.33A7.6 7.6 0 0 1 4.43 11.1c0-4.2 3.41-7.61 7.61-7.61s7.61 3.41 7.61 7.61-3.41 7.61-7.61 7.61zm4.29-5.05c-.23-.12-1.36-.67-1.57-.75-.21-.08-.36-.12-.52.12-.15.23-.6.75-.73.9-.13.15-.27.17-.5..06-.23-.12-.96-.35-1.83-1.1-.68-.61-1.14-1.36-1.28-1.59-.13-.23-.01-.36.1-.48.1-.1.23-.27.35-.4.12-.13.15-.23.23-.38.08-.15.04-.29-.02-.4-.06-.12-.52-1.26-.72-1.72-.19-.46-.38-.4-.52-.4h-.45c-.15 0-.4.06-.6.29-.21.23-.79.77-.79 1.88 0 1.11.81 2.19.93 2.34.12.15 1.59 2.43 3.84 3.41.54.23.95.37 1.28.47.54.17 1.03.15 1.42.09.43-.06 1.36-.56 1.55-1.11.19-.56.19-1.04.13-1.14-.06-.1-.21-.16-.44-.28z" />
+                <path d="M12.04 2C6.99 2 2.9 6.08 2.9 11.12c0 1.79.47 3.52 1.36 5.05L3 22l6-1.23a9.06 9.06 0 0 0 3.04.5c5.05 0 9.14-4.08 9.14-9.13C21.18 6.08 17.09 2 12.04 2zm0 16.54c-1.5 0-2.98-.4-4.27-1.15l-.31-.18-3.56.73.73-3.47-.2-.33A7.6 7.6 0 0 1 4.43 11.1c0-4.2 3.41-7.61 7.61-7.61s7.61 3.41 7.61 7.61-3.41 7.61-7.61 7.61zm4.29-5.05c-.23-.12-1.36-.67-1.57-.75-.21-.08-.36-.12-.52.12-.15.23-.6.75-.73.9-.13.15-.27.17-.5.06-.23-.12-.96-.35-1.83-1.1-.68-.61-1.14-1.36-1.28-1.59-.13-.23-.01-.36.1-.48.1-.1.23-.27.35-.4.12-.13.15-.23.23-.38.08-.15.04-.29-.02-.4-.06-.12-.52-1.26-.72-1.72-.19-.46-.38-.4-.52-.4h-.45c-.15 0-.4.06-.6.29-.21.23-.79.77-.79 1.88 0 1.11.81 2.19.93 2.34.12.15 1.59 2.43 3.84 3.41.54.23.95.37 1.28.47.54.17 1.03.15 1.42.09.43-.06 1.36-.56 1.55-1.11.19-.56.19-1.04.13-1.14-.06-.1-.21-.16-.44-.28z" />
               </svg>
               <a
                 href="https://wa.me/34692903572?text=Hola%20me%20gustaría%20recibir%20información"
