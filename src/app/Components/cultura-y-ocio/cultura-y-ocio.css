@@ -20,15 +20,82 @@
 .breadcrumbs a { color: inherit; text-decoration: none; }
 .breadcrumbs a:hover { text-decoration: underline; }
 
-/* Sección y cards (idénticas a otros servicios) */
+/* Sección */
 .section { padding: clamp(2.5rem, 5vw, 4rem) 0; }
 .section--alt { background:#fff; }
 .section__copy { color:#000; }
 .btn-cta { padding:.65rem .95rem; border-radius:10px; font-weight:600; border:1px solid #e5e7eb; background:#111827; color:#fff; }
 
-.summary-grid{ display:grid; grid-template-columns:1fr; gap:1.25rem; margin-top:1rem; }
-@media (min-width: 900px){ .summary-grid{ grid-template-columns:repeat(3,1fr); } }
-.summary-card{ border:1px solid #e5e7eb; border-radius:14px; padding:1rem; background:#fff; }
-.summary-thumb{ background:#e5e7eb; border-radius:10px; width:100%; aspect-ratio:4/3; margin-bottom:.75rem; }
-.summary-card h3{ margin:.25rem 0; font-size:1.1rem; }
-.summary-card p{ color:#4b5563; }
+/* Grid de cards */
+.summary-grid { display:grid; grid-template-columns:1fr; gap:1.25rem; margin-top:1rem; }
+@media (min-width:900px){ .summary-grid{ grid-template-columns:repeat(3,1fr); } }
+
+/* ----- CARD con imagen de fondo ----- */
+.summary-card{
+  --card-img-opacity: .35;          /* ajusta opacidad del fondo */
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(229,231,235,.7);
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  aspect-ratio: 9 / 12;              /* controla proporción del card */
+  min-height: 260px;                /* respaldo en navegadores sin aspect-ratio */
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+  background: transparent;          /* no tapar la imagen */
+  isolation: isolate;               /* asegura stacking correcto del overlay */
+}
+
+/* Imagen como background (Next/Image con fill y esta clase) */
+/* Imagen de fondo: SIN opacidad, usa filter para oscurecer sin “grisar” */
+.summary-card__bg{
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 1; /* ← antes teníamos .25/.35, quítalo */
+}
+
+/* Overlay: puedes dejarlo más suave ahora que la imagen ya está oscura */
+.summary-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0,0,0,1) 100%);
+  z-index: 1;
+}
+
+/* Contenido encima del fondo */
+.summary-content{
+  position: relative;
+  z-index: 2;
+  color: #fff;
+}
+
+.summary-card__title{
+  margin:.25rem 0;
+  font-size:1.1rem;
+  font-weight:700;
+}
+
+.summary-card__desc{
+  color:#f3f4f6;
+}
+
+/* Hover (ligero lift) */
+@media (hover:hover){
+  .summary-card{ transition: transform .3s ease, box-shadow .3s ease; }
+  .summary-card:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.16);
+  }
+}
+
+/* Respeta usuarios con reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .summary-card{ transition: none !important; }
+}
+
+/* Limpieza de estilos que ya no se usan */
+.summary-thumb{ display:none; }
+.summary-card h3, .summary-card p{ margin: 0; }
