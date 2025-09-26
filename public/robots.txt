@@ -1,0 +1,22 @@
+# robots.txt para myl3d.es
+
+User-agent: *
+# Bloquear carpetas internas que no deberían indexarse (ejemplos — ajústalas)
+Disallow: /admin/
+Disallow: /wp-admin/      # si usas WordPress u otro CMS con este directorio
+Disallow: /login/
+Disallow: /dashboard/
+Disallow: /private/
+Disallow: /scripts/
+Disallow: /tmp/
+Disallow: /backup/
+
+# Si tienes parámetros que producen contenido duplicado, puedes bloquearlos
+# Disallow: /*?sessionid=
+# Disallow: /*?utm_*
+
+# Permitir todo lo demás
+Allow: /
+
+# Indicar el sitemap para que los buscadores lo encuentren
+Sitemap: https://www.myl3d.es/sitemap.xml
