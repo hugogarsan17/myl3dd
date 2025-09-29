@@ -2,7 +2,7 @@
   position: relative;
   min-height: 100vh;
   background:
-    linear-gradient(rgba(0,0,0,.85), rgba(0,0,0,.85)), /* ↑ más oscuro */
+    linear-gradient(rgba(2,6,23,.78), rgba(2,6,23,.9)),
     url("/hero.jpg") center / cover no-repeat fixed;
   isolation: isolate;
 }
@@ -45,21 +45,18 @@
 }
 .nav__links a:hover{ opacity: .85; }
 
-/* Layout del hero: título a la izquierda y CTA a la derecha */
 .hero__inner{
   min-height: 100vh;
-  padding-top: 92px; /* deja espacio bajo la navbar */
+  padding-top: 92px;
   display: grid;
-  align-items: center;
-  grid-template-columns: 1.2fr .8fr;
-  gap: clamp(1rem, 4vw, 4rem);
-
+  place-content: center;
+  gap: clamp(1.2rem, 2.5vw, 2.25rem);
 }
 .hero__title{
   margin: 0;
   font-weight: 800;
-  line-height: 1.02;
-  font-size: clamp(2.2rem, 7.8vw, 5.4rem);
+  line-height: 1.05;
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
   color: var(--muted);
 }
 
@@ -69,8 +66,11 @@
 .hero__title:hover .accent{ color: #fff; }
 
 .hero__cta{
-  justify-self: end;
-  align-self: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 .btn-cta{
   display: inline-block;
@@ -87,7 +87,14 @@
   transform: translateY(-1px);
   background-color: #fff;
   color: #3001CA;
-  
+
+}
+
+.hero__subtitle{
+  margin: 1rem auto 0;
+  max-width: 60ch;
+  color: #e2e8f0;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
 }
 
 /* Contenedor del dropdown */

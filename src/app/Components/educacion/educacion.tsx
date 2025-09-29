@@ -41,7 +41,7 @@ export default function Educacion() {
         <div className="service-hero__bg" aria-hidden>
           <Image
             src="/hero.jpg"         /* pon tu imagen */
-            alt=""
+            alt="Aula híbrida equipada con tecnología interactiva"
             fill
             priority
             sizes="100vw"

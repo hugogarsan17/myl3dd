@@ -10,6 +10,8 @@ import "./carteleria-digital.css";
 export default function CarteleriaDigital() {
   const reduce = useReducedMotion();
 
+  const siteUrl = "https://www.myl3d.es";
+
   const cards = [
     {
       t: "Outdoor",
@@ -19,7 +21,7 @@ export default function CarteleriaDigital() {
         </>
       ),
       bg: "/res/tótems.png",
-      alt: "Pantallas exteriores",
+      alt: "Pantallas LED exteriores de gran formato",
     },
     {
       t: "Indoor",
@@ -29,7 +31,7 @@ export default function CarteleriaDigital() {
         </>
       ),
       bg: "/res/interior totem.png",
-      alt: "Señalización interior",
+      alt: "Sistema de señalización digital interior",
     },
     {
       t: "Retail",
@@ -39,7 +41,7 @@ export default function CarteleriaDigital() {
         </>
       ),
       bg: "/res/Portada.png",
-      alt: "Digital signage retail",
+      alt: "Pantalla de cartelería digital en retail",
     },
   ];
 
@@ -61,30 +63,38 @@ export default function CarteleriaDigital() {
             "@graph": [
               {
                 "@type": "Organization",
-                name: "MyL3D",
-                url: "https://www.myl3d.es/",
-                logo: "https://www.myl3d.es/logo.png",
+                "@id": `${siteUrl}/#organization`,
+                name: "MyL3d",
+                url: `${siteUrl}/`,
+                logo: `${siteUrl}/logo.png`,
                 sameAs: ["https://www.instagram.com/myl3d/"],
               },
               {
                 "@type": "BreadcrumbList",
-                itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Inicio", item: "https://www.tu-dominio.com/" },
-                  { "@type": "ListItem", position: 2, name: "Servicios", item: "https://www.tu-dominio.com/servicios" },
-                  { "@type": "ListItem", position: 3, name: "Cartelería digital", item: "https://www.tu-dominio.com/carteleria-digital" },
-                ],
+                itemListElement: breadcrumbs.map((crumb, index) => ({
+                  "@type": "ListItem",
+                  position: index + 1,
+                  name: crumb.name,
+                  item: `${siteUrl}${crumb.url === "/" ? "" : crumb.url}`,
+                })),
               },
               {
                 "@type": "Service",
                 name: "Cartelería digital",
-                serviceType: "MyL3d",
-                provider: { "@type": "Organization", name: "Nombre de la marca" },
+                serviceType: "Cartelería digital y pantallas LED",
+                provider: { "@id": `${siteUrl}/#organization` },
                 areaServed: { "@type": "Country", name: "España" },
                 description:
-                  "Diseñamos, instalamos e integramos cartelería digital para exteriores, interiores y retail: pantallas LED y monitores profesionales 24/7, con gestión de contenidos remota y centralizada.",
+                  "Diseñamos, instalamos e integramos cartelería digital para exteriores, interiores y retail: pantallas LED y monitores profesionales 24/7 con gestión de contenidos remota.",
                 offers: {
                   "@type": "Offer",
                   availability: "https://schema.org/InStock",
+                  priceSpecification: {
+                    "@type": "PriceSpecification",
+                    priceCurrency: "EUR",
+                    price: "0",
+                    description: "Presupuesto personalizado según las necesidades de cada espacio.",
+                  },
                 },
               },
             ],
@@ -92,13 +102,13 @@ export default function CarteleriaDigital() {
         }}
       />
 
-      <SiteHeader logoAlt="Nombre de la marca" />
+      <SiteHeader logoAlt="MyL3d" />
 
       <main id="service-hero" className="service-hero">
         <div className="service-hero__bg" aria-hidden>
           <Image
             src="/hero.jpg"
-            alt=""
+            alt="Instalación de pantallas LED para cartelería digital"
             fill
             priority
             sizes="100vw"
@@ -152,7 +162,7 @@ export default function CarteleriaDigital() {
                   <div className="cd-card__bg" aria-hidden>
                     <Image
                       src={c.bg}
-                      alt=""
+                      alt={c.alt}
                       fill
                       sizes="(min-width: 768px) 33vw, 100vw"
                       priority={i === 0}

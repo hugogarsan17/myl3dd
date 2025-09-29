@@ -41,7 +41,7 @@ export default function SalasDeControl() {
         <div className="service-hero__bg" aria-hidden>
           <Image
             src="/hero.jpg"    /* tu imagen de hero */
-            alt=""
+            alt="Videowall y puestos de operador en sala de control"
             fill
             priority
             sizes="100vw"
