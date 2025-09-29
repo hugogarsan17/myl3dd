@@ -297,3 +297,27 @@ img{ max-width:100%; display:block; }
     transition: none !important;
   }
 }
+
+/* Contenedor del logo */
+.logo {
+  display: inline-block;
+  max-width: 200px;   /* límite en desktop */
+  height: auto;
+}
+
+/* Imagen del logo dentro de .logo */
+.logo img {
+  width: 100%;       /* ocupa todo el ancho del contenedor */
+  height: auto;      /* mantiene proporción */
+  object-fit: contain;
+}
+
+/* --- En móvil <= 900px --- */
+@media (max-width: 900px) {
+  .logo {
+    max-width: 140px;   /* reduce ancho máximo */
+  }
+  .navbar__inner {
+    height: 64px;       /* opcional: navbar un poco más baja */
+  }
+}

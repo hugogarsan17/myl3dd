@@ -190,54 +190,30 @@ export default function Home() {
             <Link className="link-servicios" href="/servicios/eventos">realización y streaming para eventos corporativos</Link>, <Link className="link-servicios" href={"/servicios/educacion"}>aulas híbridas para educación</Link> y <Link className="link-servicios" href={"/servicios/salas-de-control"}>videowalls para salas de control</Link>.
           </p>
 
-          <div className="cards">
-            {[
-              {
-                t: "Cartelería digital",
-                d: "LED/monitores para outdoor, indoor y retail con gestión remota de contenidos.",
-                href: "/servicios/Carteleria-digital",
-              },
-              {
-                t: "Eventos",
-                d: "Realización y streaming con cámaras PTZ, procesadores y mezcladores HD/4K.",
-                href: "/servicios/eventos",
-              },
-              {
-                t: "Corporativo",
-                d: "Salas de reunión, coworking y auditorios con videoconferencia y audio profesional.",
-                href: "/servicios/corporativos",
-              },
-              {
-                t: "Cultura y ocio",
-                d: "Experiencias inmersivas en teatros, museos, discotecas y centros culturales.",
-                href: "/servicios/cultura-y-ocio",
-              },
-              {
-                t: "Educación",
-                d: "Aulas interactivas con monitores táctiles, cámaras 4K y audio de alta cobertura.",
-                href: "/servicios/educacion",
-              },
-              {
-                t: "Salas de control",
-                d: "Videowalls y sistemas de visualización en tiempo real para operaciones críticas.",
-                href: "/servicios/salas-de-control",
-              },
-            ].map((card, index) => (
-              <motion.article
-                key={card.t}
-                className="card"
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.08 * index }}
-              >
-                <Link href={card.href} className="card-link">
-                  <h3>{card.t}</h3>
-                  <p>{card.d}</p>
-                </Link>
-              </motion.article>
-            ))}
-          </div>
+<div className="cards">
+  {[
+    { t: "Cartelería digital", d: "LED/monitores para outdoor, indoor y retail con gestión remota de contenidos.", href: "/servicios/Carteleria-digital" },
+    { t: "Eventos", d: "Realización y streaming con cámaras PTZ, procesadores y mezcladores HD/4K.", href: "/servicios/eventos" },
+    { t: "Corporativo", d: "Salas de reunión, coworking y auditorios con videoconferencia y audio profesional.", href: "/servicios/corporativos" },
+    { t: "Cultura y ocio", d: "Experiencias inmersivas en teatros, museos, discotecas y centros culturales.", href: "/servicios/cultura-y-ocio" },
+    { t: "Educación", d: "Aulas interactivas con monitores táctiles, cámaras 4K y audio de alta cobertura.", href: "/servicios/educacion" },
+    { t: "Salas de control", d: "Videowalls y sistemas de visualización en tiempo real para operaciones críticas.", href: "/servicios/salas-de-control" },
+  ].map((card, index) => (
+    <Link key={card.href} href={card.href} className="card-link">
+      <motion.article
+        className="card"
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.08 * index }}
+      >
+        <h3>{card.t}</h3>
+        <p>{card.d}</p>
+      </motion.article>
+    </Link>
+  ))}
+</div>
+
         </div>
       </section>
 

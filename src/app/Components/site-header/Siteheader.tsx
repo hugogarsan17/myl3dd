@@ -9,8 +9,7 @@ type NavItem = { label: string; href?: string; ariaCurrent?: "page" | "true" | "
 interface SiteHeaderProps {
   logoSrc?: string;
   logoAlt?: string;
-  logoWidth?: number;
-  logoHeight?: number;
+
   links?: NavItem[];
   className?: string;
 }
@@ -18,8 +17,7 @@ interface SiteHeaderProps {
 export default function SiteHeader({
   logoSrc = "/logo.png",
   logoAlt = "MyL3d",
-  logoWidth = 200,
-  logoHeight = 80,
+
   links = [
     { href: "/", label: "Inicio", ariaCurrent: "page" },
     {
@@ -58,7 +56,7 @@ export default function SiteHeader({
     <header className={`navbar ${className}`} role="banner">
       <div className="container navbar__inner">
         <Link href="/" aria-label="Ir al inicio" className="logo" onClick={handleNavClick}>
-          <Image src={logoSrc} alt={logoAlt} width={logoWidth} height={logoHeight} priority />
+          <Image src={logoSrc} alt={logoAlt} width={100}  height={100} priority />
         </Link>
 
         <button
