@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import SiteHeader from "@/app/Components/site-header/Siteheader";
 import Link from "next/link";
+import "./Home.css"
 
 const container: Variants = {
   hidden: { opacity: 0 },
@@ -93,7 +94,7 @@ export default function Home() {
         }}
       />
 
-      <SiteHeader logoSrc="/logo.png" logoAlt="MyL3d, especialistas en soluciones audiovisuales" />
+      <SiteHeader />
 
       <main id="home" className="hero">
         <motion.section
@@ -304,56 +305,6 @@ export default function Home() {
           </motion.p>
         </div>
       </section>
-
-      <style jsx global>{`
-        html { scroll-behavior: smooth; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; }
-        .hero { position: relative; min-height: 82vh; display: grid; place-items: center; padding: 5rem 0 6rem; }
-        .hero__inner { text-align: center; }
-        .hero__title { font-size: clamp(2.2rem, 3vw + 1rem, 3.5rem); line-height: 1.1; }
-        .hero__subtitle { margin: 1rem auto 1.5rem; max-width: 65ch; font-size: clamp(1.05rem, 1.4vw + 1rem, 1.35rem); color: #e2e8f0; }
-        .hero__cta { display: flex; flex-direction: column; gap: 0.75rem; align-items: center; }
-        .hero__secondary { color: #e2e8f0; text-decoration: underline; font-weight: 500; }
-        .section { padding: 5rem 0; }
-        .section--alt { background: #fff; }
-        .section__title { font-size: clamp(1.6rem, 2vw + 1rem, 2.25rem); margin-bottom: 0.75rem; }
-        .section__copy { color: #0f172a; max-width: 70ch; }
-
-        .about-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; }
-        .about-image__media { width: 100%; height: auto; border-radius: 12px; object-fit: cover; }
-
-        .cards { display: grid; gap: 1rem; margin-top: 1.25rem; }
-        .card { border: 1px solid #1e293b; border-radius: 14px; padding: 1.25rem; background: #020617; min-height: 170px; }
-        .card-link { color: #f8fafc; text-decoration: none; display: block; height: 100%; }
-        .card-link h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
-        .card-link:hover,
-        .card-link:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(48, 1, 202, 0.35); border-radius: 12px; }
-
-        .value-grid { display: grid; gap: 1.25rem; margin-top: 1.5rem; }
-        .value-card { background: #ffffff; border-radius: 16px; border: 1px solid #e5e7eb; padding: 1.5rem; box-shadow: 0 12px 30px -22px rgba(15, 23, 42, 0.75); color: #0f172a; }
-        .value-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-        .value-card p { margin: 0; }
-
-        .scroll-indicator { position: absolute; left: 50%; bottom: 1.75rem; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 0.5rem; color: #e2e8f0; text-decoration: none; font-weight: 500; }
-        .scroll-indicator__dot { width: 8px; height: 8px; border-radius: 999px; background: #3001CA; box-shadow: 0 0 0 6px rgba(48, 1, 202, 0.12); }
-        .scroll-indicator__text { font-size: 0.95rem; }
-        .scroll-indicator:hover { filter: brightness(1.1); }
-
-        @media (min-width: 640px) {
-          .cards { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (min-width: 768px) {
-          .about-grid { grid-template-columns: 1.05fr 0.95fr; }
-          .hero__cta { flex-direction: row; }
-          .hero__cta { gap: 1rem; }
-          .value-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-        }
-
-        @media (min-width: 1024px) {
-          .cards { grid-template-columns: repeat(3, 1fr); }
-        }
-      `}</style>
     </>
   );
 }

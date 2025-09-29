@@ -19,7 +19,7 @@ export default function SiteHeader({
   logoSrc = "/logo.png",
   logoAlt = "MyL3d",
   logoWidth = 200,
-  logoHeight = 200,
+  logoHeight = 80,
   links = [
     { href: "/", label: "Inicio", ariaCurrent: "page" },
     {
