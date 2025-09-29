@@ -78,7 +78,7 @@ export default function Eventos() {
         <div className="service-hero__bg" aria-hidden>
           <Image
             src="/hero.jpg"
-            alt=""
+            alt="Producción audiovisual en escenario para eventos"
             fill
             priority
             sizes="100vw"

@@ -112,7 +112,7 @@
           <div className="service-hero__bg" aria-hidden="true">
             <Image
               src="/hero.jpg"
-              alt="" /* decorativo */
+              alt="Sala de reuniones corporativa equipada con pantallas LED"
               fill
               priority
               sizes="(max-width: 768px) 100vw, 100vw"

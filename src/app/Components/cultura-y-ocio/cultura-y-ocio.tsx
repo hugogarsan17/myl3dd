@@ -92,7 +92,7 @@ export default function CulturaYOcio() {
         <div className="service-hero__bg" aria-hidden>
           <Image
             src="/hero.jpg"
-            alt=""
+            alt="Instalación audiovisual para espacios culturales"
             fill
             priority
             sizes="100vw"
