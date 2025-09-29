@@ -152,12 +152,12 @@ export default function Home() {
               <p>
                 Apostamos por la innovación y la fiabilidad para crear <strong>entornos inmersivos</strong> que refuercen la identidad de tu marca. Descubre nuestras propuestas de
                 {" "}
-                <Link href="/servicios/eventos">producción audiovisual para eventos</Link>,
+                <Link className="link-servicios" href="/servicios/eventos">producción audiovisual para eventos</Link>,
                 {" "}
-                <Link href="/servicios/corporativos">salas corporativas</Link>
+                <Link className="link-servicios" href="/servicios/corporativos">salas corporativas</Link>
                 {" "}y
                 {" "}
-                <Link href="/servicios/cultura-y-ocio">espacios culturales y de ocio</Link>.
+                <Link className="link-servicios" href="/servicios/cultura-y-ocio">espacios culturales y de ocio</Link>.
               </p>
             </motion.div>
           </div>
@@ -184,9 +184,9 @@ export default function Home() {
             Nuestro objetivo es ofrecer <strong>tecnología audiovisual de vanguardia</strong>, fácil de usar, confiable y con un acabado 100% profesional para que puedas centrarte en tu mensaje mientras nosotros nos ocupamos de la parte técnica.
           </p>
           <p>
-            Ponemos a tu disposición un amplio catálogo de servicios audiovisuales que incluye <Link href="/servicios/Carteleria-digital">cartelería digital</Link>,
+            Ponemos a tu disposición un amplio catálogo de servicios audiovisuales que incluye <Link className="link-servicios" href="/servicios/Carteleria-digital">cartelería digital</Link>,
             {" "}
-            <Link href="/servicios/eventos">realización y streaming para eventos corporativos</Link>, aulas híbridas para educación y videowalls para salas de control.
+            <Link className="link-servicios" href="/servicios/eventos">realización y streaming para eventos corporativos</Link>, <Link className="link-servicios" href={"/servicios/educacion"}>aulas híbridas para educación</Link> y <Link className="link-servicios" href={"/servicios/salas-de-control"}>videowalls para salas de control</Link>.
           </p>
 
           <div className="cards">

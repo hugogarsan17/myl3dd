@@ -377,3 +377,11 @@
 .card-link:hover {
   filter: brightness(1.1);
 }
+
+.link-servicios{
+  text-decoration: none;
+  color: #3001CA;
+}
+.link-servicios:hover{
+  color: #220486;
+}
