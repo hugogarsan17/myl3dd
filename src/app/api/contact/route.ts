@@ -8,12 +8,35 @@ export const runtime = "nodejs"; // Nodemailer requiere Node, no Edge.
 const isDev = process.env.NODE_ENV !== "production";
 
 type ContactPayload = {
+  tab: "empresa" | "persona";
   name: string;
   email: string;
-  phone?: string;
+  phone: string;
   subject?: string;
   message: string;
   captchaToken: string; // Turnstile
+
+  company?: string;
+  role?: string;
+  cif?: string;
+  dni?: string;
+
+  eventType: string;
+  city: string;
+
+  decisionTime?: string;
+  hearAbout?: string;
+
+  utm: Record<string, string | undefined>;
+  referrer: string;
+  page: string;
+
+  attachment?: {
+    name: string;
+    type: string;
+    size: number;
+    dataUrl: string;
+  };
 };
 
 function isRecord(v: unknown): v is Record<string, unknown> {
@@ -22,8 +45,9 @@ function isRecord(v: unknown): v is Record<string, unknown> {
 
 function isContactPayload(v: unknown): v is ContactPayload {
   if (!isRecord(v)) return false;
-  const { name, email, message, captchaToken } = v;
+  const { name, email, message, captchaToken, tab } = v;
   return (
+    (tab === "empresa" || tab === "persona") &&
     typeof name === "string" &&
     typeof email === "string" &&
     typeof message === "string" &&
@@ -87,16 +111,19 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { name, email, phone, subject, message, captchaToken } = raw;
+    const {
+      tab, name, email, phone, subject, message,
+      company, role, cif, dni,
+      eventType, city, decisionTime, hearAbout,
+      utm, referrer, page, attachment, captchaToken
+    } = raw;
 
-    // IP desde cabecera estándar (sin any, sin ts-ignore)
     const xff = req.headers.get("x-forwarded-for") || "";
     const ip = xff.split(",")[0]?.trim() || "";
 
-    // 1) Verificar CAPTCHA
     await verifyTurnstile(captchaToken, ip);
 
-    // 2) Config SMTP
+    // Config SMTP
     const hostSmtp = process.env.MAIL_HOST;
     const port = Number(process.env.MAIL_PORT ?? "465");
     const secure = (process.env.MAIL_SECURE ?? "true") === "true"; // 465->true, 587->false
@@ -121,17 +148,53 @@ export async function POST(req: NextRequest) {
 
     if (isDev) await transporter.verify();
 
+    // Texto plano
     const plainText = [
       `Nombre: ${name}`,
       `Email: ${email}`,
       `Teléfono: ${phone || "No indicado"}`,
+      tab === "empresa" ? `Empresa: ${company || "No indicado"}` : `DNI: ${dni || "No indicado"}`,
+      tab === "empresa" ? `Cargo: ${role || "No indicado"}` : "",
+      `CIF: ${cif || "No indicado"}`,
       `Asunto: ${subject || "Sin asunto"}`,
+      `Tipo de servicio: ${eventType}`,
+      `Ciudad: ${city || "No indicada"}`,
+      `Tiempo de decisión: ${decisionTime || "No indicado"}`,
+      `Cómo nos conoció: ${hearAbout || "No indicado"}`,
+      `Página: ${page}`,
+      `Referrer: ${referrer}`,
+      `UTM: ${JSON.stringify(utm)}`,
       "",
       "Mensaje:",
       message,
+      attachment ? `\nArchivo adjunto: ${attachment.name} (${attachment.type}, ${attachment.size} bytes)` : "",
     ].join("\n");
 
-    const safeHtmlMsg = escapeHtml(String(message)).replace(/\n/g, "<br/>");
+    // HTML seguro
+    const safeHtmlMsg = escapeHtml(message).replace(/\n/g, "<br/>");
+
+    const htmlBody = `
+      <h2>Nuevo mensaje desde la web</h2>
+      <p><strong>Nombre:</strong> ${escapeHtml(name)}</p>
+      <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+      <p><strong>Teléfono:</strong> ${escapeHtml(phone || "No indicado")}</p>
+      ${tab === "empresa" ? `<p><strong>Empresa:</strong> ${escapeHtml(company || "No indicado")}</p>` : ""}
+      ${tab === "empresa" ? `<p><strong>Cargo:</strong> ${escapeHtml(role || "No indicado")}</p>` : ""}
+      ${tab === "empresa" ? `<p><strong>CIF:</strong> ${escapeHtml(cif || "No indicado")}</p>` : ""}
+      ${tab === "persona" ? `<p><strong>DNI:</strong> ${escapeHtml(dni || "No indicado")}</p>` : ""}
+      <p><strong>Asunto:</strong> ${escapeHtml(subject || "Sin asunto")}</p>
+      <p><strong>Tipo de servicio:</strong> ${escapeHtml(eventType)}</p>
+      <p><strong>Ciudad:</strong> ${escapeHtml(city || "No indicada")}</p>
+      <p><strong>Tiempo de decisión:</strong> ${escapeHtml(decisionTime || "No indicado")}</p>
+      <p><strong>Cómo nos conoció:</strong> ${escapeHtml(hearAbout || "No indicado")}</p>
+      <p><strong>Página:</strong> ${escapeHtml(page)}</p>
+      <p><strong>Referrer:</strong> ${escapeHtml(referrer)}</p>
+      <p><strong>UTM:</strong> ${escapeHtml(JSON.stringify(utm))}</p>
+      <p><strong>Mensaje:</strong><br/>${safeHtmlMsg}</p>
+      ${attachment ? `<p><strong>Archivo adjunto:</strong> ${escapeHtml(attachment.name)} (${escapeHtml(attachment.type)}, ${attachment.size} bytes)</p>` : ""}
+      <hr/>
+      <small>IP: ${escapeHtml(ip || "desconocida")}</small>
+    `;
 
     const info: SentMessageInfo = await transporter.sendMail({
       from: `"Web Contacto" <${from}>`,
@@ -139,16 +202,7 @@ export async function POST(req: NextRequest) {
       replyTo: email,
       subject: subject || "Nuevo mensaje de contacto",
       text: plainText,
-      html: `
-        <h2>Nuevo mensaje desde la web</h2>
-        <p><strong>Nombre:</strong> ${escapeHtml(name)}</p>
-        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-        <p><strong>Teléfono:</strong> ${escapeHtml(phone ?? "No indicado")}</p>
-        <p><strong>Asunto:</strong> ${escapeHtml(subject ?? "Sin asunto")}</p>
-        <p><strong>Mensaje:</strong><br/>${safeHtmlMsg}</p>
-        <hr/>
-        <small>IP: ${escapeHtml(ip || "desconocida")}</small>
-      `,
+      html: htmlBody,
     });
 
     if (isDev) {

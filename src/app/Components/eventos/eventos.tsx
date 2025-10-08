@@ -32,7 +32,7 @@ export default function Eventos() {
     },
     {
       t: "Festivales",
-      img: "/res/stand.png",
+      img: "/res/festivales.png",
       d: (
         <>
           <strong>Realización en directo</strong> y <strong>streaming</strong> simultáneo, ruteo de señales
