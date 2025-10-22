@@ -6,7 +6,6 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import SiteHeader from "@/app/Components/site-header/Siteheader";
 import "./salas-de-control.css";
-import { img } from "framer-motion/client";
 
 export default function SalasDeControl() {
   const reduce = useReducedMotion();
@@ -92,7 +91,7 @@ export default function SalasDeControl() {
                     <strong> layouts dinámicos</strong> (PIP, mosaicos) y perfiles por turno.
                   </>
                 ),
-                img: "res/videwall.webp"
+                img: "res/videwall.webp",
               },
               {
                 t: "Operación y control",
@@ -102,6 +101,7 @@ export default function SalasDeControl() {
                     y panel táctil para cambiar vistas y escenas en segundos.
                   </>
                 ),
+                img: "res/stand.png",
               },
               {
                 t: "Continuidad 24/7",
@@ -111,7 +111,7 @@ export default function SalasDeControl() {
                     <strong> monitorización/alertas</strong> y mantenimiento preventivo.
                   </>
                 ),
-                img: 
+                img: "res/Trabajos-6.jpg",
               },
             ].map((c, i) => (
               <motion.article
@@ -122,7 +122,15 @@ export default function SalasDeControl() {
                 viewport={{ once: true, amount: 0.35 }}
                 transition={{ duration: 0.35, delay: i * 0.05 }}
               >
-                <div className="summary-thumb" />
+                <div className="summary-thumb">
+                  <Image
+                    src={`/${c.img}`}
+                    alt={c.t}
+                    fill
+                    sizes="(max-width: 900px) 100vw, 33vw"
+                    style={{ objectFit: "cover", borderRadius: "10px" }}
+                  />
+                </div>
                 <h3>{c.t}</h3>
                 <p>{c.d}</p>
               </motion.article>

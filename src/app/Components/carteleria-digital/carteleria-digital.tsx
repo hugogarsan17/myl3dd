@@ -20,7 +20,7 @@ export default function CarteleriaDigital() {
           <strong>Pantallas LED y monitores de alto brillo</strong> visibles 24/7, resistentes a la intemperie y perfectos para publicidad exterior.
         </>
       ),
-      bg: "/res/tótems.png",
+      bg: "/res/totems.png",
       alt: "Pantallas LED exteriores de gran formato",
     },
     {
@@ -30,7 +30,7 @@ export default function CarteleriaDigital() {
           <strong>Monitores profesionales</strong> con gestión centralizada, ideales para oficinas, salas de espera o espacios educativos.
         </>
       ),
-      bg: "/res/interior totem.png",
+      bg: "/res/interior-totem.png",
       alt: "Sistema de señalización digital interior",
     },
     {

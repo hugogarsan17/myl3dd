@@ -6,7 +6,6 @@
   import { motion, useReducedMotion } from "framer-motion";
   import SiteHeader from "@/app/Components/site-header/Siteheader";
   import "./corporativos.css";
-import { img } from "framer-motion/client";
 
   export default function Corporativos() {
     const reduce = useReducedMotion();
@@ -35,7 +34,7 @@ import { img } from "framer-motion/client";
             Conectividad y usabilidad cuidada para reuniones fluidas.
           </>
         ),
-        img: "res/sala reunión (1).png"
+        img: "res/sala-reunion-1.png"
       },
       {
         id: "coworking",
