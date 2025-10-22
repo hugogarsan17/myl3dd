@@ -23,6 +23,7 @@ export default function Eventos() {
     {
       t: "Conciertos",
       img: "/res/conciertos.png", // ideal renombrar a /res/stand-ise.jpg
+      alt: "Concierto con pantallas LED en escenario",
       d: (
         <>
           Cobertura <strong>multicámara</strong> con cámaras PTZ y operadores, mezcla en
@@ -33,6 +34,7 @@ export default function Eventos() {
     {
       t: "Festivales",
       img: "/res/festivales.png",
+      alt: "Festival al aire libre con pantallas gigantes",
       d: (
         <>
           <strong>Realización en directo</strong> y <strong>streaming</strong> simultáneo, ruteo de señales
@@ -43,6 +45,7 @@ export default function Eventos() {
     {
       t: "Ferias y Expos",
       img: "/res/stand-ise.png",
+      alt: "Stand ferial con pantalla LED",
       d: (
         <>
           Stands con <strong>LED/monitores</strong>, <strong>players</strong> y control de contenidos,
@@ -129,25 +132,22 @@ export default function Eventos() {
               viewport={{ once: true, amount: 0.35 }}
               transition={{ duration: 0.35, delay: i * 0.05 }}
             >
-              <div className="summary-thumb">
-                {c.img ? (
-                  <Image
-                    src={src(c.img)}
-                    alt={c.t}
-                    fill
-                    // 4 columnas >= 900px, si no 100vw (la card ocupa ancho completo)
-                    sizes="(min-width: 900px) 25vw, 100vw"
-                    priority={i === 0}
-                    placeholder="empty"
-                    style={{ objectFit: "cover" }}
-                  />
-                ) : (
-                  <div className="summary-thumb__fallback" aria-hidden />
-                )}
-              </div>
+              {c.img ? (
+                <Image
+                  src={src(c.img)}
+                  alt={c.alt}
+                  fill
+                  sizes="(min-width: 900px) 25vw, 100vw"
+                  priority={i === 0}
+                  placeholder="empty"
+                  className="summary-card__bg"
+                />
+              ) : null}
 
-              <h3>{c.t}</h3>
-              <p>{c.d}</p>
+              <div className="summary-content">
+                <h3 className="summary-card__title">{c.t}</h3>
+                <p className="summary-card__desc">{c.d}</p>
+              </div>
             </motion.article>
           ))}
         </div>

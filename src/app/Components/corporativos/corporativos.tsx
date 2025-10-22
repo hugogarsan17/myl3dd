@@ -34,7 +34,8 @@
             Conectividad y usabilidad cuidada para reuniones fluidas.
           </>
         ),
-        img: "res/sala-reunion-1.png"
+        img: "res/sala-reunion-1.png",
+        alt: "Sala de reuniones equipada con pantalla y videoconferencia",
       },
       {
         id: "coworking",
@@ -46,7 +47,8 @@
             colaboración eficaz.
           </>
         ),
-        img: "res/coworking.jpg"
+        img: "res/coworking.jpg",
+        alt: "Espacio de coworking con soluciones audiovisuales",
       },
       {
         id: "salon",
@@ -58,7 +60,8 @@
             <strong> control sencillo</strong>.
           </>
         ),
-        img: "res/actos.jpg"
+        img: "res/actos.jpg",
+        alt: "Auditorio corporativo con pantalla LED",
       },
     ];
 
@@ -173,19 +176,18 @@
                     viewport={{ once: true, amount: 0.3 }}
                     transition={{ duration: 0.4, delay: i * 0.05 }}
                   >
+                    <Image
+                      src={`/${c.img}`}
+                      alt={c.alt}
+                      fill
+                      sizes="(max-width: 900px) 100vw, 33vw"
+                      className="summary-card__bg"
+                    />
                     <Link href={`#${c.id}`} className="summary-card__link">
-<div className="summary-thumb" aria-hidden="true">
-  <Image
-    src={`/${c.img}`}
-    alt={c.t}
-    fill
-    sizes="(max-width: 900px) 100vw, 33vw"
-    style={{ objectFit: "cover", borderRadius: "10px" }}
-  />
-</div>
-<h2 className="summary-card__title">{c.t}</h2>
-<p>{c.d}</p>
-
+                      <div className="summary-content">
+                        <h2 className="summary-card__title">{c.t}</h2>
+                        <p className="summary-card__desc">{c.d}</p>
+                      </div>
                     </Link>
                   </motion.article>
                 </li>
