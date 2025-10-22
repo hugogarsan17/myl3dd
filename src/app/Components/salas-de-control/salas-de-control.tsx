@@ -17,7 +17,7 @@ export default function SalasDeControl() {
   ];
 
   return (
-    <>
+    <div className="service-page">
       <Script
         id="ld-org"
         type="application/ld+json"
@@ -156,6 +156,6 @@ export default function SalasDeControl() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

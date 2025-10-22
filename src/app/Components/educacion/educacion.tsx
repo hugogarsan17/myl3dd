@@ -17,7 +17,7 @@ export default function Educacion() {
   ];
 
   return (
-    <>
+    <div className="service-page">
       <Script
         id="ld-org"
         type="application/ld+json"
@@ -151,6 +151,6 @@ export default function Educacion() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

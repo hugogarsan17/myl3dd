@@ -54,7 +54,7 @@ export default function Eventos() {
   ];
 
   return (
-    <>
+    <div className="service-page">
       <Script
         id="ld-org"
         type="application/ld+json"
@@ -172,6 +172,6 @@ export default function Eventos() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

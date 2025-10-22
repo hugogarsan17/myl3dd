@@ -67,7 +67,7 @@ export default function CulturaYOcio() {
   ];
 
   return (
-    <>
+    <div className="service-page">
       {/* JSON-LD Organization */}
       <Script
         id="ld-org"
@@ -168,6 +168,6 @@ export default function CulturaYOcio() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

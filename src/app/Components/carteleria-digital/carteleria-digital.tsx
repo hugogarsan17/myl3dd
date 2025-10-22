@@ -52,7 +52,7 @@ export default function CarteleriaDigital() {
   ];
 
   return (
-    <>
+    <div className="service-page">
       <Script
         id="structured-data"
         type="application/ld+json"
@@ -188,11 +188,11 @@ export default function CarteleriaDigital() {
             </ul>
 
             <Link href="/contacto" className="btn-cta sheen" style={{ marginTop: "1rem" }}>
-            Solicitar información
+              Solicitar información
             </Link>
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
