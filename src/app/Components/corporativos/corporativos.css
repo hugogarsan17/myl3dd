@@ -118,3 +118,19 @@
     transform: none !important;
   }
 }
+
+/* Quitar bullets y sangrías del UL de cards */
+.summary-grid {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0; /* conserva tu margen superior */
+}
+
+/* Por si algún navegador insiste */
+.summary-grid > li {
+  list-style: none;
+}
+.summary-grid li::marker {
+  content: "";
+}
+
