@@ -22,7 +22,7 @@ export default function Eventos() {
   const items = [
     {
       t: "Conciertos",
-      img: "/res/Stand ISE.png", // ideal renombrar a /res/stand-ise.jpg
+      img: "/res/conciertos.png", // ideal renombrar a /res/stand-ise.jpg
       d: (
         <>
           Cobertura <strong>multicámara</strong> con cámaras PTZ y operadores, mezcla en

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import SiteHeader from "@/app/Components/site-header/Siteheader";
 import "./salas-de-control.css";
+import { img } from "framer-motion/client";
 
 export default function SalasDeControl() {
   const reduce = useReducedMotion();
@@ -91,6 +92,7 @@ export default function SalasDeControl() {
                     <strong> layouts dinámicos</strong> (PIP, mosaicos) y perfiles por turno.
                   </>
                 ),
+                img: "res/videwall.webp"
               },
               {
                 t: "Operación y control",
@@ -109,6 +111,7 @@ export default function SalasDeControl() {
                     <strong> monitorización/alertas</strong> y mantenimiento preventivo.
                   </>
                 ),
+                img: 
               },
             ].map((c, i) => (
               <motion.article

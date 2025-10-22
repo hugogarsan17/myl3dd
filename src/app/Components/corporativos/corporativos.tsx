@@ -47,6 +47,7 @@ import { img } from "framer-motion/client";
             colaboración eficaz.
           </>
         ),
+        img: "res/coworking.jpg"
       },
       {
         id: "salon",
@@ -58,6 +59,7 @@ import { img } from "framer-motion/client";
             <strong> control sencillo</strong>.
           </>
         ),
+        img: "res/actos.jpg"
       },
     ];
 
@@ -173,9 +175,18 @@ import { img } from "framer-motion/client";
                     transition={{ duration: 0.4, delay: i * 0.05 }}
                   >
                     <Link href={`#${c.id}`} className="summary-card__link">
-                      <div className="summary-thumb" aria-hidden="true" />
-                      <h2 className="summary-card__title">{c.t}</h2>
-                      <p>{c.d}</p>
+<div className="summary-thumb" aria-hidden="true">
+  <Image
+    src={`/${c.img}`}
+    alt={c.t}
+    fill
+    sizes="(max-width: 900px) 100vw, 33vw"
+    style={{ objectFit: "cover", borderRadius: "10px" }}
+  />
+</div>
+<h2 className="summary-card__title">{c.t}</h2>
+<p>{c.d}</p>
+
                     </Link>
                   </motion.article>
                 </li>

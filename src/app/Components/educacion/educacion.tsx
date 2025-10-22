@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import SiteHeader from "@/app/Components/site-header/Siteheader";
 import "./educacion.css";
+import { img } from "framer-motion/client";
 
 export default function Educacion() {
   const reduce = useReducedMotion();
@@ -91,6 +92,7 @@ export default function Educacion() {
                     <strong> cámaras 4K</strong> y microfonía para participación de alumnos en clase y en remoto.
                   </>
                 ),
+                img: "res/aulas-inter.jpg"
               },
               {
                 t: "Salas híbridas",
@@ -100,6 +102,7 @@ export default function Educacion() {
                     <strong> cámaras inteligentes</strong> que encuadran al profesor y al alumnado automáticamente.
                   </>
                 ),
+                img: 
               },
               {
                 t: "Auditorios y campus",
@@ -109,6 +112,7 @@ export default function Educacion() {
                     y <strong>control</strong> de señales para emisiones y grabaciones.
                   </>
                 ),
+                img: "res/actos.jpg"
               },
 
             ].map((c, i) => (
