@@ -42,7 +42,7 @@ export default function Eventos() {
     },
     {
       t: "Ferias y Expos",
-      img: "/res/ocio.png",
+      img: "/res/Stand ISE.png",
       d: (
         <>
           Stands con <strong>LED/monitores</strong>, <strong>players</strong> y control de contenidos,
