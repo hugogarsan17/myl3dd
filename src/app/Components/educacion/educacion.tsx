@@ -17,7 +17,7 @@ export default function Educacion() {
   ];
 
   return (
-    <>
+    <div className="service-page">
       <Script
         id="ld-org"
         type="application/ld+json"
@@ -92,6 +92,7 @@ export default function Educacion() {
                   </>
                 ),
                 img: "res/aulas-inter.jpg",
+                alt: "Aula interactiva equipada con pantalla táctil",
               },
               {
                 t: "Salas híbridas",
@@ -102,6 +103,7 @@ export default function Educacion() {
                   </>
                 ),
                 img: "res/sala-reunion.png",
+                alt: "Sala híbrida con videoconferencia y cámaras inteligentes",
               },
               {
                 t: "Auditorios y campus",
@@ -111,9 +113,9 @@ export default function Educacion() {
                     y <strong>control</strong> de señales para emisiones y grabaciones.
                   </>
                 ),
-                img: "res/actos.jpg"
+                img: "res/actos.jpg",
+                alt: "Auditorio universitario con pantalla LED",
               },
-
             ].map((c, i) => (
               <motion.article
                 key={c.t}
@@ -123,17 +125,17 @@ export default function Educacion() {
                 viewport={{ once: true, amount: 0.35 }}
                 transition={{ duration: 0.35, delay: i * 0.05 }}
               >
-                <div className="summary-thumb">
-                  <Image
-                    src={`/${c.img}`}
-                    alt={c.t}
-                    fill
-                    sizes="(max-width: 900px) 100vw, 33vw"
-                    style={{ objectFit: "cover", borderRadius: "10px" }}
-                  />
+                <Image
+                  src={`/${c.img}`}
+                  alt={c.alt}
+                  fill
+                  sizes="(max-width: 900px) 100vw, 33vw"
+                  className="summary-card__bg"
+                />
+                <div className="summary-content">
+                  <h3 className="summary-card__title">{c.t}</h3>
+                  <p className="summary-card__desc">{c.d}</p>
                 </div>
-                <h3>{c.t}</h3>
-                <p>{c.d}</p>
               </motion.article>
             ))}
           </div>
@@ -151,6 +153,6 @@ export default function Educacion() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
