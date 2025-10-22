@@ -93,15 +93,6 @@ export default function SalasDeControl() {
                 ),
               },
               {
-                t: "Fuentes y señales",
-                d: (
-                  <>
-                    Ingesta de <strong>multifuente</strong> (HDMI/SDI/DP/IP, NDI/SRT), decodificación
-                    y <strong>ruteo</strong> hacia el videowall y puestos de trabajo.
-                  </>
-                ),
-              },
-              {
                 t: "Operación y control",
                 d: (
                   <>

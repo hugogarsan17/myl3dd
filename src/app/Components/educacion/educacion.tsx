@@ -110,15 +110,7 @@ export default function Educacion() {
                   </>
                 ),
               },
-              {
-                t: "Señalética digital",
-                d: (
-                  <>
-                    <strong>Cartelería</strong> para pasillos y accesos con <strong>gestión remota</strong>:
-                    horarios, avisos y eventos del campus en tiempo real.
-                  </>
-                ),
-              },
+
             ].map((c, i) => (
               <motion.article
                 key={c.t}
