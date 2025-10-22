@@ -4,6 +4,7 @@ import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next"; // 👈 Importa aquí
 import "./globals.css";
 import "./Components/Home/Home.css";
+import "./styles/service-base.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

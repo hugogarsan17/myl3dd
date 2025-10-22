@@ -63,7 +63,7 @@
     ];
 
     return (
-      <>
+      <div className="service-page">
         {/* JSON-LD: Organization + Service + BreadcrumbList */}
         <Script
           id="ld-json"
@@ -199,8 +199,6 @@
             </div>
           </div>
         </section>
-
-
-      </>
+      </div>
     );
   }

@@ -1,101 +1,75 @@
-:root { scroll-behavior: smooth; }
-.container { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; }
+/* Estilos específicos para cultura y ocio */
 
-/* Banner de servicio */
-.service-hero { position:relative; min-height:34vh; padding:2.5rem 0 1.75rem; color:#fff; display:flex; align-items:flex-end; }
-.service-hero__bg { position:absolute; inset:0; z-index:0; }
-.service-hero::before {
-  content:""; position:absolute; inset:0; z-index:1;
-  background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.35) 40%, rgba(0,0,0,.15) 100%);
-}
-.service-hero .container, .service-hero__title { position:relative; z-index:2; }
-.service-hero__title { font-size: clamp(2rem, 3vw + 1rem, 3rem); font-weight:800; letter-spacing:-.02em; margin:0; text-shadow:0 6px 26px rgba(0,0,0,.35); }
-.service-hero__subtitle { margin:.35rem 0 0; font-size:clamp(1.1rem, 1.4vw + .7rem, 1.6rem); font-weight:500; color:#f3f4f6; max-width:44rem; text-shadow:0 4px 18px rgba(0,0,0,.35); }
-
-/* Breadcrumbs */
-.breadcrumbs { margin-bottom: .5rem; font-size: .875rem; color: #e5e7eb; }
-.breadcrumbs ol { display: flex; gap: .5rem; list-style: none; padding: 0; margin: 0; }
-.breadcrumbs li { display: inline-flex; align-items: center; gap: .5rem; }
-.breadcrumbs li:not(:last-child)::after { content: "/"; opacity: .7; }
-.breadcrumbs a { color: inherit; text-decoration: none; }
-.breadcrumbs a:hover { text-decoration: underline; }
-
-/* Sección */
-.section { padding: clamp(2.5rem, 5vw, 4rem) 0; }
-.section--alt { background:#fff; }
-.section__copy { color:#000; }
-.btn-cta { padding:.65rem .95rem; border-radius:10px; font-weight:600; border:1px solid #e5e7eb; background:#111827; color:#fff; }
-
-/* Grid de cards */
-.summary-grid { display:grid; grid-template-columns:1fr; gap:1.25rem; margin-top:1rem; }
-@media (min-width:900px){ .summary-grid{ grid-template-columns:repeat(3,1fr); } }
-
-/* ----- CARD con imagen de fondo ----- */
-.summary-card{
-  --card-img-opacity: .35;          /* ajusta opacidad del fondo */
+.service-page .summary-card {
+  --card-img-opacity: 0.35;
   position: relative;
   overflow: hidden;
   border-radius: 14px;
-  border: 1px solid rgba(229,231,235,.7);
-  box-shadow: 0 8px 24px rgba(0,0,0,.12);
-  aspect-ratio: 9 / 12;              /* controla proporción del card */
-  min-height: 260px;                /* respaldo en navegadores sin aspect-ratio */
+  border: 1px solid rgba(229, 231, 235, 0.7);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  aspect-ratio: 9 / 12;
+  min-height: 260px;
   display: flex;
   align-items: flex-end;
   padding: 1rem;
-  background: transparent;          /* no tapar la imagen */
-  isolation: isolate;               /* asegura stacking correcto del overlay */
+  background: transparent;
+  isolation: isolate;
 }
 
-/* Imagen como background (Next/Image con fill y esta clase) */
-/* Imagen de fondo: SIN opacidad, usa filter para oscurecer sin “grisar” */
-.summary-card__bg{
+.service-page .summary-card__bg {
   position: absolute;
   inset: 0;
   object-fit: cover;
   z-index: 0;
-  opacity: 1; /* ← antes teníamos .25/.35, quítalo */
+  opacity: 1;
 }
 
-/* Overlay: puedes dejarlo más suave ahora que la imagen ya está oscura */
-.summary-card::before{
-  content:"";
-  position:absolute; inset:0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0,0,0,1) 100%);
+.service-page .summary-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 1) 100%);
   z-index: 1;
 }
 
-/* Contenido encima del fondo */
-.summary-content{
+.service-page .summary-content {
   position: relative;
   z-index: 2;
   color: #fff;
 }
 
-.summary-card__title{
-  margin:.25rem 0;
-  font-size:1.1rem;
-  font-weight:700;
+.service-page .summary-card__title {
+  margin: 0.25rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
 }
 
-.summary-card__desc{
-  color:#f3f4f6;
+.service-page .summary-card__desc {
+  color: #f3f4f6;
 }
 
-/* Hover (ligero lift) */
-@media (hover:hover){
-  .summary-card{ transition: transform .3s ease, box-shadow .3s ease; }
-  .summary-card:hover{
+@media (hover: hover) {
+  .service-page .summary-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .service-page .summary-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(0,0,0,.16);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
   }
 }
 
-/* Respeta usuarios con reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .summary-card{ transition: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .service-page .summary-card {
+    transition: none !important;
+  }
 }
 
-/* Limpieza de estilos que ya no se usan */
-.summary-thumb{ display:none; }
-.summary-card h3, .summary-card p{ margin: 0; }
+.service-page .summary-thumb {
+  display: none;
+}
+
+.service-page .summary-card h3,
+.service-page .summary-card p {
+  margin: 0;
+}
