@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import SiteHeader from "@/app/Components/site-header/Siteheader";
 import Link from "next/link";
+import { getFeaturedBlogPosts } from "@/lib/blogPosts";
 import "./Home.css"
 
 const container: Variants = {
@@ -47,6 +48,8 @@ function ScrollDown() {
 }
 
 export default function Home() {
+  const featuredPosts = getFeaturedBlogPosts();
+
   return (
     <>
       <Script
@@ -88,6 +91,42 @@ export default function Home() {
                     description: "Presupuestos personalizados a medida de cada proyecto.",
                   },
                 },
+              },
+              {
+                "@type": "Blog",
+                "@id": "https://www.myl3d.es/#blog",
+                name: "Blog y recursos MyL3d",
+                url: "https://www.myl3d.es/blog",
+                description:
+                  "Ideas, buenas prácticas y casos de éxito sobre pantallas LED, eventos híbridos y cartelería digital en España.",
+                inLanguage: "es-ES",
+                isPartOf: { "@id": "https://www.myl3d.es/#webpage" },
+                blogPost: [
+                  {
+                    "@type": "BlogPosting",
+                    headline: "Cómo planificar un evento híbrido con éxito",
+                    url: "https://www.myl3d.es/blog/eventos-hibridos",
+                    datePublished: "2024-03-12",
+                    inLanguage: "es-ES",
+                    timeRequired: "PT6M",
+                  },
+                  {
+                    "@type": "BlogPosting",
+                    headline: "Pantallas LED vs. LCD: cuál es la mejor opción para tu espacio comercial",
+                    url: "https://www.myl3d.es/blog/pantallas-led-vs-lcd",
+                    datePublished: "2024-02-26",
+                    inLanguage: "es-ES",
+                    timeRequired: "PT5M",
+                  },
+                  {
+                    "@type": "BlogPosting",
+                    headline: "Caso de éxito: experiencia inmersiva en museo interactivo",
+                    url: "https://www.myl3d.es/blog/caso-exito-museo-inmersivo",
+                    datePublished: "2024-01-30",
+                    inLanguage: "es-ES",
+                    timeRequired: "PT7M",
+                  },
+                ],
               },
             ],
           }),
@@ -279,6 +318,85 @@ export default function Home() {
           >
             ¿Necesitas asesoramiento? <Link href="/contacto">Contacta con nuestro equipo</Link> para recibir un presupuesto personalizado y descubrir cómo potenciar tu próxima acción con audiovisuales profesionales.
           </motion.p>
+        </div>
+      </section>
+
+      <section id="blog" className="section">
+        <div className="container">
+          <motion.h2
+            className="section__title"
+            variants={item}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            Blog y recursos
+          </motion.h2>
+          <motion.p
+            className="section__copy section__copy--muted"
+            variants={item}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            Explora guías prácticas, tendencias y casos de éxito sobre cartelería digital, producción audiovisual y pantallas LED
+            para inspirar tu próximo proyecto.
+          </motion.p>
+
+          <div className="blog-grid" role="list">
+            {featuredPosts.map((post, index) => (
+              <Link key={post.slug} href={`/blog/${post.slug}`} className="blog-card" role="listitem">
+                <motion.article
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 * index }}
+                  viewport={{ once: true, amount: 0.2 }}
+                >
+                  <div className="blog-card__meta">
+                    <span className="blog-card__badge">{post.category}</span>
+                    <time dateTime={post.date}>{post.readTime}</time>
+                  </div>
+                  <h3 className="blog-card__title">{post.title}</h3>
+                  <p className="blog-card__excerpt">{post.description}</p>
+                  <span className="blog-card__cta">
+                    Leer artículo
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path
+                        d="M13.5 5l6 6-6 6"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M5.5 11h12"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </motion.article>
+              </Link>
+            ))}
+          </div>
+
+          <motion.div
+            className="blog-more"
+            variants={item}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <Link href="/blog" className="blog-more__link">
+              Ver todos los recursos
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M13.5 5l6 6-6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M5.5 11h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+          </motion.div>
         </div>
       </section>
     </>
