@@ -2,6 +2,7 @@ import Script from "next/script";
 import Link from "next/link";
 import type { Metadata } from "next";
 import SiteHeader from "@/app/Components/site-header/Siteheader";
+import { blogPosts } from "@/lib/blogPosts";
 import BlogHero from "./BlogHero";
 
 import "./blog.css";
@@ -13,75 +14,6 @@ const servicesChildren = [
   { href: "/servicios/corporativos", label: "Corporativos" },
   { href: "/servicios/educacion", label: "Educación" },
   { href: "/servicios/salas-de-control", label: "Salas de control" },
-];
-
-const posts = [
-  {
-    title: "Cómo planificar un evento híbrido con éxito",
-    description:
-      "Checklist técnico, guion y recomendaciones logísticas para ofrecer una experiencia fluida a asistentes presenciales y online.",
-    href: "/blog/eventos-hibridos",
-    category: "Eventos corporativos",
-    readTime: "6 min de lectura",
-    date: "2024-03-12",
-    excerpt:
-      "Analizamos los elementos esenciales para sincronizar producción audiovisual, streaming y participación de la audiencia en eventos híbridos de gran escala.",
-  },
-  {
-    title: "Pantallas LED vs. LCD: cuál es la mejor opción para tu espacio comercial",
-    description:
-      "Comparamos tecnologías, costes operativos y mantenimiento para ayudarte a escoger la solución de digital signage que mejor encaja con tu negocio.",
-    href: "/blog/pantallas-led-vs-lcd",
-    category: "Cartelería digital",
-    readTime: "5 min de lectura",
-    date: "2024-02-26",
-    excerpt:
-      "Te explicamos cuándo apostar por paneles LED, qué ventajas ofrecen frente a LCD y cómo calcular el retorno de inversión de tu circuito de pantallas.",
-  },
-  {
-    title: "Caso de éxito: experiencia inmersiva en museo interactivo",
-    description:
-      "Descubre cómo integramos pantallas LED de gran formato, sonido 3D y contenidos interactivos para transformar la visita del público en un museo tecnológico.",
-    href: "/blog/caso-exito-museo-inmersivo",
-    category: "Cultura y ocio",
-    readTime: "7 min de lectura",
-    date: "2024-01-30",
-    excerpt:
-      "Repasamos los hitos técnicos del proyecto, desde la ingeniería audiovisual hasta la creación de contenidos inmersivos que aumentaron el tiempo de permanencia en sala.",
-  },
-  {
-    title: "Guía rápida para implantar cartelería digital en retail",
-    description:
-      "Pasos clave para definir objetivos, elegir hardware y establecer un plan de contenidos que incremente las ventas en tienda.",
-    href: "/blog/guia-carteleria-digital-retail",
-    category: "Retail",
-    readTime: "8 min de lectura",
-    date: "2023-12-12",
-    excerpt:
-      "Incluimos checklist de despliegue, recomendaciones de tamaños de pantalla según superficie y métricas para evaluar el éxito de la instalación.",
-  },
-  {
-    title: "Cómo producir contenido 3D para pantallas LED gigantes",
-    description:
-      "Buenas prácticas para desarrollar visuales volumétricos que aprovechen la profundidad de las pantallas LED de última generación.",
-    href: "/blog/contenido-3d-pantallas-led",
-    category: "Producción audiovisual",
-    readTime: "9 min de lectura",
-    date: "2023-11-03",
-    excerpt:
-      "Revisamos herramientas, pipeline creativo y recomendaciones técnicas para evitar distorsiones y optimizar tiempos de render.",
-  },
-  {
-    title: "Checklist técnico para ferias y congresos con pantallas LED",
-    description:
-      "Todo lo que debes revisar antes de abrir puertas: estructura, electricidad, redundancia de señal y planes de contingencia.",
-    href: "/blog/checklist-pantallas-led-ferias",
-    category: "Eventos",
-    readTime: "6 min de lectura",
-    date: "2023-09-14",
-    excerpt:
-      "Compartimos la metodología que emplea MyL3d para asegurar despliegues fiables en entornos de alto tráfico y montajes express.",
-  },
 ];
 
 export const metadata: Metadata = {
@@ -123,10 +55,10 @@ export default function BlogPage() {
               name: "MyL3d",
               url: "https://www.myl3d.es",
             },
-            blogPost: posts.map((post) => ({
+            blogPost: blogPosts.map((post) => ({
               "@type": "BlogPosting",
               headline: post.title,
-              url: `https://www.myl3d.es${post.href}`,
+              url: `https://www.myl3d.es/blog/${post.slug}`,
               datePublished: post.date,
               description: post.description,
               inLanguage: "es-ES",
@@ -157,8 +89,8 @@ export default function BlogPage() {
             </div>
 
             <div className="blog__grid" role="list">
-              {posts.map((post) => (
-                <Link key={post.href} href={post.href} className="blog__card" role="listitem">
+              {blogPosts.map((post) => (
+                <Link key={post.slug} href={`/blog/${post.slug}`} className="blog__card" role="listitem">
                   <article>
                     <div className="blog__card-meta">
                       <span className="blog__badge">{post.category}</span>

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import SiteHeader from "@/app/Components/site-header/Siteheader";
 import Link from "next/link";
+import { getFeaturedBlogPosts } from "@/lib/blogPosts";
 import "./Home.css"
 
 const container: Variants = {
@@ -47,6 +48,8 @@ function ScrollDown() {
 }
 
 export default function Home() {
+  const featuredPosts = getFeaturedBlogPosts();
+
   return (
     <>
       <Script
@@ -341,36 +344,8 @@ export default function Home() {
           </motion.p>
 
           <div className="blog-grid" role="list">
-            {[
-              {
-                title: "Cómo planificar un evento híbrido con éxito",
-                description:
-                  "Checklist técnico y recomendaciones para combinar asistentes presenciales y online sin perder calidad.",
-                href: "/blog/eventos-hibridos",
-                category: "Eventos corporativos",
-                readTime: "6 min de lectura",
-                date: "2024-03-12",
-              },
-              {
-                title: "Pantallas LED vs. LCD: cuál es la mejor opción para tu espacio comercial",
-                description:
-                  "Comparamos tecnologías, costes y mantenimiento para ayudarte a elegir la solución de digital signage adecuada.",
-                href: "/blog/pantallas-led-vs-lcd",
-                category: "Cartelería digital",
-                readTime: "5 min de lectura",
-                date: "2024-02-26",
-              },
-              {
-                title: "Caso de éxito: experiencia inmersiva en museo interactivo",
-                description:
-                  "Descubre cómo integramos sonido 3D, mapping y pantallas de gran formato para transformar la visita del público.",
-                href: "/blog/caso-exito-museo-inmersivo",
-                category: "Cultura y ocio",
-                readTime: "7 min de lectura",
-                date: "2024-01-30",
-              },
-            ].map((post, index) => (
-              <Link key={post.href} href={post.href} className="blog-card" role="listitem">
+            {featuredPosts.map((post, index) => (
+              <Link key={post.slug} href={`/blog/${post.slug}`} className="blog-card" role="listitem">
                 <motion.article
                   initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
