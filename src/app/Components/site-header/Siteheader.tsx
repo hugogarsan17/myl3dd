@@ -31,6 +31,7 @@ export default function SiteHeader({
         { href: "/servicios/salas-de-control", label: "Salas de control" },
       ],
     },
+    { href: "/productos", label: "Productos" },
     { href: "/#blog", label: "Blog y recursos" },
 
     { href: "/contacto", label: "Contacto" }, // ✅ ruta real
