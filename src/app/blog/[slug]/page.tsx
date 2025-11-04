@@ -10,7 +10,7 @@ import "../blog.css";
 import "./page.css";
 
 type BlogArticlePageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 const servicesChildren = [
@@ -34,8 +34,9 @@ export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));
 }
 
-export function generateMetadata({ params }: BlogArticlePageProps): Metadata {
-  const post = getBlogPost(params.slug);
+export async function generateMetadata({ params }: BlogArticlePageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
 
   if (!post) {
     return { title: "Recurso no encontrado | MyL3d" };
@@ -66,8 +67,9 @@ export function generateMetadata({ params }: BlogArticlePageProps): Metadata {
   };
 }
 
-export default function BlogArticlePage({ params }: BlogArticlePageProps) {
-  const post = getBlogPost(params.slug);
+export default async function BlogArticlePage({ params }: BlogArticlePageProps) {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
 
   if (!post) {
     notFound();
