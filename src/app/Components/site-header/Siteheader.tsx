@@ -32,7 +32,7 @@ export default function SiteHeader({
       ],
     },
     { href: "/productos", label: "Productos" },
-    { href: "/#blog", label: "Blog y recursos" },
+    { href: "/blog", label: "Blog y recursos" },
 
     { href: "/contacto", label: "Contacto" }, // ✅ ruta real
 
