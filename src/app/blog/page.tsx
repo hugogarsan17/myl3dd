@@ -67,14 +67,7 @@ export default function BlogPage() {
         }}
       />
 
-      <SiteHeader
-        links={[
-          { href: "/", label: "Inicio" },
-          { label: "Servicios", children: servicesChildren },
-          { href: "/blog", label: "Blog y recursos", ariaCurrent: "page" },
-          { href: "/contacto", label: "Contacto" },
-        ]}
-      />
+      <SiteHeader />
 
       <main className="blog">
         <BlogHero />
