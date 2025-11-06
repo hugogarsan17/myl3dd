@@ -24,7 +24,6 @@ const filters: Filter[] = [
   { label: "Todos", value: "Todos" },
   { label: "Pantallas LED", value: "Pantallas LED" },
   { label: "Tótems digitales", value: "Tótems digitales" },
-  { label: "Procesadores", value: "Procesadores" },
   { label: "Soportes", value: "Soportes" },
 ];
 
@@ -34,7 +33,7 @@ const products: Product[] = [
     category: "Pantallas LED",
     description:
       "Módulos de alta densidad diseñados para estudios y espacios premium donde la nitidez y la reproducción cromática son clave.",
-    image: "/res/videwall.webp",
+    image: "/res/LCD.png",
     alt: "Video wall LED de alta resolución instalado en showroom",
     price: "Desde 385 € / m²",
     specs: ["Pitch 1.9 mm", "Brillo 1.800 nits", "Calibración HDR10"],
@@ -44,7 +43,7 @@ const products: Product[] = [
     category: "Pantallas LED",
     description:
       "Chasis ligero y sellado IP65 ideal para giras, festivales y fachadas. Sistema de bloqueo rápido para montaje ágil.",
-    image: "/res/stand.png",
+    image: "/res/Cabinet TV Studio.jpg",
     alt: "Escenario exterior con paneles LED modulares",
     price: "Desde 340 € / m²",
     specs: ["Pitch 3.9 mm", "Brillo 4.500 nits", "Curvatura ±10°"],
@@ -54,32 +53,95 @@ const products: Product[] = [
     category: "Tótems digitales",
     description:
       "Estructura autoportante con players sincronizados para retail, hoteles y recepción corporativa.",
-    image: "/res/totems.png",
-    alt: "Tótems digitales en lobby corporativo",
+    image: "/res/totem4.png",
+    alt: "Tótem digital doble cara en lobby corporativo",
     price: "Desde 189 € / unidad",
     specs: ["Pantalla 55\" UHD", "Reproductor 4K integrado", "Cristal templado antivandálico"],
   },
   {
-    name: "Procesador NovaStar VX600",
-    category: "Procesadores",
+    name: "Pantalla Lineal LED",
+    category: "Pantallas LED",
     description:
-      "Controlador híbrido con escalado profesional, redundancia HDMI/DP y preset de escenas para directos.",
-    image: "/res/interior-totem.png",
-    alt: "Procesador de vídeo NovaStar instalado en rack",
-    price: "Desde 1.890 €",
-    specs: ["Entrada 4K", "Hasta 6 salidas", "Edición en vivo"],
+      "Display LED en formato lineal para rótulos, cenefas y textos dinámicos. Ideal para retail, escenografía y señalética.",
+    image: "/res/Lineal.png",
+    alt: "Pantalla lineal LED vista en perspectiva",
+    price: "Precio a consultar",
+    specs: ["Formato ultrapanorámico", "Uso interior", "Compatible con control NovaStar"],
   },
   {
     name: "Estructura truss y soporte modular",
     category: "Soportes",
     description:
       "Solución modular en aluminio para colgado o apilado de pantallas LED con certificación europea.",
-    image: "/res/stand-ise.png",
+    image: "/res/LCD Con soporte.png",
     alt: "Estructura truss soportando pantalla LED en feria",
     price: "Bajo pedido",
     specs: ["Carga hasta 1.000 kg", "Configuración personalizada", "Incluye ingeniería y montaje"],
   },
+
+  // --- Nuevos productos añadidos ---
+  {
+    name: "Videowall LCD bisel ultrafino 55”",
+    category: "Videowalls",
+    description:
+      "Monitores profesionales para composiciones 2x2, 3x3 o superiores con gestión por controlador y empalme casi imperceptible.",
+    image: "/res/LCD.png",
+    alt: "Videowall LCD de bisel fino mostrando contenido corporativo",
+    price: "Desde 799 € / pantalla",
+    specs: ["Bisel 1.8–3.5 mm", "24/7", "Montaje VESA y matriz flexible"],
+  },
+  {
+    name: "Cabinet LED alquiler (500×500 / 500×1000)",
+    category: "Pantallas LED",
+    description:
+      "Gabinetes de aluminio para touring con cierres rápidos, stacking/hanging y compatibilidad con curvatura.",
+    image: "/res/4 cabinets.png",
+    alt: "Gama de gabinetes LED de alquiler en varios tamaños",
+    price: "Desde 315 € / m²",
+    specs: ["Pitch 2.6–4.8 mm", "IP54/65 según modelo", "Curvatura convexa/cóncava"],
+  },
+  {
+    name: "Módulo LED servicio frontal",
+    category: "Pantallas LED",
+    description:
+      "Paneles con extracción magnética para mantenimiento frontal. Perfectos para integración sobre pared.",
+    image: "/res/Cabinet desmontado.png",
+    alt: "Módulo LED desmontado mostrando mantenimiento frontal",
+    price: "Desde 329 € / m²",
+    specs: ["Servicio frontal", "Pitch 1.9–3.9 mm", "Instalación fija"],
+  },
+  {
+    name: "Banderola LED proyectada",
+    category: "Pantallas LED",
+    description:
+      "Pantalla LED doble cara en soporte de pared tipo banderola para comercios y calles con alto tránsito.",
+    image: "/res/Banderola.png",
+    alt: "Banderola LED doble cara montada en pared",
+    price: "Desde 1.490 €",
+    specs: ["Doble cara", "Alto brillo exteriores", "Player integrado y WiFi"],
+  },
+  {
+    name: "Batería de tótems conectados",
+    category: "Tótems digitales",
+    description:
+      "Conjunto de tótems sincronizados para galerías, exposiciones y retail. Gestión remota del contenido.",
+    image: "/res/6 tótems juntos.png",
+    alt: "Seis tótems digitales alineados mostrando un escenario sincronizado",
+    price: "Proyecto a medida",
+    specs: ["Hasta N unidades en grupo", "CMS remoto", "Sincronización de playlists"],
+  },
+  {
+    name: "Cabinet LED Outdoor P5",
+    category: "Pantallas LED",
+    description:
+      "Gabinete de exterior IP65 para rótulos y monopostes. Alta luminosidad y electrónica preparada para 24/7.",
+    image: "/res/cabinet billboard.png",
+    alt: "Cabinet LED outdoor P5 para valla publicitaria",
+    price: "Desde 289 € / m²",
+    specs: ["Pitch 5 mm", "Brillo 6.000–7.000 nits", "IP65 frontal / IP54 trasera"],
+  },
 ];
+
 
 export default function Productos() {
   const [activeFilter, setActiveFilter] = useState<string>(filters[0]?.value ?? "Todos");
