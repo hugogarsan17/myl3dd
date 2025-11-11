@@ -52,7 +52,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es">
       <head>
-        <head>
+            <Script
+        strategy="afterInteractive"
+        src="https://www.googletagmanager.com/gtag/js?id=G-QP5HESG7SP"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-QP5HESG7SP');
+        `}
+      </Script>
         {/* Google Tag Manager */}
 <Script id="gtm-script" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -63,15 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
         {/* End Google Tag Manager */}
       </head>
-      </head>
-       <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-5LCJJD8M"
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-          ></iframe>
-        </noscript>
+
       <body className={inter.className}>
         <Script
           id="global-structured-data"
