@@ -95,7 +95,7 @@ export default function Home() {
               {
                 "@type": "Blog",
                 "@id": "https://www.myl3d.es/#blog",
-                name: "Blog y recursos MyL3d",
+                name: "recursos MyL3d",
                 url: "https://www.myl3d.es/blog",
                 description:
                   "Ideas, buenas prácticas y casos de éxito sobre pantallas LED, eventos híbridos y cartelería digital en España.",
