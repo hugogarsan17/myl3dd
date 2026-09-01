@@ -7,26 +7,17 @@ import BlogHero from "./BlogHero";
 
 import "./blog.css";
 
-const servicesChildren = [
-  { href: "/servicios/Carteleria-digital", label: "Carteleria digital" },
-  { href: "/servicios/cultura-y-ocio", label: "Cultura y ocio" },
-  { href: "/servicios/eventos", label: "Eventos" },
-  { href: "/servicios/corporativos", label: "Corporativos" },
-  { href: "/servicios/educacion", label: "Educación" },
-  { href: "/servicios/salas-de-control", label: "Salas de control" },
-];
-
 export const metadata: Metadata = {
   title: "Blog y recursos audiovisuales | MyL3d",
   description:
-    "Ideas, guías y casos de éxito sobre cartelería digital, pantallas LED y producción audiovisual para eventos corporativos, retail y cultura en España.",
+    "Ideas, guías y casos de uso sobre cartelería digital, pantallas LED y producción audiovisual para empresas, retail y cultura.",
   alternates: {
     canonical: "https://www.myl3d.es/blog",
   },
   openGraph: {
     title: "Blog y recursos audiovisuales | MyL3d",
     description:
-      "Explora buenas prácticas, tendencias y casos reales de proyectos audiovisuales con pantallas LED, streaming y contenidos inmersivos.",
+      "Explora buenas prácticas, guías y ejemplos de aplicación de pantallas LED, streaming y contenidos audiovisuales.",
     url: "https://www.myl3d.es/blog",
     type: "website",
     locale: "es_ES",
@@ -110,7 +101,7 @@ export default function BlogPage() {
             <div className="blog__cta-banner-content">
               <h2>¿Quieres lanzar un proyecto audiovisual?</h2>
               <p>
-                Nuestro equipo puede ayudarte a definir la tecnología adecuada, producir el contenido y coordinar la ejecución en ferias, museos o espacios corporativos.
+                Podemos ayudarte a definir la tecnología adecuada y coordinar la ejecución con profesionales especializados según las necesidades del proyecto.
               </p>
             </div>
             <Link href="/contacto" className="blog__cta-banner-link">
@@ -122,4 +113,3 @@ export default function BlogPage() {
     </>
   );
 }
-

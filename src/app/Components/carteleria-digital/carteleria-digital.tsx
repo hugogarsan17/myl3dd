@@ -37,7 +37,7 @@ export default function CarteleriaDigital() {
       t: "Retail",
       d: (
         <>
-          <strong>Señalización dinámica</strong> y kioscos táctiles que potencian la interacción del cliente y aumentan la conversión.
+          <strong>Señalización dinámica</strong> y kioscos táctiles para mostrar promociones, información y contenidos de apoyo a la venta.
         </>
       ),
       bg: "/res/Portada.png",
@@ -86,16 +86,6 @@ export default function CarteleriaDigital() {
                 areaServed: { "@type": "Country", name: "España" },
                 description:
                   "Diseñamos, instalamos e integramos cartelería digital para exteriores, interiores y retail: pantallas LED y monitores profesionales 24/7 con gestión de contenidos remota.",
-                offers: {
-                  "@type": "Offer",
-                  availability: "https://schema.org/InStock",
-                  priceSpecification: {
-                    "@type": "PriceSpecification",
-                    priceCurrency: "EUR",
-                    price: "0",
-                    description: "Presupuesto personalizado según las necesidades de cada espacio.",
-                  },
-                },
               },
             ],
           }),
@@ -188,7 +178,7 @@ export default function CarteleriaDigital() {
             </ul>
 
             <Link href="/contacto" className="btn-cta sheen" style={{ marginTop: "1rem" }}>
-              Solicitar información
+              Solicitar presupuesto
             </Link>
           </div>
         </div>

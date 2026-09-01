@@ -118,7 +118,7 @@ export default function Eventos() {
             Producción audiovisual llave en mano para <strong>conciertos, festivales, ferias y eventos corporativos</strong>.
             <strong> Realización multicámara</strong>, <strong>streaming</strong>, <strong>cámaras PTZ</strong>,
             <strong> procesadores y mezcladores HD/4K</strong>, <strong>gestión de señales</strong> y
-            <strong> sistemas de control</strong> para garantizar una ejecución fluida y un resultado impecable.
+            <strong> sistemas de control</strong>, configurados según las necesidades del evento.
           </p>
 
         {/* Bloques por vertical */}

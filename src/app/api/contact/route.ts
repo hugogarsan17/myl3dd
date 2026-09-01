@@ -8,7 +8,7 @@ export const runtime = "nodejs"; // Nodemailer requiere Node, no Edge.
 const isDev = process.env.NODE_ENV !== "production";
 
 type ContactPayload = {
-  tab: "empresa" | "persona";
+  tab: "empresa";
   name: string;
   email: string;
   phone: string;
@@ -17,10 +17,6 @@ type ContactPayload = {
   captchaToken: string; // Turnstile
 
   company?: string;
-  role?: string;
-  cif?: string;
-  dni?: string;
-
   eventType: string;
   city: string;
 
@@ -47,7 +43,7 @@ function isContactPayload(v: unknown): v is ContactPayload {
   if (!isRecord(v)) return false;
   const { name, email, message, captchaToken, tab } = v;
   return (
-    (tab === "empresa" || tab === "persona") &&
+    tab === "empresa" &&
     typeof name === "string" &&
     typeof email === "string" &&
     typeof message === "string" &&
@@ -112,8 +108,8 @@ export async function POST(req: NextRequest) {
     }
 
     const {
-      tab, name, email, phone, subject, message,
-      company, role, cif, dni,
+      name, email, phone, subject, message,
+      company,
       eventType, city, decisionTime, hearAbout,
       utm, referrer, page, attachment, captchaToken
     } = raw;
@@ -153,9 +149,7 @@ export async function POST(req: NextRequest) {
       `Nombre: ${name}`,
       `Email: ${email}`,
       `Teléfono: ${phone || "No indicado"}`,
-      tab === "empresa" ? `Empresa: ${company || "No indicado"}` : `DNI: ${dni || "No indicado"}`,
-      tab === "empresa" ? `Cargo: ${role || "No indicado"}` : "",
-      `CIF: ${cif || "No indicado"}`,
+      `Empresa: ${company || "No indicada"}`,
       `Asunto: ${subject || "Sin asunto"}`,
       `Tipo de servicio: ${eventType}`,
       `Ciudad: ${city || "No indicada"}`,
@@ -178,10 +172,7 @@ export async function POST(req: NextRequest) {
       <p><strong>Nombre:</strong> ${escapeHtml(name)}</p>
       <p><strong>Email:</strong> ${escapeHtml(email)}</p>
       <p><strong>Teléfono:</strong> ${escapeHtml(phone || "No indicado")}</p>
-      ${tab === "empresa" ? `<p><strong>Empresa:</strong> ${escapeHtml(company || "No indicado")}</p>` : ""}
-      ${tab === "empresa" ? `<p><strong>Cargo:</strong> ${escapeHtml(role || "No indicado")}</p>` : ""}
-      ${tab === "empresa" ? `<p><strong>CIF:</strong> ${escapeHtml(cif || "No indicado")}</p>` : ""}
-      ${tab === "persona" ? `<p><strong>DNI:</strong> ${escapeHtml(dni || "No indicado")}</p>` : ""}
+      <p><strong>Empresa:</strong> ${escapeHtml(company || "No indicada")}</p>
       <p><strong>Asunto:</strong> ${escapeHtml(subject || "Sin asunto")}</p>
       <p><strong>Tipo de servicio:</strong> ${escapeHtml(eventType)}</p>
       <p><strong>Ciudad:</strong> ${escapeHtml(city || "No indicada")}</p>
