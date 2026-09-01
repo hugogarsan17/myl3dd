@@ -114,7 +114,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
           { href: "/", label: "Inicio" },
           { label: "Servicios", children: servicesChildren },
           { href: "/blog", label: "Blog y recursos", ariaCurrent: "page" },
-          { href: "/contacto", label: "Contacto" },
+          { href: "/contacto", label: "Solicitar presupuesto" },
         ]}
       />
 
@@ -168,7 +168,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
                   <p key={paragraph}>{paragraph}</p>
                 ))}
                 <Link href="/contacto" className="blog-article__cta">
-                  Habla con el equipo de MyL3d
+                  Solicitar presupuesto
                 </Link>
               </section>
             </div>

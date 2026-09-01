@@ -101,7 +101,7 @@ export default function BlogPage() {
             <div className="blog__cta-banner-content">
               <h2>¿Quieres lanzar un proyecto audiovisual?</h2>
               <p>
-                Nuestro equipo puede ayudarte a definir la tecnología adecuada, producir el contenido y coordinar la ejecución en ferias, museos o espacios corporativos.
+                Podemos ayudarte a definir la tecnología adecuada y coordinar la ejecución con profesionales especializados según las necesidades del proyecto.
               </p>
             </div>
             <Link href="/contacto" className="blog__cta-banner-link">

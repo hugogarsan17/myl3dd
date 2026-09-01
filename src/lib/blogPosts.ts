@@ -82,7 +82,7 @@ const posts: BlogPost[] = [
     ],
     conclusion: [
       "Una producción híbrida impecable nace de la preparación minuciosa y de la coordinación entre equipos técnicos, speakers y responsables de contenidos.",
-      "Si quieres un acompañamiento integral, nuestro equipo puede ayudarte a diseñar y operar la experiencia completa, desde la ingeniería audiovisual hasta el streaming y la analítica posterior.",
+      "Si necesitas acompañamiento, podemos analizar el proyecto y coordinar los recursos técnicos y profesionales especializados que requiera.",
     ],
   },
   {
@@ -141,45 +141,45 @@ const posts: BlogPost[] = [
   },
   {
     slug: "caso-exito-museo-inmersivo",
-    title: "Ejemplo de solución: sala audiovisual para museo",
+    title: "Ejemplo conceptual: cómo diseñar una experiencia audiovisual en un museo",
     description:
-      "Integramos pantallas LED, audio 3D y sensores interactivos para aumentar el tiempo de permanencia del público en un museo tecnológico.",
+      "Ejemplo conceptual para plantear pantallas LED, audio y elementos interactivos en un espacio museístico.",
     category: "Cultura y ocio",
     readTime: "7 min de lectura",
     date: "2024-01-30",
     excerpt:
       "Un caso de uso conceptual para explicar cómo plantear la visualización, el sonido y los contenidos de una sala audiovisual para museo.",
     heroEyebrow: "Cultura y ocio",
-    heroTitle: "Caso de uso: sala audiovisual para museo",
+    heroTitle: "Ejemplo conceptual: experiencia audiovisual en un museo",
     heroSubtitle:
-      "Cómo combinamos pantallas LED curvas, sensores y sonido envolvente para crear un recorrido memorable.",
+      "Este contenido explica cómo podría plantearse una solución de este tipo. No corresponde a una instalación realizada por MYL3D.",
     sections: [
       {
-        title: "Reto del proyecto",
+        title: "Planteamiento del ejemplo",
         paragraphs: [
-          "El museo necesitaba renovar una sala permanente para atraer a un público más joven. El objetivo era generar una experiencia inmersiva que conectase patrimonio y tecnología sin perder rigor divulgativo.",
-          "Propusimos un recorrido circular con pantallas LED de gran formato, sonido espacializado y módulos interactivos que reaccionan al movimiento de los visitantes.",
+          "Imaginemos un museo que quiere renovar una sala permanente y presentar su contenido de una forma más visual sin perder rigor divulgativo.",
+          "Una posible propuesta sería un recorrido con pantallas LED de gran formato, sonido localizado y módulos interactivos. La configuración final dependería del espacio, el contenido, el presupuesto y los requisitos de accesibilidad.",
         ],
       },
       {
         title: "Diseño técnico",
         paragraphs: [
-          "Instalamos un videowall LED curvo de 1.9 mm de pitch con resolución 8K adaptativa que envuelve al visitante. La gestión de contenidos se realiza desde un servidor Disguise con capas dedicadas a grafismos, render en tiempo real y señalización contextual.",
-          "El audio se diseñó en 7.1 con altavoces empotrados y subwoofers direccionales. Añadimos un sistema de posicionamiento que activa escenas sonoras al detectar la proximidad del público.",
+          "El diseño podría utilizar un videowall LED curvo con una distancia entre píxeles adecuada a la proximidad del visitante. Un sistema de gestión de contenidos permitiría organizar grafismos, vídeo y señalización contextual.",
+          "El audio podría distribuirse por zonas y coordinarse con sensores de presencia. Estas decisiones deben validarse mediante un estudio técnico del recinto.",
         ],
       },
       {
         title: "Contenidos y narrativa",
         paragraphs: [
-          "El storytelling combina archivos históricos con recreaciones 3D producidas en Unreal Engine. Diseñamos triggers interactivos para que cada visitante pueda desbloquear perspectivas distintas sobre la exposición.",
-          "También creamos un modo accesible con subtítulos en pantalla y audioguías sincronizadas para garantizar la inclusividad de la experiencia.",
+          "Los contenidos podrían combinar archivos históricos, recreaciones y elementos interactivos para ofrecer distintos niveles de lectura.",
+          "La propuesta también debería contemplar subtítulos, audioguías y alternativas de interacción para mejorar la accesibilidad.",
         ],
       },
       {
-        title: "Resultados",
+        title: "Criterios de evaluación",
         paragraphs: [
-          "Tras la inauguración, el museo registró un incremento del 37 % en el tiempo medio de permanencia dentro de la sala y un aumento del 22 % en la venta de entradas combinadas.",
-          "El sistema de gestión permite actualizar contenidos sin interrumpir la operación diaria, reduciendo costes de producción a futuro.",
+          "Al tratarse de un ejemplo conceptual, no existen resultados de una instalación ni métricas atribuibles a MYL3D.",
+          "En un proyecto real convendría valorar la legibilidad, la facilidad de actualización, la accesibilidad, el mantenimiento y la respuesta del público.",
         ],
       },
     ],
@@ -189,8 +189,8 @@ const posts: BlogPost[] = [
       "Un CMS profesional agiliza la actualización de contenidos y maximiza el retorno de la inversión.",
     ],
     conclusion: [
-      "Este caso demuestra cómo una integración audiovisual bien planificada puede transformar la percepción del visitante y abrir nuevas líneas de ingresos.",
-      "Si buscas un partner para conceptualizar y ejecutar proyectos inmersivos, MyL3d combina ingeniería audiovisual, diseño de contenidos y operación continuada.",
+      "Este ejemplo muestra las decisiones que conviene estudiar antes de definir una instalación audiovisual para un museo.",
+      "MYL3D puede ayudarte a analizar el espacio y coordinar una propuesta con fabricantes, distribuidores, técnicos e instaladores especializados según las necesidades del proyecto.",
     ],
   },
   {
@@ -303,7 +303,7 @@ const posts: BlogPost[] = [
     ],
     conclusion: [
       "La espectacularidad de un contenido 3D depende tanto de la idea creativa como del rigor técnico en su ejecución.",
-      "Nuestro equipo puede ayudarte a desarrollar visuales inmersivos llave en mano, desde el concepto hasta la operación en directo.",
+      "Podemos ayudarte a plantear los contenidos y coordinar la configuración técnica necesaria para el evento.",
     ],
   },
   {
@@ -356,8 +356,8 @@ const posts: BlogPost[] = [
       "Una operación proactiva durante la feria permite reaccionar antes de que el público detecte incidencias.",
     ],
     conclusion: [
-      "Los eventos de alto tránsito exigen un partner que combine ingeniería, seguridad y capacidad de respuesta inmediata.",
-      "Nuestro equipo está preparado para diseñar, instalar y operar montajes LED en ferias y congresos de cualquier escala.",
+      "Los eventos de alto tránsito requieren planificación técnica, seguridad y una coordinación clara entre los profesionales implicados.",
+      "MYL3D puede estudiar el montaje LED y coordinar el suministro y la instalación con técnicos especializados según la escala y los requisitos del evento.",
     ],
   },
 ];

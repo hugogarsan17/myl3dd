@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Contacto | MyL3d",
     description:
-      "Contacta con MyL3d para asesoramiento en alquiler de pantallas LED y producción audiovisual en España.",
+      "Solicita presupuesto para pantallas LED, digital signage o un proyecto audiovisual adaptado a tu empresa.",
     url: "https://www.myl3d.es/contacto",
     type: "website",
   },

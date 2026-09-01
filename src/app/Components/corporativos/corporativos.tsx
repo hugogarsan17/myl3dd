@@ -160,9 +160,9 @@
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.45 }}
             >
-              Amplia gama de soluciones audiovisuales para mejorar la colaboración y la comunicación
-              en la empresa, adaptadas a cada cliente. Integración llave en mano con equipos fiables
-              y operación sencilla.
+              Pantallas profesionales, videowalls y sistemas audiovisuales para salas, recepciones y
+              espacios corporativos. Coordinamos la configuración y la instalación según las necesidades
+              de cada proyecto.
             </motion.p>
 
             {/* Cards clicables */}
@@ -196,7 +196,7 @@
 
             <div style={{ marginTop: "1rem" }}>
               <Link href="/contacto" className="btn-cta sheen" prefetch>
-                Solicitar información
+                Solicitar presupuesto
               </Link>
             </div>
           </div>
