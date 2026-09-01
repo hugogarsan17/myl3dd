@@ -1,21 +1,20 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next"; // 👈 Importa aquí
+import SiteFooter from "./Components/site-footer/SiteFooter";
+import CookieConsent from "./Components/cookie-consent/CookieConsent";
 import "./globals.css";
 import "./Components/Home/Home.css";
 import "./styles/service-base.css";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.myl3d.es"),
   title: {
-    default: "MyL3d | Soluciones audiovisuales",
+    default: "Pantallas LED y cartelería digital para empresas | MYL3D",
     template: "%s | MyL3d",
   },
   description:
-    "Soluciones audiovisuales llave en mano, alquiler de pantallas LED y cartelería digital para eventos, retail y espacios corporativos en toda España.",
+    "Diseño, suministro e instalación de pantallas LED, cartelería digital y soluciones audiovisuales para empresas, comercios y espacios corporativos.",
   keywords: [
     "alquiler de pantallas LED",
     "cartelería digital",
@@ -51,31 +50,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
-      <head>
-            <Script
-        strategy="afterInteractive"
-        src="https://www.googletagmanager.com/gtag/js?id=G-QP5HESG7SP"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-QP5HESG7SP');
-        `}
-      </Script>
-        {/* Google Tag Manager */}
-<Script id="gtm-script" strategy="afterInteractive">
-          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','GTM-5LCJJD8M');`}
-        </Script>
-        {/* End Google Tag Manager */}
-      </head>
+      <head />
 
-      <body className={inter.className}>
+      <body>
         <Script
           id="global-structured-data"
           type="application/ld+json"
@@ -152,6 +129,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         {children}
+        <SiteFooter />
+        <CookieConsent />
         <SpeedInsights /> {/* 👈 Ya está disponible en toda la app */}
       </body>
     </html>

@@ -19,11 +19,12 @@ export default function SiteHeader({
   logoAlt = "MyL3d",
 
   links = [
-    { href: "/", label: "Inicio", ariaCurrent: "page" },
+    { href: "/", label: "Inicio" },
     {
-      label: "Servicios",
+      label: "Soluciones",
       children: [
-        { href: "/servicios/Carteleria-digital", label: "Carteleria digital" },
+        { href: "/productos", label: "Pantallas LED" },
+        { href: "/servicios/Carteleria-digital", label: "Digital signage" },
         { href: "/servicios/cultura-y-ocio", label: "Cultura y ocio" },
         { href: "/servicios/eventos", label: "Eventos" },
         { href: "/servicios/corporativos", label: "Corporativos" },
@@ -34,7 +35,7 @@ export default function SiteHeader({
     { href: "/productos", label: "Productos" },
     { href: "/blog", label: "Blog y recursos" },
 
-    { href: "/contacto", label: "Contacto" }, // ✅ ruta real
+    { href: "/contacto", label: "Solicitar presupuesto" },
 
   ],
   className = "",

@@ -224,7 +224,7 @@ export default function Productos() {
                     ))}
                   </ul>
                   <div className="product-card__footer">
-                    <span className="product-card__price">{product.price}</span>
+                    <span className="product-card__price">Configuración y precio según proyecto</span>
                     <Link className="product-card__link" href="/contacto">
                       Solicitar presupuesto
                     </Link>

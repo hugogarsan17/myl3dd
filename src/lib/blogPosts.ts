@@ -141,16 +141,16 @@ const posts: BlogPost[] = [
   },
   {
     slug: "caso-exito-museo-inmersivo",
-    title: "Caso de éxito: experiencia inmersiva en museo interactivo",
+    title: "Ejemplo de solución: sala audiovisual para museo",
     description:
       "Integramos pantallas LED, audio 3D y sensores interactivos para aumentar el tiempo de permanencia del público en un museo tecnológico.",
     category: "Cultura y ocio",
     readTime: "7 min de lectura",
     date: "2024-01-30",
     excerpt:
-      "Repasamos los hitos técnicos del proyecto, desde la ingeniería audiovisual hasta la creación de contenidos inmersivos que aumentaron el tiempo de permanencia en sala.",
+      "Un caso de uso conceptual para explicar cómo plantear la visualización, el sonido y los contenidos de una sala audiovisual para museo.",
     heroEyebrow: "Cultura y ocio",
-    heroTitle: "Experiencia inmersiva en museo interactivo",
+    heroTitle: "Caso de uso: sala audiovisual para museo",
     heroSubtitle:
       "Cómo combinamos pantallas LED curvas, sensores y sonido envolvente para crear un recorrido memorable.",
     sections: [
@@ -371,4 +371,3 @@ export function getBlogPost(slug: string): BlogPost | undefined {
 export function getFeaturedBlogPosts(limit = 3): BlogPost[] {
   return blogPosts.slice(0, limit);
 }
-
