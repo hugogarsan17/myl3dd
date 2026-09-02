@@ -21,7 +21,7 @@ export default function BlogHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          Ideas, guías y casos reales para potenciar tus proyectos audiovisuales
+          Guías, ideas y recursos sobre tecnología audiovisual, pantallas LED y digital signage
         </motion.h1>
         <motion.p
           className="blog__lead"

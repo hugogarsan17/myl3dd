@@ -103,7 +103,7 @@ const posts: BlogPost[] = [
       {
         title: "Nivel de brillo y visibilidad",
         paragraphs: [
-          "Las pantallas LED ofrecen picos de brillo superiores a 3.000 nits, ideales para escaparates con luz solar directa. Los monitores LCD comerciales suelen situarse entre 700 y 1.500 nits, suficientes para interior sin incidencia solar.",
+          "El brillo disponible varía según fabricante y modelo. Para escaparates con luz solar suele estudiarse una pantalla LED o un monitor de alto brillo; en interiores controlados pueden bastar niveles inferiores.",
           "Si tu retail cuenta con ventanales o superficies acristaladas, los LED mantienen la legibilidad sin necesidad de filtros adicionales, algo que incrementa el coste en soluciones LCD.",
         ],
       },
@@ -117,7 +117,7 @@ const posts: BlogPost[] = [
       {
         title: "Costes de operación",
         paragraphs: [
-          "El consumo energético de un LED bien calibrado suele ser menor que el de un videowall LCD equivalente. Además, su vida útil supera las 80.000 horas frente a las 50.000 horas de un panel LCD.",
+          "El consumo y la vida útil dependen del modelo, el brillo configurado, las horas de uso y el mantenimiento. Conviene comparar las fichas técnicas y condiciones de garantía de los equipos preseleccionados.",
           "En mantenimiento preventivo, los LED permiten sustituir solo el módulo afectado, mientras que en LCD hay que reemplazar la pantalla completa en caso de avería grave.",
         ],
       },
@@ -136,12 +136,12 @@ const posts: BlogPost[] = [
     ],
     conclusion: [
       "No existe una solución única: analiza el entorno, los objetivos comerciales y el presupuesto de operación antes de elegir.",
-      "Podemos acompañarte en un estudio comparativo y en la implantación llave en mano de la tecnología que mejor se adapte a tu circuito retail.",
+      "Podemos acompañarte en un estudio comparativo y coordinar suministro, configuración e instalación con los proveedores y especialistas que requiera el proyecto.",
     ],
   },
   {
     slug: "caso-exito-museo-inmersivo",
-    title: "Ejemplo conceptual: cómo diseñar una experiencia audiovisual en un museo",
+    title: "Ejemplo conceptual: cómo diseñar una experiencia audiovisual inmersiva para un museo",
     description:
       "Ejemplo conceptual para plantear pantallas LED, audio y elementos interactivos en un espacio museístico.",
     category: "Cultura y ocio",
@@ -149,10 +149,10 @@ const posts: BlogPost[] = [
     date: "2024-01-30",
     excerpt:
       "Un caso de uso conceptual para explicar cómo plantear la visualización, el sonido y los contenidos de una sala audiovisual para museo.",
-    heroEyebrow: "Cultura y ocio",
-    heroTitle: "Ejemplo conceptual: experiencia audiovisual en un museo",
+    heroEyebrow: "EJEMPLO CONCEPTUAL / CASO DE USO",
+    heroTitle: "Ejemplo conceptual: cómo diseñar una experiencia audiovisual inmersiva para un museo",
     heroSubtitle:
-      "Este contenido explica cómo podría plantearse una solución de este tipo. No corresponde a una instalación realizada por MYL3D.",
+      "Este contenido presenta un ejemplo conceptual de cómo podría plantearse una solución audiovisual para un espacio museístico. No corresponde a una instalación realizada por MYL3D ni representa resultados obtenidos por un cliente real.",
     sections: [
       {
         title: "Planteamiento del ejemplo",
@@ -185,12 +185,12 @@ const posts: BlogPost[] = [
     ],
     keyTakeaways: [
       "El diseño inmersivo debe responder a objetivos claros del espacio cultural.",
-      "Coordinar tecnología, narrativa y accesibilidad genera experiencias memorables y sostenibles.",
-      "Un CMS profesional agiliza la actualización de contenidos y maximiza el retorno de la inversión.",
+      "La coordinación entre tecnología, narrativa y accesibilidad debería formar parte del planteamiento.",
+      "Un sistema de gestión de contenidos podría facilitar la actualización de las piezas audiovisuales.",
     ],
     conclusion: [
       "Este ejemplo muestra las decisiones que conviene estudiar antes de definir una instalación audiovisual para un museo.",
-      "MYL3D puede ayudarte a analizar el espacio y coordinar una propuesta con fabricantes, distribuidores, técnicos e instaladores especializados según las necesidades del proyecto.",
+      "MYL3D puede analizar las necesidades del espacio y coordinar una propuesta con fabricantes, distribuidores, técnicos e instaladores especializados según los requisitos del proyecto.",
     ],
   },
   {

@@ -17,7 +17,7 @@ export default function CarteleriaDigital() {
       t: "Outdoor",
       d: (
         <>
-          <strong>Pantallas LED y monitores de alto brillo</strong> visibles 24/7, resistentes a la intemperie y perfectos para publicidad exterior.
+          <strong>Pantallas LED y monitores de alto brillo</strong> seleccionados según el régimen de uso y la exposición ambiental del espacio.
         </>
       ),
       bg: "/res/totems.png",
@@ -85,7 +85,7 @@ export default function CarteleriaDigital() {
                 provider: { "@id": `${siteUrl}/#organization` },
                 areaServed: { "@type": "Country", name: "España" },
                 description:
-                  "Diseñamos, instalamos e integramos cartelería digital para exteriores, interiores y retail: pantallas LED y monitores profesionales 24/7 con gestión de contenidos remota.",
+                  "Analizamos y coordinamos soluciones de cartelería digital para exterior, interior y retail con equipos seleccionados según el uso y el entorno.",
               },
             ],
           }),
@@ -125,7 +125,7 @@ export default function CarteleriaDigital() {
 
           <h1 className="service-hero__title">Cartelería digital</h1>
           <h2 className="service-hero__subtitle">
-            Pantallas LED y monitores profesionales 24/7 con gestión remota.
+            Pantallas LED y monitores con configuración y gestión adaptadas al proyecto.
           </h2>
         </div>
       </main>
@@ -134,9 +134,7 @@ export default function CarteleriaDigital() {
         <div className="container">
           <div className="about-text">
             <p className="section__copy">
-              Diseñamos, instalamos e integramos cartelería digital para exteriores, interiores y retail:
-              pantallas LED y <strong>monitores profesionales 24/7</strong>, con <strong>gestión de contenidos
-              remota y centralizada</strong> para publicar información relevante en el momento adecuado.
+              Podemos analizar y coordinar cartelería digital para exteriores, interiores y retail, con pantallas LED y <strong>monitores seleccionados según el régimen de uso</strong>. La <strong>gestión remota y centralizada</strong> se define cuando los contenidos y la operación del proyecto lo requieren.
             </p>
 
             <div className="cd-grid">
@@ -171,7 +169,7 @@ export default function CarteleriaDigital() {
             </div>
 
             <ul className="cd-bullets">
-              <li>Trabajo <strong>24/7</strong> y alta fiabilidad</li>
+              <li>Régimen de uso y fiabilidad definidos según el equipo seleccionado</li>
               <li><strong>Alto brillo</strong> y formatos a medida (indoor/outdoor)</li>
               <li><strong>Gestión remota</strong> y multi-sede</li>
               <li><strong>Interactividad</strong> con kioscos táctiles (opcional)</li>

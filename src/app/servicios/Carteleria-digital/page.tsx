@@ -5,12 +5,12 @@ import SiteHeader from "../../Components/site-header/Siteheader";
 export const metadata: Metadata = {
   title: "Cartelería digital | MyL3d",
   description:
-    "Cartelería digital y pantallas LED para exterior e interior con gestión remota de contenidos, instalación llave en mano y soporte técnico en toda España.",
+    "Cartelería digital y pantallas LED para exterior e interior, con configuración, suministro e instalación definidos según cada proyecto.",
   alternates: { canonical: "/servicios/Carteleria-digital" },
   openGraph: {
     title: "Cartelería digital | MyL3d",
     description:
-      "Diseño e instalación de pantallas LED y monitores profesionales 24/7 para retail, corporate y espacios públicos.",
+      "Pantallas LED y monitores para retail, espacios corporativos y espacios públicos, seleccionados según el uso previsto.",
     url: "https://www.myl3d.es/servicios/Carteleria-digital",
     type: "article",
   },

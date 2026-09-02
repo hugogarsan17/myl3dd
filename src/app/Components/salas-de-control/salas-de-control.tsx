@@ -66,7 +66,7 @@ export default function SalasDeControl() {
           </nav>
           <h1 className="service-hero__title">Salas de control</h1>
           <h2 className="service-hero__subtitle">
-            Videowalls críticos, gestión de señales y operación continua 24/7.
+            Videowalls y gestión de señales definidos según los requisitos operativos.
           </h2>
         </div>
       </main>
@@ -75,9 +75,7 @@ export default function SalasDeControl() {
       <section className="section section--alt">
         <div className="container">
           <p className="section__copy">
-            Diseño e integración de <strong>videowalls</strong> y puestos de operador para
-            <strong> visualización en tiempo real</strong> y <strong>toma de decisiones ágil</strong>.
-            Enrutado de señales, <strong>control centralizado</strong> y máxima fiabilidad 24/7.
+            Podemos estudiar <strong>videowalls</strong>, puestos de operador y gestión de señales para entornos de supervisión. La continuidad, el control y la fiabilidad se dimensionan con especialistas según los requisitos del proyecto.
           </p>
 
           {/* Bloques principales */}
@@ -106,11 +104,10 @@ export default function SalasDeControl() {
                 alt: "Operador gestionando sala de control",
               },
               {
-                t: "Continuidad 24/7",
+                t: "Continuidad operativa",
                 d: (
                   <>
-                    Hardware de <strong>grado profesional</strong> con redundancia (PSU/red),
-                    <strong> monitorización/alertas</strong> y mantenimiento preventivo.
+                    Las opciones de redundancia, <strong>monitorización y alertas</strong> pueden definirse tras estudiar la criticidad y la viabilidad técnica.
                   </>
                 ),
                 img: "res/Trabajos-6.jpg",
@@ -146,9 +143,9 @@ export default function SalasDeControl() {
               "Wall controller (layouts/presets)",
               "KVM sobre IP / matrices",
               "Decoders/encoders AV sobre IP",
-              "Integración SCADA/BMS",
+              "Viabilidad de integración con sistemas de control",
               "Alarmas y monitorización",
-              "Plan de mantenimiento 24/7",
+              "Soporte y mantenimiento según acuerdo",
             ].map((x) => (
               <li key={x} className="ctrl-chip">{x}</li>
             ))}

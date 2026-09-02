@@ -26,8 +26,7 @@ export default function Eventos() {
       alt: "Concierto con pantallas LED en escenario",
       d: (
         <>
-          Cobertura <strong>multicámara</strong> con cámaras PTZ y operadores, mezcla en
-          <strong> HD/4K</strong>, pantallas LED de escenario y side screens, e <strong>intercom</strong> para equipo técnico.
+          Una posible solución puede combinar <strong>captación multicámara</strong>, mezcla, pantallas LED e intercom, coordinando los perfiles técnicos y proveedores necesarios.
         </>
       ),
     },
@@ -37,8 +36,7 @@ export default function Eventos() {
       alt: "Festival al aire libre con pantallas gigantes",
       d: (
         <>
-          <strong>Realización en directo</strong> y <strong>streaming</strong> simultáneo, ruteo de señales
-          a pantallas de recinto, <strong>grabación</strong> y <strong>replays</strong> para redes/social wall.
+          Se puede plantear <strong>realización en directo</strong>, <strong>streaming</strong>, distribución de señales y grabación junto a profesionales especializados según el evento.
         </>
       ),
     },
@@ -106,7 +104,7 @@ export default function Eventos() {
           </nav>
           <h1 className="service-hero__title">Eventos</h1>
           <h2 className="service-hero__subtitle">
-            Producción audiovisual integral para conciertos, festivales y ferias.
+            Soluciones audiovisuales coordinadas para conciertos, festivales y ferias.
           </h2>
         </div>
       </main>
@@ -115,10 +113,7 @@ export default function Eventos() {
       <section className="section section--alt">
         <div className="container">
           <p className="section__copy">
-            Producción audiovisual llave en mano para <strong>conciertos, festivales, ferias y eventos corporativos</strong>.
-            <strong> Realización multicámara</strong>, <strong>streaming</strong>, <strong>cámaras PTZ</strong>,
-            <strong> procesadores y mezcladores HD/4K</strong>, <strong>gestión de señales</strong> y
-            <strong> sistemas de control</strong>, configurados según las necesidades del evento.
+            Podemos plantear soluciones para <strong>conciertos, festivales, ferias y eventos corporativos</strong>, seleccionar la tecnología y coordinar profesionales y proveedores especializados. La captación, el streaming, la mezcla, las pantallas y la gestión de señales se definen según las necesidades del evento.
           </p>
 
         {/* Bloques por vertical */}
@@ -155,9 +150,9 @@ export default function Eventos() {
           {/* Bloque de capacidades (chips) */}
           <ul className="evt-chips">
             {[
-              "Realización multicámara",
+              "Captación multicámara según proyecto",
               "Streaming (RTMP, SRT, plataformas)",
-              "Cámaras PTZ + operadores",
+              "Cámaras y perfiles técnicos a coordinar",
               "Mezcladores/Procesadores HD/4K",
               "Reparto/gestión de señales",
               "Intercom & tally",
