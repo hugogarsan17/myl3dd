@@ -23,8 +23,7 @@ type ContactPayload = {
   decisionTime?: string;
   hearAbout?: string;
 
-  utm: Record<string, string | undefined>;
-  referrer: string;
+  attribution: Record<string, string | undefined>;
   page: string;
 
   attachment?: {
@@ -48,7 +47,9 @@ function isContactPayload(v: unknown): v is ContactPayload {
     typeof email === "string" &&
     typeof message === "string" &&
     typeof captchaToken === "string" &&
-    captchaToken.length > 0
+    name.trim().length > 1 && name.length <= 120 &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 254 &&
+    message.length <= 5000 && captchaToken.length > 0
   );
 }
 
@@ -95,7 +96,9 @@ export async function POST(req: NextRequest) {
     // (Opcional) CSRF/same-origin mínimo
     const origin = req.headers.get("origin") || "";
     const host = req.headers.get("host") || "";
-    if (!origin || !origin.includes(host)) {
+    let originHost = "";
+    try { originHost = new URL(origin).host; } catch { originHost = ""; }
+    if (!originHost || originHost !== host) {
       return NextResponse.json({ success: false, error: "Origen no permitido" }, { status: 403 });
     }
 
@@ -111,13 +114,18 @@ export async function POST(req: NextRequest) {
       name, email, phone, subject, message,
       company,
       eventType, city, decisionTime, hearAbout,
-      utm, referrer, page, attachment, captchaToken
+      attribution, page, attachment, captchaToken
     } = raw;
 
     const xff = req.headers.get("x-forwarded-for") || "";
     const ip = xff.split(",")[0]?.trim() || "";
 
     await verifyTurnstile(captchaToken, ip);
+
+    const allowedTypes = ["image/jpeg", "image/png", "application/pdf"];
+    if (attachment && (!allowedTypes.includes(attachment.type) || attachment.size > 8 * 1024 * 1024 || !attachment.dataUrl.startsWith(`data:${attachment.type};base64,`) || /[\\/]/.test(attachment.name))) {
+      return NextResponse.json({ success: false, error: "Archivo no válido." }, { status: 400 });
+    }
 
     // Config SMTP
     const hostSmtp = process.env.MAIL_HOST;
@@ -156,8 +164,7 @@ export async function POST(req: NextRequest) {
       `Tiempo de decisión: ${decisionTime || "No indicado"}`,
       `Cómo nos conoció: ${hearAbout || "No indicado"}`,
       `Página: ${page}`,
-      `Referrer: ${referrer}`,
-      `UTM: ${JSON.stringify(utm)}`,
+      `Atribución: ${JSON.stringify(attribution)}`,
       "",
       "Mensaje:",
       message,
@@ -179,8 +186,7 @@ export async function POST(req: NextRequest) {
       <p><strong>Tiempo de decisión:</strong> ${escapeHtml(decisionTime || "No indicado")}</p>
       <p><strong>Cómo nos conoció:</strong> ${escapeHtml(hearAbout || "No indicado")}</p>
       <p><strong>Página:</strong> ${escapeHtml(page)}</p>
-      <p><strong>Referrer:</strong> ${escapeHtml(referrer)}</p>
-      <p><strong>UTM:</strong> ${escapeHtml(JSON.stringify(utm))}</p>
+      <p><strong>Atribución:</strong> ${escapeHtml(JSON.stringify(attribution))}</p>
       <p><strong>Mensaje:</strong><br/>${safeHtmlMsg}</p>
       ${attachment ? `<p><strong>Archivo adjunto:</strong> ${escapeHtml(attachment.name)} (${escapeHtml(attachment.type)}, ${attachment.size} bytes)</p>` : ""}
       <hr/>
@@ -194,13 +200,19 @@ export async function POST(req: NextRequest) {
       subject: subject || "Nuevo mensaje de contacto",
       text: plainText,
       html: htmlBody,
+      attachments: attachment ? [{ filename: attachment.name, content: attachment.dataUrl.split(",")[1], encoding: "base64", contentType: attachment.type }] : undefined,
     });
+
+    await transporter.sendMail({ from: `"MYL3D" <${from}>`, to: email, subject: "Hemos recibido tu solicitud", text: "Hemos recibido tu solicitud y revisaremos las necesidades del proyecto.", html: "<p>Hemos recibido tu solicitud y revisaremos las necesidades del proyecto.</p>" }).catch((error)=>console.error("No se pudo enviar la confirmación del lead", error));
+
+    const leadId = crypto.randomUUID();
+    if (process.env.LEAD_WEBHOOK_URL) await fetch(process.env.LEAD_WEBHOOK_URL, { method:"POST", headers:{"content-type":"application/json", ...(process.env.LEAD_WEBHOOK_SECRET ? {authorization:`Bearer ${process.env.LEAD_WEBHOOK_SECRET}`} : {})}, body:JSON.stringify({id:leadId,createdAt:new Date().toISOString(),status:"NEW",name,company,email,phone,city,solutionType:eventType,message,image:attachment?{name:attachment.name,type:attachment.type,size:attachment.size}:undefined,landingPage:page,...attribution}) }).catch((error)=>console.error("No se pudo enviar el lead al webhook",error));
 
     if (isDev) {
       console.log("Email enviado:", info.messageId);
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, leadId });
   } catch (err: unknown) {
     console.error("Error en /api/contact:", err);
     const msg = err instanceof Error ? err.message : "No se pudo procesar la solicitud.";
