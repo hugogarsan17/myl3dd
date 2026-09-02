@@ -9,7 +9,7 @@ export default function Page() {
     <h2>Qué utiliza esta web</h2>
     <p>La web guarda en el almacenamiento local del navegador la elección realizada en el aviso de cookies. Este dato técnico permite recordar si se aceptaron o rechazaron las cookies opcionales.</p>
     <h2>Medición opcional</h2>
-    <p>Google Analytics se carga únicamente después de pulsar «Aceptar». Puede establecer identificadores de medición para elaborar estadísticas agregadas sobre el uso del sitio. Si se pulsa «Rechazar opcionales», esta herramienta no se carga.</p>
+    <p>Google Analytics se carga únicamente después de pulsar «Aceptar analítica». Puede establecer identificadores de medición para elaborar estadísticas agregadas sobre el uso del sitio. Si se pulsa «Solo necesarias», esta herramienta no se carga.</p>
     <h2>Servicios técnicos</h2>
     <p>El formulario utiliza Cloudflare Turnstile como medida de seguridad frente a envíos automatizados. La web también utiliza Vercel Speed Insights para observar el rendimiento técnico. Estos servicios pueden tratar datos técnicos necesarios para prestar sus funciones conforme a sus propias condiciones.</p>
     <h2>Cambiar o retirar el consentimiento</h2>

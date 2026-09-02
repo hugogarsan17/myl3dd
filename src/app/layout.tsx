@@ -3,6 +3,7 @@ import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next"; // 👈 Importa aquí
 import SiteFooter from "./Components/site-footer/SiteFooter";
 import CookieConsent from "./Components/cookie-consent/CookieConsent";
+import Analytics from "./Components/analytics/Analytics";
 import "./globals.css";
 import "./Components/Home/Home.css";
 import "./styles/service-base.css";
@@ -73,11 +74,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     "Pantallas LED y cartelería digital para empresas, comercios y espacios corporativos.",
                   inLanguage: "es-ES",
                   publisher: { "@id": "https://www.myl3d.es/#organization" },
-                  potentialAction: {
-                    "@type": "SearchAction",
-                    target: "https://www.myl3d.es/?s={search_term_string}",
-                    "query-input": "required name=search_term_string",
-                  },
                 },
                 {
                   "@type": "Organization",
@@ -103,6 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <SiteFooter />
         <CookieConsent />
+        <Analytics />
         <SpeedInsights /> {/* 👈 Ya está disponible en toda la app */}
       </body>
     </html>

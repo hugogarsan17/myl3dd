@@ -23,7 +23,11 @@ export default function SiteHeader({
     {
       label: "Soluciones",
       children: [
-        { href: "/productos", label: "Pantallas LED" },
+        { href: "/pantallas-led-escaparates", label: "Pantallas para escaparates" },
+        { href: "/pantallas-led-interior", label: "Pantallas LED interior" },
+        { href: "/pantallas-led-exterior", label: "Pantallas LED exterior" },
+        { href: "/precio-pantalla-led", label: "Precio pantalla LED" },
+        { href: "/digital-signage", label: "Digital signage" },
         { href: "/servicios/Carteleria-digital", label: "Digital signage" },
         { href: "/servicios/cultura-y-ocio", label: "Cultura y ocio" },
         { href: "/servicios/eventos", label: "Eventos" },
