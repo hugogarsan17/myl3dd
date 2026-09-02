@@ -28,22 +28,22 @@ const filters: Filter[] = [
 
 const products: Product[] = [
   {
-    name: "Panel modular LED P1.9 UHD",
+    name: "Panel modular LED de alta resolución",
     category: "Pantallas LED",
     description:
       "Módulos de alta densidad diseñados para estudios y espacios premium donde la nitidez y la reproducción cromática son clave.",
     image: "/res/LCD.png",
     alt: "Video wall LED de alta resolución instalado en showroom",
-    specs: ["Pitch 1.9 mm", "Brillo 1.800 nits", "Calibración HDR10"],
+    specs: ["Pitch según distancia de visión", "Brillo según entorno", "Calibración según modelo"],
   },
   {
-    name: "Panel LED exterior P3.9",
+    name: "Panel LED modular para exterior",
     category: "Pantallas LED",
     description:
-      "Chasis ligero y sellado IP65 ideal para giras, festivales y fachadas. Sistema de bloqueo rápido para montaje ágil.",
+      "Configuración modular para eventos o instalaciones exteriores, seleccionada según exposición ambiental, formato y tipo de montaje.",
     image: "/res/Cabinet TV Studio.jpg",
     alt: "Escenario exterior con paneles LED modulares",
-    specs: ["Pitch 3.9 mm", "Brillo 4.500 nits", "Curvatura ±10°"],
+    specs: ["Pitch según distancia de visión", "Protección según ubicación", "Curvatura según modelo"],
   },
   {
     name: "Tótem digital doble cara",
@@ -52,7 +52,7 @@ const products: Product[] = [
       "Estructura autoportante con players sincronizados para retail, hoteles y recepción corporativa.",
     image: "/res/totem4.png",
     alt: "Tótem digital doble cara en lobby corporativo",
-    specs: ["Pantalla 55\" UHD", "Reproductor 4K integrado", "Cristal templado antivandálico"],
+    specs: ["Formato según espacio", "Reproductor según contenidos", "Acabado según ubicación"],
   },
   {
     name: "Pantalla Lineal LED",
@@ -81,7 +81,7 @@ const products: Product[] = [
       "Monitores profesionales para composiciones 2x2, 3x3 o superiores con gestión por controlador y empalme casi imperceptible.",
     image: "/res/LCD.png",
     alt: "Videowall LCD de bisel fino mostrando contenido corporativo",
-    specs: ["Bisel 1.8–3.5 mm", "24/7", "Montaje VESA y matriz flexible"],
+    specs: ["Bisel según modelo", "Régimen de uso según fabricante", "Montaje y matriz configurables"],
   },
   {
     name: "Cabinet LED alquiler (500×500 / 500×1000)",
@@ -90,7 +90,7 @@ const products: Product[] = [
       "Gabinetes de aluminio para touring con cierres rápidos, stacking/hanging y compatibilidad con curvatura.",
     image: "/res/4 cabinets.png",
     alt: "Gama de gabinetes LED de alquiler en varios tamaños",
-    specs: ["Pitch 2.6–4.8 mm", "IP54/65 según modelo", "Curvatura convexa/cóncava"],
+    specs: ["Pitch según aplicación", "Protección según modelo", "Curvatura según configuración"],
   },
   {
     name: "Módulo LED servicio frontal",
@@ -99,7 +99,7 @@ const products: Product[] = [
       "Paneles con extracción magnética para mantenimiento frontal. Perfectos para integración sobre pared.",
     image: "/res/Cabinet desmontado.png",
     alt: "Módulo LED desmontado mostrando mantenimiento frontal",
-    specs: ["Servicio frontal", "Pitch 1.9–3.9 mm", "Instalación fija"],
+    specs: ["Acceso frontal según modelo", "Pitch según distancia de visión", "Configuración para instalación fija"],
   },
   {
     name: "Banderola LED proyectada",
@@ -120,13 +120,13 @@ const products: Product[] = [
     specs: ["Número de unidades según espacio", "CMS remoto", "Sincronización de contenidos"],
   },
   {
-    name: "Cabinet LED Outdoor P5",
+    name: "Cabinet LED para exterior",
     category: "Pantallas LED",
     description:
-      "Gabinete de exterior IP65 para rótulos y monopostes. Alta luminosidad y electrónica preparada para 24/7.",
+      "Gabinete para rótulos y monopostes cuya luminosidad, protección ambiental y electrónica se definen según la ubicación y el modelo.",
     image: "/res/cabinet billboard.png",
     alt: "Cabinet LED outdoor P5 para valla publicitaria",
-    specs: ["Pitch 5 mm", "Brillo 6.000–7.000 nits", "IP65 frontal / IP54 trasera"],
+    specs: ["Pitch según distancia de visión", "Brillo según exposición solar", "Protección según modelo"],
   },
 ];
 
@@ -167,6 +167,9 @@ export default function Productos() {
               <p className="products-section__copy">
                 Seleccionamos la configuración según dimensiones, distancia de visualización, luminosidad y uso previsto. El
                 suministro, transporte e instalación se presupuestan según cada proyecto.
+              </p>
+              <p className="products-section__copy">
+                Las características, disponibilidad, precio y configuración final pueden variar según fabricante, modelo seleccionado y requisitos del proyecto.
               </p>
             </div>
             <Link className="btn-cta products-section__cta" href="/contacto">

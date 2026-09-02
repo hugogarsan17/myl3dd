@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Soluciones audiovisuales corporativas | MyL3d",
     description:
-      "Videoconferencia, audio y pantallas profesionales llave en mano para espacios corporativos.",
+      "Propuestas de videoconferencia, audio y pantallas profesionales configuradas según cada espacio corporativo.",
     url: "https://www.myl3d.es/servicios/corporativos",
     type: "article",
   },

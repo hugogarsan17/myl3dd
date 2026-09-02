@@ -5,12 +5,12 @@ import Eventos from "@/app/Components/eventos/eventos";
 export const metadata: Metadata = {
   title: "Producción audiovisual para eventos | MyL3d",
   description:
-    "Realización multicámara, streaming y alquiler de pantallas LED para conciertos, festivales y eventos corporativos en España.",
+    "Propuestas audiovisuales para conciertos, festivales y eventos corporativos, coordinadas con profesionales y proveedores según el proyecto.",
   alternates: { canonical: "/servicios/eventos" },
   openGraph: {
     title: "Producción audiovisual para eventos | MyL3d",
     description:
-      "Servicios técnicos llave en mano: cámaras PTZ, mezcladores HD/4K, gestión de señales y soporte en directo.",
+      "Selección y coordinación de pantallas, cámaras, mezcla, streaming y gestión de señales según las necesidades del evento.",
     url: "https://www.myl3d.es/servicios/eventos",
     type: "article",
   },

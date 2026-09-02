@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Productos audiovisuales profesionales | MyL3d",
     description:
-      "Soluciones LED modulares, soportes y controladores con soporte técnico especializado en toda España.",
+      "Soluciones LED modulares, soportes y controladores seleccionados según los requisitos de cada proyecto.",
     url: "https://www.myl3d.es/productos",
     type: "website",
   },

@@ -95,7 +95,7 @@
                 areaServed: "ES",
                 url: `${brand.url}corporativo`,
                 description:
-                  "Integración llave en mano de videoconferencia, audio profesional y visualización para empresas.",
+                  "Estudio y coordinación de videoconferencia, audio y visualización para empresas según cada proyecto.",
               },
               {
                 "@context": "https://schema.org",
@@ -124,7 +124,6 @@
               sizes="(max-width: 768px) 100vw, 100vw"
               quality={72}
               placeholder="blur"
-              /* TODO: sustituye por tu blurDataURL real */
               blurDataURL="data:image/jpeg;base64,/9j/2wBD..."
               style={{ objectFit: "cover", objectPosition: "center" }}
             />

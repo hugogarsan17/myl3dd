@@ -5,12 +5,12 @@ import SalasDeControl from "@/app/Components/salas-de-control/salas-de-control";
 export const metadata: Metadata = {
   title: "Salas de control y videowalls | MyL3d",
   description:
-    "Diseño de videowalls, gestión de señales y puestos de operador para salas de control 24/7 en empresas e instituciones.",
+    "Estudio de videowalls, gestión de señales y puestos de operador para salas de control en empresas e instituciones.",
   alternates: { canonical: "/servicios/salas-de-control" },
   openGraph: {
     title: "Salas de control y videowalls | MyL3d",
     description:
-      "Integración llave en mano de videowalls, controladores y sistemas de monitorización crítica.",
+      "Propuestas de videowalls, controladores y monitorización cuya viabilidad se define con especialistas según el proyecto.",
     url: "https://www.myl3d.es/servicios/salas-de-control",
     type: "article",
   },
