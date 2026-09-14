@@ -19,6 +19,8 @@ type ContactPayload = {
   company?: string;
   eventType: string;
   city: string;
+  width?: string;
+  height?: string;
 
   decisionTime?: string;
   hearAbout?: string;
@@ -38,19 +40,50 @@ function isRecord(v: unknown): v is Record<string, unknown> {
   return v !== null && typeof v === "object";
 }
 
+function isOptionalString(v: unknown): v is string | undefined {
+  return v === undefined || typeof v === "string";
+}
+
 function isContactPayload(v: unknown): v is ContactPayload {
   if (!isRecord(v)) return false;
-  const { name, email, message, captchaToken, tab } = v;
+  const { name, email, phone, message, captchaToken, tab, eventType, city, attribution, page } = v;
   return (
     tab === "empresa" &&
     typeof name === "string" &&
     typeof email === "string" &&
+    typeof phone === "string" &&
     typeof message === "string" &&
     typeof captchaToken === "string" &&
-    name.trim().length > 1 && name.length <= 120 &&
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 254 &&
-    message.length <= 5000 && captchaToken.length > 0
+    typeof eventType === "string" &&
+    typeof city === "string" &&
+    isRecord(attribution) &&
+    typeof page === "string" &&
+    isOptionalString(v.company) && isOptionalString(v.subject) &&
+    isOptionalString(v.width) && isOptionalString(v.height) &&
+    isOptionalString(v.decisionTime) && isOptionalString(v.hearAbout) &&
+    (v.attachment === undefined || (
+      isRecord(v.attachment) && typeof v.attachment.name === "string" &&
+      typeof v.attachment.type === "string" && typeof v.attachment.size === "number" &&
+      typeof v.attachment.dataUrl === "string"
+    )) &&
+    name.trim().length > 0 && name.length <= 120 &&
+    (email.trim().length > 0 || phone.trim().length > 0) &&
+    (email.trim().length === 0 || (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()) && email.length <= 254)) &&
+    phone.length <= 50 && eventType.trim().length > 0 && eventType.length <= 120 &&
+    city.length <= 120 && message.length <= 5000 && captchaToken.length > 0
   );
+}
+
+function normalizeSingleLine(value: string | undefined, maxLength: number): string {
+  return (value ?? "").replace(/[\u0000-\u001F\u007F]+/g, " ").replace(/\s+/g, " ").trim().slice(0, maxLength);
+}
+
+function normalizeMessage(value: string): string {
+  return value.replace(/\r\n?/g, "\n").replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "").trim().slice(0, 5000);
+}
+
+function optionalValue(value: string): string | null {
+  return value || null;
 }
 
 // Escapa HTML básico para evitar inyección en el correo
@@ -105,17 +138,38 @@ export async function POST(req: NextRequest) {
     const raw: unknown = await req.json();
     if (!isContactPayload(raw)) {
       return NextResponse.json(
-        { success: false, error: "Cuerpo inválido. Se requieren name, email, message y captchaToken (string)." },
+        { success: false, error: "Cuerpo inválido. Se requieren nombre, tipo de solución y al menos email o teléfono." },
         { status: 400 }
       );
     }
 
     const {
-      name, email, phone, subject, message,
-      company,
-      eventType, city, decisionTime, hearAbout,
+      name: rawName, email: rawEmail, phone: rawPhone, subject: rawSubject, message: rawMessage,
+      company: rawCompany,
+      eventType: rawEventType, city: rawCity, width: rawWidth, height: rawHeight,
+      decisionTime: rawDecisionTime, hearAbout: rawHearAbout,
       attribution, page, attachment, captchaToken
     } = raw;
+
+    const name = normalizeSingleLine(rawName, 120);
+    const email = normalizeSingleLine(rawEmail, 254).toLowerCase();
+    const phone = normalizeSingleLine(rawPhone, 50);
+    const subject = normalizeSingleLine(rawSubject, 180);
+    const message = normalizeMessage(rawMessage);
+    const company = normalizeSingleLine(rawCompany, 160);
+    const eventType = normalizeSingleLine(rawEventType, 120);
+    const city = normalizeSingleLine(rawCity, 120);
+    const width = normalizeSingleLine(rawWidth, 50);
+    const height = normalizeSingleLine(rawHeight, 50);
+    const decisionTime = normalizeSingleLine(rawDecisionTime, 120);
+    const hearAbout = normalizeSingleLine(rawHearAbout, 120);
+
+    if (!name || (!email && !phone)) {
+      return NextResponse.json(
+        { success: false, error: "Indica un nombre y al menos un email o un teléfono." },
+        { status: 400 }
+      );
+    }
 
     const xff = req.headers.get("x-forwarded-for") || "";
     const ip = xff.split(",")[0]?.trim() || "";
@@ -196,17 +250,51 @@ export async function POST(req: NextRequest) {
     const info: SentMessageInfo = await transporter.sendMail({
       from: `"Web Contacto" <${from}>`,
       to,
-      replyTo: email,
+      replyTo: email || undefined,
       subject: subject || "Nuevo mensaje de contacto",
       text: plainText,
       html: htmlBody,
       attachments: attachment ? [{ filename: attachment.name, content: attachment.dataUrl.split(",")[1], encoding: "base64", contentType: attachment.type }] : undefined,
     });
 
-    await transporter.sendMail({ from: `"MYL3D" <${from}>`, to: email, subject: "Hemos recibido tu solicitud", text: "Hemos recibido tu solicitud y revisaremos las necesidades del proyecto.", html: "<p>Hemos recibido tu solicitud y revisaremos las necesidades del proyecto.</p>" }).catch((error)=>console.error("No se pudo enviar la confirmación del lead", error));
+    if (email) await transporter.sendMail({ from: `"MYL3D" <${from}>`, to: email, subject: "Hemos recibido tu solicitud", text: "Hemos recibido tu solicitud y revisaremos las necesidades del proyecto.", html: "<p>Hemos recibido tu solicitud y revisaremos las necesidades del proyecto.</p>" }).catch((error)=>console.error("No se pudo enviar la confirmación del lead", error));
 
     const leadId = crypto.randomUUID();
     if (process.env.LEAD_WEBHOOK_URL) await fetch(process.env.LEAD_WEBHOOK_URL, { method:"POST", headers:{"content-type":"application/json", ...(process.env.LEAD_WEBHOOK_SECRET ? {authorization:`Bearer ${process.env.LEAD_WEBHOOK_SECRET}`} : {})}, body:JSON.stringify({id:leadId,createdAt:new Date().toISOString(),status:"NEW",name,company,email,phone,city,solutionType:eventType,message,image:attachment?{name:attachment.name,type:attachment.type,size:attachment.size}:undefined,landingPage:page,...attribution}) }).catch((error)=>console.error("No se pudo enviar el lead al webhook",error));
+
+    const n8nWebhookUrl = process.env.N8N_LEAD_WEBHOOK_URL;
+    if (n8nWebhookUrl) {
+      const n8nPayload = {
+        organization_id: "myl3d",
+        name,
+        company: optionalValue(company),
+        email: optionalValue(email),
+        phone: optionalValue(phone),
+        city: optionalValue(city),
+        solution: optionalValue(eventType),
+        width: optionalValue(width),
+        height: optionalValue(height),
+        message: optionalValue(message),
+        file_url: null,
+        source: "myl3d.es/contacto",
+        utm_source: optionalValue(normalizeSingleLine(typeof attribution.source === "string" ? attribution.source : undefined, 200)),
+        utm_medium: optionalValue(normalizeSingleLine(typeof attribution.medium === "string" ? attribution.medium : undefined, 200)),
+        utm_campaign: optionalValue(normalizeSingleLine(typeof attribution.campaign === "string" ? attribution.campaign : undefined, 200)),
+        utm_content: optionalValue(normalizeSingleLine(typeof attribution.content === "string" ? attribution.content : undefined, 200)),
+        utm_term: optionalValue(normalizeSingleLine(typeof attribution.term === "string" ? attribution.term : undefined, 200)),
+      };
+
+      try {
+        const response = await fetch(n8nWebhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(n8nPayload),
+        });
+        if (!response.ok) throw new Error(`n8n webhook failed: ${response.status}`);
+      } catch (error) {
+        console.error("No se pudo enviar el lead a n8n", error);
+      }
+    }
 
     if (isDev) {
       console.log("Email enviado:", info.messageId);
