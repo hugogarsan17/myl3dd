@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next"; // 👈 Importa aquí
 import SiteFooter from "./Components/site-footer/SiteFooter";
 import CookieConsent from "./Components/cookie-consent/CookieConsent";
@@ -100,6 +101,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteFooter />
         <CookieConsent />
         <Analytics />
+        <VercelAnalytics />
         <SpeedInsights /> {/* 👈 Ya está disponible en toda la app */}
       </body>
     </html>
