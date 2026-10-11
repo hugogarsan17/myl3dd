@@ -100,10 +100,21 @@ function escapeHtml(s: string): string {
   });
 }
 
+class TurnstileError extends Error {
+  constructor(
+    message: string,
+    readonly status: number,
+    readonly codes: string[] = []
+  ) {
+    super(message);
+    this.name = "TurnstileError";
+  }
+}
+
 // Verifica token de Cloudflare Turnstile
 async function verifyTurnstile(token: string, ip: string) {
   const secret = process.env.TURNSTILE_SECRET_KEY || "";
-  if (!secret) throw new Error("Falta TURNSTILE_SECRET_KEY en el entorno.");
+  if (!secret) throw new TurnstileError("La verificación anti-bot no está configurada.", 503);
 
   const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
     method: "POST",
@@ -115,12 +126,23 @@ async function verifyTurnstile(token: string, ip: string) {
     }),
   });
 
-  if (!res.ok) throw new Error(`Fallo verificando Turnstile: ${res.status}`);
+  if (!res.ok) throw new TurnstileError("Cloudflare no ha podido validar la verificación. Inténtalo de nuevo.", 502);
   const data = (await res.json()) as { success: boolean; "error-codes"?: string[] };
 
   if (!data.success) {
-    const codes = data["error-codes"]?.join(", ") || "desconocido";
-    throw new Error(`Verificación CAPTCHA fallida (${codes})`);
+    const codes = data["error-codes"] ?? [];
+    const configurationError = codes.some((code) =>
+      ["missing-input-secret", "invalid-input-secret"].includes(code)
+    );
+    throw new TurnstileError(
+      configurationError
+        ? "La verificación anti-bot no está disponible temporalmente."
+        : codes.includes("timeout-or-duplicate")
+          ? "La verificación ha caducado. Complétala de nuevo."
+          : "No se pudo validar la verificación anti-bot. Inténtalo de nuevo.",
+      configurationError ? 503 : 400,
+      codes
+    );
   }
 }
 
@@ -303,6 +325,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true, leadId });
   } catch (err: unknown) {
     console.error("Error en /api/contact:", err);
+    if (err instanceof TurnstileError) {
+      if (err.codes.length) console.error("Códigos de Turnstile:", err.codes.join(", "));
+      return NextResponse.json(
+        { success: false, error: err.message },
+        { status: err.status }
+      );
+    }
     const msg = err instanceof Error ? err.message : "No se pudo procesar la solicitud.";
     return NextResponse.json(
       { success: false, error: isDev ? msg : "No se pudo enviar el correo." },

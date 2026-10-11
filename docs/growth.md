@@ -26,4 +26,4 @@ Envíe `/sitemap.xml`, inspeccione las seis URLs nuevas, valide canonical/noinde
 
 ## Variables manuales
 
-Consulte `.env.example`. Son obligatorias para formulario: `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`, `MAIL_HOST`, `MAIL_USER`, `MAIL_PASS` y un remitente/destinatario válido. Analytics, GTM, Ads y webhook son opcionales. Nunca publique secretos con prefijo `NEXT_PUBLIC_`.
+Consulte `.env.example`. El formulario usa la clave pública Turnstile configurada en el frontend; `NEXT_PUBLIC_TURNSTILE_SITE_KEY` permite sobrescribirla. La clave pública y `TURNSTILE_SECRET_KEY` deben pertenecer al mismo widget de Cloudflare, que debe autorizar `myl3d.es` (esto también cubre `www.myl3d.es`). Tras cambiar una variable pública hay que volver a desplegar, porque Next.js la incorpora durante la compilación. Configure también `MAIL_HOST`, `MAIL_USER`, `MAIL_PASS` y un remitente/destinatario válido en el entorno servidor. Analytics, GTM, Ads y webhook son opcionales. Nunca publique secretos con prefijo `NEXT_PUBLIC_`.
